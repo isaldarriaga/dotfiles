@@ -1,0 +1,18 @@
+[General]
+AutoExpandFolders=true
+ShowToolTips=true
+ShowZoomSlider=false
+Version=202
+ViewPropsTimestamp=2023,2,12,16,1,49.929
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[KPropertiesDialog]
+eDP HDMI-1-0 Height 1920x1080 eDP=475
+eDP HDMI-1-0 Width 1920x1080 eDP=461
+
+[MainWindow]
+MenuBar=Disabled
+ToolBarsMovable=Disabled
