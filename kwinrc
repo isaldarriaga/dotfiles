@@ -20,7 +20,6 @@ kwin4_effect_squashEnabled=false
 magiclampEnabled=true
 overviewEnabled=true
 wobblywindowsEnabled=true
-zoomEnabled=false
 
 [Script-forceblur]
 blurExceptMatching=true
