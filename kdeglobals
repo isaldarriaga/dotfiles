@@ -101,6 +101,7 @@ toolBarFont=Fira Sans,10,-1,5,50,0,0,0,0,0
 
 [KDE]
 LookAndFeelPackage=Dr460nized
+SingleClick=false
 
 [PreviewSettings]
 MaximumRemoteSize=0
