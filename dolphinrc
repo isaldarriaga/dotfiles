@@ -1,9 +1,12 @@
+[CompactMode]
+MaximumTextWidthIndex=1
+
 [General]
 AutoExpandFolders=true
 ShowToolTips=true
 ShowZoomSlider=false
 Version=202
-ViewPropsTimestamp=2023,2,12,16,1,49.929
+ViewPropsTimestamp=2023,2,12,16,5,14.543
 
 [KFileDialog Settings]
 Places Icons Auto-resize=false
@@ -16,3 +19,6 @@ eDP HDMI-1-0 Width 1920x1080 eDP=461
 [MainWindow]
 MenuBar=Disabled
 ToolBarsMovable=Disabled
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,opendocumentthumbnail,svgthumbnail,windowsexethumbnail,windowsimagethumbnail,palathumbcreator,mobithumbnail,ffmpegthumbs,rawthumbnail,fontthumbnail,directorythumbnail,gsthumbnail,resvgthumbnailer,blenderthumbnail
