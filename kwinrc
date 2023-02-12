@@ -33,6 +33,7 @@ LayoutName=coverswitch
 
 [Windows]
 BorderlessMaximizedWindows=true
+Placement=Maximizing
 
 [org.kde.kdecoration2]
 ButtonsOnLeft=XAI
