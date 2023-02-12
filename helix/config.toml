@@ -1,0 +1,22 @@
+theme = "doom_acario_dark"
+#theme = "heisenberg"
+
+[editor]
+line-number = "absolute"
+mouse = false
+bufferline = "always"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.statusline]
+left = ["mode", "spinner", "file-type", "total-line-numbers", "position-percentage"]
+center = ["diagnostics"]
+
+[keys.normal]
+#C-tab = ":buffer-next"
+
+[keys.insert]
+#"C-tab" = ":buffer-next"
