@@ -26,6 +26,10 @@ blurExceptMatching=true
 blurMatching=false
 patterns=Peek
 
+[TabBox]
+HighlightWindows=false
+LayoutName=coverswitch
+
 [Windows]
 BorderlessMaximizedWindows=true
 
