@@ -11,9 +11,15 @@ insert = "bar"
 normal = "block"
 select = "underline"
 
+[editor.file-picker]
+hidden = true
+
+[editor.lsp]
+display-messages = true
+
 [editor.statusline]
-left = ["mode", "spinner", "file-type", "total-line-numbers", "position-percentage"]
-center = ["diagnostics"]
+left = ["mode", "spinner", "file-type", "file-encoding", "position-percentage"]
+center = ["file-name", "diagnostics"]
 
 [keys.normal]
 #C-tab = ":buffer-next"
