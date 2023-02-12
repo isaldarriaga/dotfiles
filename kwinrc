@@ -27,6 +27,7 @@ blurMatching=false
 patterns=Peek
 
 [TabBox]
+ApplicationsMode=1
 HighlightWindows=false
 LayoutName=coverswitch
 
