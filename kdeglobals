@@ -103,6 +103,9 @@ toolBarFont=Fira Sans,10,-1,5,50,0,0,0,0,0
 LookAndFeelPackage=Dr460nized
 SingleClick=false
 
+[KShortcutsDialog Settings]
+Dialog Size=600,480
+
 [PreviewSettings]
 MaximumRemoteSize=0
 
