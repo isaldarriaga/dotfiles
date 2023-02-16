@@ -1,4 +1,3 @@
-#[[language]]
-
-#[[grammar]]
-
+[[language]]
+name = "java"
+auto-format = true

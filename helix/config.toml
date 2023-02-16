@@ -1,5 +1,4 @@
-theme = "doom_acario_dark"
-#theme = "heisenberg"
+theme = "onedarker"
 
 [editor]
 line-number = "absolute"
