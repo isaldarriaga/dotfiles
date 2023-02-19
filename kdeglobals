@@ -90,6 +90,10 @@ ForegroundNormal=211,218,227
 ForegroundPositive=113,247,159
 ForegroundVisited=179,13,191
 
+[DirSelect Dialog]
+DirSelectDialog Size=845,584
+History Items[$e]=file:$HOME/repos/.config,file:$HOME/repos/.idea,file:$HOME/repos
+
 [General]
 BrowserApplication=google-chrome.desktop
 ColorSchemeHash=a054744e5da530142f039caa182148b170643d2e
@@ -102,6 +106,26 @@ toolBarFont=Fira Sans,10,-1,5,50,0,0,0,0,0
 [KDE]
 LookAndFeelPackage=Dr460nized
 SingleClick=false
+
+[KFileDialog Settings]
+Allow Expansion=false
+Automatically select filename extension=true
+Breadcrumb Navigation=true
+Decoration position=2
+LocationCombo Completionmode=5
+PathCombo Completionmode=5
+Show Bookmarks=false
+Show Full Path=false
+Show Inline Previews=true
+Show Preview=false
+Show Speedbar=true
+Show hidden files=false
+Sort by=Name
+Sort directories first=true
+Sort hidden files last=false
+Sort reversed=false
+Speedbar Width=137
+View Style=DetailTree
 
 [KShortcutsDialog Settings]
 Dialog Size=600,480
