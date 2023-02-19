@@ -166,15 +166,22 @@ export VISUAL='helix'
 
 # my aliases
 alias pac="sudo pacman"
+
 alias search="yay -Ss"
 alias install="yay -Syy"
 alias upgrade="yay -Su"
 alias remove="yay -Rns"
+
 alias mk="minikube"
 alias k="mk kubectl -"
+
 alias pm="podman"
 alias db="distrobox"
+
 alias hx="helix"
+
+alias lg="lazygit"
+alias gu="gitui"
 
 # run ssh agent
 fish_ssh_agent
