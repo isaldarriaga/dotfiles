@@ -1,3 +1,6 @@
+[$Version]
+update_info=kwin.upd:replace-cascaded-zerocornered
+
 [Desktops]
 Id_1=1c577b0f-1efb-46d1-a2f7-b79046ed83eb
 Number=1
@@ -30,6 +33,21 @@ patterns=Peek
 ApplicationsMode=1
 HighlightWindows=false
 LayoutName=coverswitch
+
+[Tiling]
+padding=4
+
+[Tiling][4189c8f7-685b-529d-b08e-6cba5ad70fb3]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][4656e9c7-29d2-5198-aef7-e64495a298e9]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][5b7a5ba4-43cc-5910-8e98-f358f9d54b43]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][61ba8c37-2cd7-5096-beae-3177678aee8c]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Windows]
 BorderlessMaximizedWindows=true
