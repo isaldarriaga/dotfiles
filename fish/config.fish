@@ -153,16 +153,12 @@ alias jctl="journalctl -p 3 -xb"
 # Recent installed packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
-## Run fastfetch if session is interactive
-if status --is-interactive && type -q fastfetch
-   fastfetch --load-config dr460nized
-end
+# ---------------------------------------------------
 
 # nvm
 function nvm
     bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
 end
-nvm use lts/hydrogen
 
 # my editor
 export EDITOR='helix'
@@ -178,7 +174,15 @@ alias mk="minikube"
 alias k="mk kubectl -"
 alias pm="podman"
 alias db="distrobox"
+alias hx="helix"
 
-# bun
-#export BUN_INSTALL="$HOME/.bun"
-#export PATH=$BUN_INSTALL/bin:$PATH
+# run ssh agent
+fish_ssh_agent
+
+if status --is-interactive && type -q fastfetch
+   fastfetch --load-config dr460nized
+end
+
+nvm use lts/hydrogen
+
+typeracer
