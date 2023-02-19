@@ -1,5 +1,6 @@
 [CompactMode]
-MaximumTextWidthIndex=1
+MaximumTextWidthIndex=3
+PreviewSize=16
 
 [General]
 AutoExpandFolders=true
@@ -13,8 +14,8 @@ Places Icons Auto-resize=false
 Places Icons Static Size=22
 
 [KPropertiesDialog]
-eDP HDMI-1-0 Height 1920x1080 eDP=533
-eDP HDMI-1-0 Width 1920x1080 eDP=470
+eDP HDMI-1-0 Height 1920x1080 eDP=475
+eDP HDMI-1-0 Width 1920x1080 eDP=469
 
 [MainWindow]
 MenuBar=Disabled
