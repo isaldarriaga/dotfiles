@@ -160,6 +160,8 @@ function nvm
     bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
 end
 
+#set PATH $PATH:~/.cargo/bin/
+
 # my editor
 export EDITOR='helix'
 export VISUAL='helix'
@@ -168,7 +170,7 @@ export VISUAL='helix'
 alias pac="sudo pacman"
 
 alias search="yay -Ss"
-alias install="yay -Syy"
+alias install="yay -S"
 alias upgrade="yay -Su"
 alias remove="yay -Rns"
 
@@ -182,6 +184,8 @@ alias hx="helix"
 
 alias lg="lazygit"
 alias gu="gitui"
+
+alias tree="ranger"
 
 # run ssh agent
 fish_ssh_agent
