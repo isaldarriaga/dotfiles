@@ -160,7 +160,7 @@ function nvm
     bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
 end
 
-#set PATH $PATH:~/.cargo/bin/
+set -U fish_user_paths ~/.cargo/bin $fish_user_paths
 
 # my editor
 export EDITOR='helix'
