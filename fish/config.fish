@@ -185,7 +185,7 @@ alias hx="helix"
 alias lg="lazygit"
 alias gu="gitui"
 
-alias tree="ranger"
+alias tree="xplr"
 
 # run ssh agent
 fish_ssh_agent
