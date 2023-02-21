@@ -163,8 +163,8 @@ end
 set -U fish_user_paths ~/.cargo/bin $fish_user_paths
 
 # my editor
-export EDITOR='helix'
-export VISUAL='helix'
+export EDITOR=helix
+export VISUAL=helix
 
 # my aliases
 alias pac="sudo pacman"
