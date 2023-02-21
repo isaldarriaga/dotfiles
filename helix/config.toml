@@ -1,4 +1,4 @@
-theme = "onedarker"
+theme = "heisenberg"
 
 [editor]
 line-number = "absolute"
@@ -19,24 +19,4 @@ display-messages = true
 [editor.statusline]
 left = ["mode", "spinner", "file-type", "file-encoding", "position-percentage"]
 center = ["file-name", "diagnostics"]
-
-[keys.normal]
-up = "no_op"
-down = "no_op"
-left = "no_op"
-right = "no_op"
-pageup = "no_op"
-pagedown = "no_op"
-home = "no_op"
-end = "no_op"
-
-[keys.insert]
-up = "no_op"
-down = "no_op"
-left = "no_op"
-right = "no_op"
-pageup = "no_op"
-pagedown = "no_op"
-home = "no_op"
-end = "no_op"
 
