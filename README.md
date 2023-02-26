@@ -1,3 +1,6 @@
+# KDE shortcuts
+`DIR=~/.config    && LINK=kglobalshortcutsrc && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK`
+
 # nixos (https://releases.nixos.org/?prefix=nixos/unstable/)
 `ssh-keygen # then add it to the repo's ssh keys in te cloud`
 `nix-shell -p git`
@@ -11,10 +14,13 @@
 `sudo nix search nixpkgs helix`
 `sudo nix shell helix`
 
-`DIR=/home/.config && LINK=helix             && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK`
+`DIR=~/.config && LINK=helix             && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK`
 
 # Pacman (does not work)
 # `DIR=/etc          && LINK=pacman.conf       && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK`
 # `DIR=/etc          && LINK=pacman.d          && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK`
 # `DIR=/var/log      && LINK=pacman.log        && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK`
 # `DIR=/var/log      && LINK=pacman.log        && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK`
+
+# Theme
+Sweet KDE
