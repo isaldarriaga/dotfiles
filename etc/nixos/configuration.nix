@@ -56,6 +56,9 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -127,9 +130,9 @@
       #podman
       #distrobox
       #minikube
-      #driver
-      #nvidia
       #3d
+      inxi
+      glxinfo
       #blender
       #gaming
       #steam
