@@ -108,6 +108,7 @@
       pciutils
       inxi
       glxinfo
+      gnome.gnome-disk-utility
       #package-manager
       #pacman
       ##terminal
