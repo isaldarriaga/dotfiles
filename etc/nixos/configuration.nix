@@ -105,6 +105,10 @@
       #system
       killall
       wget
+      #gpu
+      pciutils
+      inxi
+      glxinfo
       ##terminal
       alacritty
       ##repo
@@ -131,8 +135,6 @@
       #distrobox
       #minikube
       #3d
-      inxi
-      glxinfo
       #blender
       #gaming
       #steam
