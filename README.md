@@ -1,13 +1,18 @@
-### Instructions
+# nixos
+DIR=/etc/nixos    && LINK=configuration.nix && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK
 
-clone the repo into `$HOME/<user>/.config2`
+# Helix (unstable)
+sudo nix-channel --list
+sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable
+sudo nix-channel --list
+sudo nix-channel --update
+sudo nix search nixpkgs helix
+sudo nix shell helix
 
-diff folders `$HOME/<user>/.config` and `$HOME/<user>/.config2`
+DIR=/home/.config && LINK=helix             && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK
 
-move `$HOME/<user>/.config2/.git` into `%HOME/<user>/.config/.git`
-
-copy as many rc (run-command) files and folders as you want 
-
-make sure to check .gitignore files that might include personal data (backups, logs, etc)
-
-start tracking your config
+# Pacman (does not work)
+# DIR=/etc          && LINK=pacman.conf       && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK
+# DIR=/etc          && LINK=pacman.d          && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK
+# DIR=/var/log      && LINK=pacman.log        && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK
+# DIR=/var/log      && LINK=pacman.log        && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK
