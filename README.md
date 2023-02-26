@@ -1,4 +1,4 @@
-# nixos
+# nixos (https://releases.nixos.org/?prefix=nixos/unstable/)
 `ssh-keygen # then add it to the repo's ssh keys in te cloud`
 `nix-shell -p git`
 `DIR=/etc/nixos    && LINK=configuration.nix && sudo mv $DIR/$LINK $DIR/$LINK.bak && cd $DIR && sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && ls -l $DIR/$LINK`
