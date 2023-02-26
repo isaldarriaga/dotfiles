@@ -122,6 +122,7 @@
       rustup
       nodejs
       ##editor
+      kate
       helix
       ##ide
       #webstorm
