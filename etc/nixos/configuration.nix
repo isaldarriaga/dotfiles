@@ -133,15 +133,14 @@
     ];
   };
 
-  #security.sudo.extraRules= [
-  #{  users = [ "privileged_user" ];
-  #  commands = [
-  #     { command = "ALL" ;
-  #       options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
-  #    }
-  #  ];
-  #}
-#];
+  security.sudo.extraRules= [{  
+    users = [ "ivan" ];
+    commands = [
+       { command = "ALL" ;
+         options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
+      }
+    ];
+  }];
 
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
