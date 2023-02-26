@@ -9,6 +9,12 @@
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
     ];
+    
+  # make ready for nix flakes
+  nix.package = pkgs.nixFlakes;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';  
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
