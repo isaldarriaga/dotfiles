@@ -105,10 +105,11 @@
       #system
       killall
       wget
-      #gpu
       pciutils
       inxi
       glxinfo
+      #package-manager
+      #pacman
       ##terminal
       alacritty
       ##repo
@@ -131,8 +132,8 @@
       google-chrome # use blowfish for gpg kdewallet
       brave
       ##container
-      #podman
-      #distrobox
+      podman
+      distrobox
       #minikube
       #3d
       #blender
