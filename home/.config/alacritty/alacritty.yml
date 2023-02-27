@@ -42,10 +42,10 @@ cursor:
 
 live_config_reload: true
 
-shell:
-  program: /usr/bin/fish
-  args:
-    - --login
+#shell:
+#  program: /usr/bin/fish
+#  args:
+#    - --login
 
 mouse:
   hide_when_typing: true
