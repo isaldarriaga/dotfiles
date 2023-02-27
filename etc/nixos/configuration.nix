@@ -109,12 +109,13 @@
       inxi
       glxinfo
       gnome.gnome-disk-utility
+      latte-dock
       #shell
       neofetch
       xplr
       ranger
-      latte-dock
       starship
+      terminal-typeracer
       alacritty
       ##repo
       git
