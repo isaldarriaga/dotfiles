@@ -81,7 +81,7 @@ alias k="mk kubectl -"
 alias pm="podman"
 alias db="distrobox"
 
-alias hx="helix"
+#alias hx="helix"
 
 alias lg="lazygit"
 alias gu="gitui"
