@@ -110,6 +110,11 @@
       glxinfo
       gnome.gnome-disk-utility
       latte-dock
+      #compress
+      zip
+      rar
+      gnutar
+      ark
       #shell
       neofetch
       xplr
@@ -152,6 +157,13 @@
       #bluez-tools
     ];
   };
+
+  fonts.fonts = with pkgs; [
+    terminus-nerdfont
+    nerdfonts
+    fira-code
+    fira-code-symbols
+  ];
 
   security.sudo.extraRules= [{  
     users = [ "ivan" ];

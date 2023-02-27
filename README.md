@@ -73,9 +73,19 @@ ls -l "$HOME/$LINK"
 # Starship
 
 ```
-DIR=.config/starship && \
-LINK=starship.toml && \
-mkdir -p $DIR && \
+DIR=.config && \
+LINK=starship && \
+sudo mv "$HOME/$DIR/$LINK" "$HOME/$DIR/$LINK.bak" ; \
+cd "$HOME/$DIR" && \
+sudo ln -s "$HOME/repos/.dotfiles/home/$DIR/$LINK" $LINK && \
+ls -l "$HOME/$DIR/$LINK"
+```
+
+# Alacritty
+
+```
+DIR=.config && \
+LINK=alacritty && \
 sudo mv "$HOME/$DIR/$LINK" "$HOME/$DIR/$LINK.bak" ; \
 cd "$HOME/$DIR" && \
 sudo ln -s "$HOME/repos/.dotfiles/home/$DIR/$LINK" $LINK && \
