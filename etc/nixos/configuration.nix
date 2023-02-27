@@ -137,9 +137,9 @@
       distrobox
       minikube
       #3d
-      #blender
+      blender
       #gaming
-      #steam
+      steam
       #bluetooth
       #bluez
       #bluez-tools
