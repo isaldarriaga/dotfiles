@@ -1,6 +1,6 @@
 # Instructions
 - Copy the contents of `/etc/nixos/configuration.nix` into the respective file.
-- RUN: sudo nixos-rebuild switch
+- RUN: `sudo nixos-rebuild switch`
 - Having git installed clone the repo
 
 # KDE shortcuts
