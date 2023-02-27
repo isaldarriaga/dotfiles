@@ -123,11 +123,12 @@
       kate
       helix
       ##ide
-      #webstorm
+      jetbrains.webstorm
       lapce
       vscode
       ##lsp
       rust-analyzer
+      nodePackages_latest.typescript-language-server
       ##browser. 
       google-chrome # use blowfish for gpg kdewallet
       brave
