@@ -25,6 +25,15 @@ sudo ln -s "$HOME/repos/.dotfiles/home/$DIR/$LINK" $LINK && \
 ls -l "$HOME/$DIR/$LINK"
 ```
 
+```
+DIR=.config && \
+LINK=kwinrc && \
+sudo mv "$HOME/$DIR/$LINK" "$HOME/$DIR/$LINK.bak" ; \
+cd "$HOME/$DIR" && \
+sudo ln -s "$HOME/repos/.dotfiles/home/$DIR/$LINK" $LINK && \
+ls -l "$HOME/$DIR/$LINK"
+```
+
 - re-login
 
 # nixos (https://releases.nixos.org/?prefix=nixos/unstable/)
