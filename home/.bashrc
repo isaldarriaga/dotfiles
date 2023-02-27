@@ -18,8 +18,15 @@ if  [ -n $STARSHIP ]; then
     unset -f __main
 fi
 
-# Advanced command-not-found hook
-#source /usr/share/doc/find-the-command/ftc.bash
+export STARSHIP_CONFIG=~/.config/starship.toml
+
+# Replace ls with exa
+alias ls='exa -al --color=always --group-directories-first --icons' # preferred listing
+alias la='exa -al --color=always --group-directories-first --icons'  # all files and dirs
+alias ll='exa -l --color=always --group-directories-first --icons'  # long format
+alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
+alias l.="exa -a | egrep '^\.'"                                     # show only dotfiles
+alias ip="ip -color"
 
 # Aliases
 alias dir='dir --color=auto'
@@ -64,7 +71,7 @@ export VISUAL=helix
 #alias pac="sudo pacman"
 
 #alias search="yay -Ss"
-alias install="sudo nixos-rebuild switch"
+alias sync="sudo nixos-rebuild switch"
 #alias upgrade="yay -Su"
 #alias remove="yay -Rns"
 
