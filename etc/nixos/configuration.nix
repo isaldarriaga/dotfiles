@@ -109,8 +109,12 @@
       inxi
       glxinfo
       gnome.gnome-disk-utility
+      #shell
       neofetch
-      ##terminal
+      xplr
+      ranger
+      latte-dock
+      starship
       alacritty
       ##repo
       git
