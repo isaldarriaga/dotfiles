@@ -14,6 +14,9 @@ Drag=85
 Stiffness=10
 WobblynessLevel=1
 
+[ModifierOnlyShortcuts]
+Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
+
 [Plugins]
 blurEnabled=true
 forceblurEnabled=true
@@ -57,5 +60,5 @@ BorderlessMaximizedWindows=false
 Placement=Maximizing
 
 [org.kde.kdecoration2]
-ButtonsOnLeft=XAI
+ButtonsOnLeft=XAIN
 ButtonsOnRight=

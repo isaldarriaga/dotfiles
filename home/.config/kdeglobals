@@ -138,7 +138,9 @@ History Items[$e]=file:$HOME/repos/.config,file:$HOME/repos/.idea,file:$HOME/rep
 
 [General]
 BrowserApplication=google-chrome.desktop
-ColorSchemeHash=d2f9f23c62b2c7529878a3b4c96c2902e98086db
+ColorSchemeHash=a054744e5da530142f039caa182148b170643d2e
+TerminalApplication=alacritty
+TerminalService=Alacritty.desktop
 fixed=FiraCode Nerd Font Mono,10,-1,5,50,0,0,0,0,0
 font=Fira Sans,10,-1,5,50,0,0,0,0,0
 menuFont=Fira Sans,10,-1,5,50,0,0,0,0,0
