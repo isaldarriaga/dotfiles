@@ -1,7 +1,6 @@
 # Garuda Linux configuration for Alacritty
 import:
- - ~/.config/alacritty/themes/cyber_punk_neon.yaml
-
+ - ~/.config/alacritty/themes/blood_moon.yaml
 env:
   TERM: xterm-256color
 
