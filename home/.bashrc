@@ -1,16 +1,17 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+STARSHIP=$(which starship)
 # Load starship prompt if starship is installed
-if  [ -x /usr/bin/starship ]; then
+if  [ -n $STARSHIP ]; then
     __main() {
         local major="${BASH_VERSINFO[0]}"
         local minor="${BASH_VERSINFO[1]}"
 
         if ((major > 4)) || { ((major == 4)) && ((minor >= 1)); }; then
-            source <("/usr/bin/starship" init bash --print-full-init)
+            source <("$STARSHIP" init bash --print-full-init)
         else
-            source /dev/stdin <<<"$("/usr/bin/starship" init bash --print-full-init)"
+            source /dev/stdin <<<"$("$STARSHIP" init bash --print-full-init)"
         fi
     }
     __main
@@ -18,7 +19,7 @@ if  [ -x /usr/bin/starship ]; then
 fi
 
 # Advanced command-not-found hook
-source /usr/share/doc/find-the-command/ftc.bash
+#source /usr/share/doc/find-the-command/ftc.bash
 
 # Aliases
 alias dir='dir --color=auto'
@@ -63,7 +64,7 @@ export VISUAL=helix
 #alias pac="sudo pacman"
 
 #alias search="yay -Ss"
-#alias install="yay -S"
+alias install="sudo nixos-rebuild switch"
 #alias upgrade="yay -Su"
 #alias remove="yay -Rns"
 
