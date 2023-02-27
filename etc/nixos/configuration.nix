@@ -109,6 +109,7 @@
       inxi
       glxinfo
       gnome.gnome-disk-utility
+      neofetch
       ##terminal
       alacritty
       ##repo
