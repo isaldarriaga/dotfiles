@@ -109,8 +109,6 @@
       inxi
       glxinfo
       gnome.gnome-disk-utility
-      #package-manager
-      #pacman
       ##terminal
       alacritty
       ##repo
@@ -129,14 +127,14 @@
       lapce
       vscode
       ##lsp
-      #rust-analyser
+      rust-analyzer
       ##browser. 
       google-chrome # use blowfish for gpg kdewallet
       brave
       ##container
       podman
       distrobox
-      #minikube
+      minikube
       #3d
       #blender
       #gaming
