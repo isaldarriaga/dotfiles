@@ -116,6 +116,7 @@
       ranger
       starship
       terminal-typeracer
+      exa
       alacritty
       ##repo
       git
