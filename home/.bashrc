@@ -18,7 +18,7 @@ if  [ -n $STARSHIP ]; then
     unset -f __main
 fi
 
-export STARSHIP_CONFIG=~/.config/starship.toml
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 # Replace ls with exa
 alias ls='exa -al --color=always --group-directories-first --icons' # preferred listing
