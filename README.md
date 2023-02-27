@@ -96,3 +96,16 @@ ls -l "$HOME/$DIR/$LINK"
 - Manually change KDE theme to "Sweet KDE"
 - Add widget: "Application Dashboard"
 - Some garuda assets: https://gitlab.com/garuda-linux
+
+# Pending with Nix
+- setup git globals
+- install theme
+- shortcuts
+- widgets
+- layout
+- builtin monitor
+
+# requested packages
+- fastfetch
+- awsvpnclient
+- envycontrol
