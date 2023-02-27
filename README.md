@@ -8,11 +8,11 @@
 # KDE shortcuts
 
 ```
-DIR=~/.config && \
-LINK=kglobalshortcutsrc && \
-sudo mv $DIR/$LINK $DIR/$LINK.bak && \
+DIR="~/.config" && \
+LINK="kglobalshortcutsrc" && \
+sudo mv "$DIR/$LINK" "$DIR/$LINK.bak" && \
 cd $DIR && \
-sudo ln -s ~/repos/.dotfiles$DIR/$LINK $LINK && \
+sudo ln -s "~/repos/.dotfiles$DIR/$LINK" $LINK && \
 ls -l $DIR/$LINK
 ```
 
