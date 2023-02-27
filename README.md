@@ -60,3 +60,4 @@ ls -l "$HOME/$DIR/$LINK"
 
 # Theme
 - Manually change KDE theme to "Sweet KDE"
+- Add widget: "Application Dashboard"
