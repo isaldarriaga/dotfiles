@@ -12,7 +12,7 @@ DIR=.config && \
 LINK=kglobalshortcutsrc && \
 sudo mv "$HOME/$DIR/$LINK" "$HOME/$DIR/$LINK.bak" ; \
 cd "$HOME/$DIR" && \
-sudo ln -s "$HOME/repos/.dotfiles$DIR/$LINK" $LINK && \
+sudo ln -s "$HOME/repos/.dotfiles/$DIR/$LINK" $LINK && \
 ls -l "$HOME/$DIR/$LINK"
 ```
 
