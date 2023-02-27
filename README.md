@@ -8,12 +8,12 @@
 # KDE shortcuts
 
 ```
-DIR="~/.config" && \
-LINK="kglobalshortcutsrc" && \
-sudo mv "$DIR/$LINK" "$DIR/$LINK.bak" && \
-cd $DIR && \
-sudo ln -s "~/repos/.dotfiles$DIR/$LINK" $LINK && \
-ls -l $DIR/$LINK
+DIR=.config && \
+LINK=kglobalshortcutsrc && \
+sudo mv "$HOME/$DIR/$LINK" "$HOME/$DIR/$LINK.bak" ; \
+cd "$HOME/$DIR" && \
+sudo ln -s "$HOME/repos/.dotfiles$DIR/$LINK" $LINK && \
+ls -l "$HOME/$DIR/$LINK"
 ```
 
 - re-login
