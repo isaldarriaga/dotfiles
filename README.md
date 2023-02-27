@@ -104,6 +104,7 @@ ls -l "$HOME/$DIR/$LINK"
 - widgets
 - layout
 - builtin monitor
+- remove konsole
 
 # requested packages
 - fastfetch
