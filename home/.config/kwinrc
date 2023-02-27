@@ -49,6 +49,9 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][61ba8c37-2cd7-5096-beae-3177678aee8c]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][e7e6fb82-b4c3-59ed-bb67-a1636917c324]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Windows]
 BorderlessMaximizedWindows=true
 Placement=Maximizing
