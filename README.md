@@ -58,6 +58,17 @@ sudo ln -s "$HOME/repos/.dotfiles/home/$DIR/$LINK" $LINK && \
 ls -l "$HOME/$DIR/$LINK"
 ```
 
+
+# Bash
+
+```
+LINK=.bashrc && \
+sudo mv "$HOME/$LINK" "$HOME/$LINK.bak" ; \
+cd $HOME && \
+sudo ln -s "$HOME/repos/.dotfiles/home/$LINK" $LINK && \
+ls -l "$HOME/$LINK"
+```
+
 # Theme
 - Manually change KDE theme to "Sweet KDE"
 - Add widget: "Application Dashboard"
