@@ -148,6 +148,7 @@ smallestReadableFont=Fira Sans,10,-1,5,50,0,0,0,0,0
 toolBarFont=Fira Sans,10,-1,5,50,0,0,0,0,0
 
 [KDE]
+AnimationDurationFactor=0.125
 LookAndFeelPackage=Sweet
 SingleClick=false
 
