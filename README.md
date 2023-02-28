@@ -93,17 +93,17 @@ ls -l "$HOME/$DIR/$LINK"
 ```
 
 # Theme
-- Manually change KDE theme to "Sweet KDE"
+- Manually change KDE theme to "Sweet KDE" (already isntalled)
 - Add widget: "Application Dashboard"
-- Some garuda assets: https://gitlab.com/garuda-linux
+- install Some garuda assets: https://gitlab.com/garuda-linux
 
 # Pending with Nix
 - setup git globals
-- install theme
 - shortcuts
 - widgets
 - layout
 - builtin monitor
+- opengl
 - remove konsole
 
 # requested packages
