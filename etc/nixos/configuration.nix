@@ -115,7 +115,6 @@
       gnome.gnome-disk-utility
       latte-dock
       gcc11
-      vtop
       #compress
       zip
       rar
@@ -167,10 +166,8 @@
   };
 
   fonts.fonts = with pkgs; [
-    terminus-nerdfont
-    nerdfonts
-    fira-code
-    fira-code-symbols
+    fira
+    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" ]; })
   ];
 
   security.sudo.extraRules= [{  
