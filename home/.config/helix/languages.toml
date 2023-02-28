@@ -1,3 +1,4 @@
+auto-format = true
+
 [[language]]
 name = "java"
-auto-format = true
