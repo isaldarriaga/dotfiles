@@ -107,32 +107,33 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       #system
-      killall
-      wget
-      pciutils
-      inxi
-      glxinfo
-      gnome.gnome-disk-utility
-      latte-dock
-      gcc11
+      killall # terminate programs
+      wget # downloader
+      pciutils # show pci hardware
+      inxi # show graphics configuration
+      glxinfo # show graphic card details
+      gnome.gnome-disk-utility # write iso files
+      latte-dock # app launcher
+      gcc11 # compiler
+      sweet # theme
       #compress
       zip
       rar
       gnutar
-      ark
+      ark # uncompress via menu
       #shell
       neofetch
-      xplr
-      ranger
-      starship
-      terminal-typeracer
-      exa
-      alacritty
-      ##repo
+      xplr # cli file manager
+      ranger # cli file navigator
+      starship # cross shell ppomt (git info, etc)
+      terminal-typeracer # keystroke practice
+      exa # improve ls
+      alacritty # terminal
+      ##repo 
       git
       git-crypt
       gnupg
-      lazygit
+      lazygit # git helper
       ##programming
       rustc
       cargo
@@ -146,8 +147,8 @@
       lapce
       vscode
       ##lsp
-      rust-analyzer
-      nodePackages_latest.typescript-language-server
+      rust-analyzer # rust
+      nodePackages_latest.typescript-language-server # ts
       marksman # markdown
       gopls # golang
       nil # nix
