@@ -63,6 +63,9 @@ alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
 # ---------------------------------------------------
 
+#k3s
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
 # my editor
 export EDITOR=helix
 export VISUAL=helix
@@ -75,8 +78,8 @@ alias sync="sudo nixos-rebuild switch"
 #alias upgrade="yay -Su"
 #alias remove="yay -Rns"
 
-alias mk="minikube"
-alias k="mk kubectl -"
+#alias mk="minikube"
+alias k="sudo k3s kubectl"
 
 alias pm="podman"
 alias db="distrobox"

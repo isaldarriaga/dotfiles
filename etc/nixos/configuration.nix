@@ -115,6 +115,7 @@
       gnome.gnome-disk-utility
       latte-dock
       gcc11
+      vtop
       #compress
       zip
       rar
@@ -156,17 +157,12 @@
       ##container
       podman
       distrobox
-      minikube
       ##testing
       k6
       ##3d
       blender
       ##gaming
       steam
-      ##bluetooth
-      #bluez
-      #bluez-tools
-      #bluedevil
     ];
   };
 
@@ -193,11 +189,19 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # K3s
+  # This is required so that pod can reach the API server (running on port 6443 by default)
+  networking.firewall.allowedTCPPorts = [ 6443 ];
+  services.k3s.enable = true;
+  services.k3s.role = "server";
+  services.k3s.extraFlags = toString [
+    # "--kubelet-arg=v=4" # Optionally add additional args to k3s
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    pkgs.k3s    
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
