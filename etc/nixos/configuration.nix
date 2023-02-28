@@ -150,6 +150,7 @@
       nodePackages_latest.typescript-language-server
       marksman # markdown
       gopls # golang
+      nil # nix
       ##browser
       google-chrome # use blowfish for gpg kdewallet
       brave
@@ -160,6 +161,7 @@
       k6
       ##3d
       blender
+      sweethome3d.application
       ##gaming
       steam
     ];
