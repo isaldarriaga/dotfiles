@@ -56,7 +56,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ]; # nvidia / amdgpu
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 
@@ -66,7 +66,7 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "latam";
+    layout = "us"; # latam / us
     xkbVariant = "";
   };
 
@@ -96,6 +96,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # bluetooth
+  #hardware.bluetooth.enable = true;
+  #services.blueman.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ivan = {
     isNormalUser = true;
@@ -110,6 +114,7 @@
       glxinfo
       gnome.gnome-disk-utility
       latte-dock
+      gcc11
       #compress
       zip
       rar
@@ -129,8 +134,10 @@
       gnupg
       lazygit
       ##programming
-      rustup
+      rustc
+      cargo
       nodejs
+      go
       ##editor
       kate
       helix
@@ -141,20 +148,25 @@
       ##lsp
       rust-analyzer
       nodePackages_latest.typescript-language-server
-      ##browser. 
+      marksman # markdown
+      gopls # golang
+      ##browser
       google-chrome # use blowfish for gpg kdewallet
       brave
       ##container
       podman
       distrobox
       minikube
-      #3d
+      ##testing
+      k6
+      ##3d
       blender
-      #gaming
+      ##gaming
       steam
-      #bluetooth
+      ##bluetooth
       #bluez
       #bluez-tools
+      #bluedevil
     ];
   };
 
