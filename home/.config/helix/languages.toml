@@ -1,4 +1,7 @@
+[[language]]
+name = "java"
 auto-format = true
 
 [[language]]
-name = "java"
+name = "bash"
+auto-format = true

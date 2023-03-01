@@ -90,11 +90,10 @@ alias lg="lazygit"
 alias gu="gitui"
 
 alias tree="xplr"
+alias warmup="typeracer"
 
 #if status --is-interactive && type -q fastfetch
 #   fastfetch --load-config dr460nized
 #end
 
-typeracer
-
-neofetch
+neofetch && warmup
