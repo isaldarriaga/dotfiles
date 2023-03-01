@@ -71,7 +71,7 @@
   };
 
   # Configure console keymap
-  console.keyMap = "la-latin1";
+  console.keyMap = "us";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -116,6 +116,7 @@
       latte-dock # app launcher
       gcc11 # compiler
       sweet # theme
+      ventoy-bin # multi iso boot
       #compress
       zip
       rar
