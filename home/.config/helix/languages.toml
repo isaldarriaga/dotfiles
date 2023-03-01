@@ -3,5 +3,5 @@ name = "java"
 auto-format = true
 
 [[language]]
-name = "bash"
+  name = "bash"
 auto-format = true
