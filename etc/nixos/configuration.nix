@@ -130,11 +130,12 @@
       terminal-typeracer # keystroke practice
       exa # improve ls
       alacritty # terminal
-      ##repo 
+      ##git 
       git
       git-crypt
       gnupg
-      lazygit # git helper
+      lazygit
+      gitui
       ##programming
       rustc
       cargo
@@ -153,6 +154,7 @@
       marksman # markdown
       gopls # golang
       nil # nix
+      nodePackages.bash-language-server # bash
       ##browser
       google-chrome # use blowfish for gpg kdewallet
       brave
