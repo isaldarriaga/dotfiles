@@ -35,6 +35,16 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  
+  services.create_ap = {
+  enable = true;
+  settings = {
+    INTERNET_IFACE = "cni0";
+    WIFI_IFACE = "wlp4s0";
+    SSID = "Ivan's Hotspot";
+    PASSPHRASE = "9096312iv";
+  };
+};
 
   # Set your time zone.
   time.timeZone = "America/Bogota";
