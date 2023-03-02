@@ -1,7 +1,19 @@
 [[language]]
+name = "bash"
+auto-format = true
+
+[[language]]
 name = "java"
 auto-format = true
 
 [[language]]
-  name = "bash"
+name = "nix"
+auto-format = true
+
+[[language]]
+name = "typescript"
+auto-format = true
+
+[[language]]
+name = "toml"
 auto-format = true
