@@ -27,7 +27,7 @@
   };
 
   networking.hostName = "nixos"; # Define your hostname.
-#  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -127,6 +127,8 @@
       gcc11 # compiler
       sweet # theme
       ventoy-bin # multi iso boot
+      vial # keyboard config
+      hwinfo # hardware info
       #compress
       zip
       rar
