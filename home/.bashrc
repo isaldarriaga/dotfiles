@@ -55,13 +55,13 @@ export VISUAL=helix
 # my aliases
 #alias pac="sudo pacman"
 
-#alias search="yay -Ss"
+alias search="nix-env -qaP"
+alias adhoc="nix-shell -p"
+alias repl="nix repl --extra-experimental-features 'flakes repl-flake' nixpkgs"
+alias rf="repl"
 alias sync="sudo nixos-rebuild switch"
 #alias upgrade="yay -Su"
 #alias remove="yay -Rns"
-
-#repl flakes
-alias rf="nix repl --extra-experimental-features 'flakes repl-flake' nixpkgs"
 
 #alias mk="minikube"
 alias k="sudo k3s kubectl"
@@ -81,4 +81,4 @@ alias warmup="typeracer"
 #   fastfetch --load-config dr460nized
 #end
 
-neofetch && cd ~/repos/nix-from-nothing && pwd && la 
+neofetch && cd ~/repos/2ndgen && pwd && la 
