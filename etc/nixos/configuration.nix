@@ -166,7 +166,7 @@
       marksman # markdown
       gopls # golang
       nil # nix
-      nodePackages.bash-language-server # bash
+      #rnix-lsp # bash
       ##browser
       google-chrome # use blowfish for gpg kdewallet
       brave
