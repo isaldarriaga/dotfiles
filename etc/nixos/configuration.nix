@@ -116,24 +116,6 @@
     description = "ivan";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      #system
-      killall # terminate programs
-      wget # downloader
-      pciutils # show pci hardware
-      inxi # show graphics configuration
-      glxinfo # show graphic card details
-      gnome.gnome-disk-utility # write iso files
-      latte-dock # app launcher
-      gcc11 # compiler
-      sweet # theme
-      ventoy-bin # multi iso boot
-      vial # keyboard config
-      hwinfo # hardware info
-      #compress
-      zip
-      rar
-      gnutar
-      ark # uncompress via menu
       #shell
       neofetch
       xplr # cli file manager
@@ -142,43 +124,42 @@
       terminal-typeracer # keystroke practice
       exa # improve ls
       alacritty # terminal
-      ##git 
+      # version control
       git
       git-crypt
       gnupg
       lazygit
       gitui
-      ##programming
+      # languages
       rustc
       cargo
       nodejs
       go
-      ##editor
+      # editor
       kate
       helix
-      ##ide
       jetbrains.webstorm
       lapce
       vscode
-      ##lsp
+      postman
+      # lsp
       rust-analyzer # rust
       nodePackages_latest.typescript-language-server # ts
       marksman # markdown
       gopls # golang
       nil # nix
-      #rnix-lsp # bash
-      ##browser
+      # browser
       google-chrome # use blowfish for gpg kdewallet
       brave
       ##container
       podman
       distrobox
-      ##testing
+      # testing
       k6
-      ##3d
+      # 3d
       blender
       sweethome3d.application
-      ##gaming
+      # gaming
       steam
     ];
   };
@@ -216,7 +197,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    pkgs.k3s    
+    pkgs.k3s # kubernetes
+    libsForQt5.bismuth # tile manager
+    pkgs.sweet # theme
+    killall # terminate programs
+    wget # downloader
+    pciutils # show pci hardware
+    inxi # show graphics configuration
+    glxinfo # show graphic card details
+    gnome.gnome-disk-utility # write iso files
+    latte-dock # app launcher
+    gcc11 # compiler
+    ventoy-bin # multi iso boot
+    vial # keyboard config
+    hwinfo # hardware info
+    #compress
+    zip
+    gnutar
+    ark # kde
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
