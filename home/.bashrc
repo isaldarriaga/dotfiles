@@ -56,7 +56,7 @@ export VISUAL=helix
 #alias pac="sudo pacman"
 
 alias search="nix-env -qaP"
-alias adhoc="nix-shell -p"
+alias shell="nix-shell -p"
 alias repl="nix repl --extra-experimental-features 'flakes repl-flake' nixpkgs"
 alias rf="repl"
 alias sync="sudo nixos-rebuild switch"
@@ -83,4 +83,4 @@ alias warmup="typeracer"
 #   fastfetch --load-config dr460nized
 #end
 
-neofetch && cd ~/repos/2ndgen && pwd && la 
+cd ~/repos && pwd && la
