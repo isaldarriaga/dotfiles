@@ -1,28 +1,45 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-case $(tty) in /dev/tty[0-9]*)
-  setfont -d
-  showconsolefont
-esac
-
-if [ $(basename $SHELL) = "bash" ]; then
-  eval "$(starship init bash)"
-elif [ $(basename $SHELL) = "fish" ]; then
-  starship init fish | source  
-fi
-
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 # Replace ls with exa
-alias ls='exa -al --color=always --group-directories-first --icons' # preferred listing
-alias la='exa -al --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first --icons'  # long format
-alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
-alias l.="exa -a | egrep '^\.'"                                     # show only dotfiles
-alias ip="ip -color"
+LS='exa -al --color=always --group-directories-first' # preferred listing
+LA='exa -al --color=always --group-directories-first' # all files and dirs
+LL='exa -l --color=always --group-directories-first --icons' # long format
+LT='exa -aT --color=always --group-directories-first --icons' # tree listing
+LDOT="exa -a | egrep '^\.'" # only dot files
+
+case $(tty) in /dev/tty[0-9]*)
+  echo "tty detected!"
+  setfont -d
+  showconsolefont
+
+  alias ls="$LS"
+  alias la="$LA"
+  alias ll="$LL"
+  alias lt="$LT"
+  alias l.="$LDOT"
+esac
+
+case $(tty) in /dev/pts/[0-9]*)
+  if [ $(basename $SHELL) = "bash" ]; then
+    eval "$(starship init bash)"
+  elif [ $(basename $SHELL) = "fish" ]; then
+    starship init fish | source  
+  fi
+  export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+  alias ls="$LS --icons"
+  alias la="$LA --icons"
+  alias ll="$LL --icons"
+  alias lt="$LT --icons"
+  alias l.="$LDOT"
+esac
+
+echo -e -n "\x1b[\x33 q" # Blinking underline
 
 # Aliases
+alias ip="ip -color"
 alias egrep='grep -E --color=auto'
 alias fgrep='grep -F --color=auto'
 alias grep='grep --color=auto'
@@ -36,10 +53,11 @@ alias wget='wget -c '
 
 # Get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
+alias journalctl="jctl"
 
 # ---------------------------------------------------
 
-#k3s
+# k3s
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # my editor
@@ -47,8 +65,6 @@ export EDITOR=helix
 export VISUAL=helix
 
 # my aliases
-#alias pac="sudo pacman"
-
 alias search="nix-env -qaP"
 alias shell="nix-shell -p"
 alias repl="nix repl --extra-experimental-features 'flakes repl-flake' nixpkgs"
@@ -60,23 +76,17 @@ alias listgen="sudo nix-env --profile /nix/var/nix/profiles/system --list-genera
 #alias upgrade="yay -Su"
 #alias remove="yay -Rns"
 
-#alias mk="minikube"
+alias mk="minikube"
 alias k="sudo k3s kubectl"
 
 alias pm="podman"
 alias db="distrobox"
-
-#alias hx="helix"
 
 alias lg="lazygit"
 alias gu="gitui"
 
 alias tree="xplr"
 alias warmup="typeracer"
-
-#if status --is-interactive && type -q fastfetch
-#   fastfetch --load-config dr460nized
-#end
 
 cd ~/repos && la && pwd
 
