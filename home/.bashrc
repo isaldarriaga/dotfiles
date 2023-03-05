@@ -1,21 +1,15 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-STARSHIP=$(which starship)
-# Load starship prompt if starship is installed
-if  [ -n $STARSHIP ]; then
-    __main() {
-        local major="${BASH_VERSINFO[0]}"
-        local minor="${BASH_VERSINFO[1]}"
+case $(tty) in /dev/tty[0-9]*)
+  setfont -d
+  showconsolefont
+esac
 
-        if ((major > 4)) || { ((major == 4)) && ((minor >= 1)); }; then
-            source <("$STARSHIP" init bash --print-full-init)
-        else
-            source /dev/stdin <<<"$("$STARSHIP" init bash --print-full-init)"
-        fi
-    }
-    __main
-    unset -f __main
+if [ $(basename $SHELL) = "bash" ]; then
+  eval "$(starship init bash)"
+elif [ $(basename $SHELL) = "fish" ]; then
+  starship init fish | source  
 fi
 
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
