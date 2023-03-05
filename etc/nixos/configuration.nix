@@ -184,7 +184,7 @@
     inxi # show graphics configuration
     glxinfo # show graphic card details
     gnome.gnome-disk-utility # write iso files
-    latte-dock # app launcher
+    #latte-dock # app launcher
     gcc11 # compiler
     ventoy-bin # multi iso boot
     vial # keyboard config
