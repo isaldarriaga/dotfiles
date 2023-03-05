@@ -36,15 +36,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
   
-  services.create_ap = {
-  enable = true;
-  settings = {
-    INTERNET_IFACE = "cni0";
-    WIFI_IFACE = "wlp4s0";
-    SSID = "NixOS Hotspot";
-    PASSPHRASE = "9096312iv";
-  };
-};
 
   # Set your time zone.
   time.timeZone = "America/Bogota";
@@ -64,46 +55,64 @@
     LC_TIME = "es_CO.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ]; # nvidia / amdgpu
-  hardware.opengl.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  services = {
+    # hotspot
+    create_ap = {
+      enable = true;
+      settings = {
+        INTERNET_IFACE = "cni0";
+        WIFI_IFACE = "wlp4s0";
+        SSID = "NixOS Hotspot";
+        PASSPHRASE = "9096312iv";
+      };
+    };
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ]; # nvidia / amdgpu
+      desktopManager.plasma5.enable = true;
 
-  services.k3s.displayManager.sddm.autoNumlock = true;
+      layout = "us"; # latam / us
+      xkbVariant = "";
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us"; # latam / us
-    xkbVariant = "";
+    
+      displayManager = {
+        autoLogin.enable = true;
+        autoLogin.user = "ivan";
+
+        sddm = {
+          enable = true;
+          autoNumlock = true;
+          theme = "Breeze-Dark";
+        };
+      };
+    };
+
+    # sound
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
+
+    # CUPS
+    printing.enable = true;
+
   };
 
+  hardware.opengl.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  
   # Configure console keymap
   console.keyMap = "us";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -118,44 +127,15 @@
     description = "ivan";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      #shell
-      neofetch
-      xplr # cli file manager
-      ranger # cli file navigator
-      starship # cross shell ppomt (git info, etc)
-      terminal-typeracer # keystroke practice
-      exa # improve ls
-      alacritty # terminal
-      # version control
-      git
-      git-crypt
-      gnupg
-      lazygit
-      gitui
-      # languages
-      rustc
-      cargo
-      nodejs
-      go
       # editor
       kate
-      helix
       jetbrains.webstorm
       lapce
       vscode
       postman
-      # lsp
-      rust-analyzer # rust
-      nodePackages_latest.typescript-language-server # ts
-      marksman # markdown
-      gopls # golang
-      nil # nix
       # browser
       google-chrome # use blowfish for gpg kdewallet
       brave
-      ##container
-      podman
-      distrobox
       # testing
       k6
       # 3d
@@ -180,9 +160,6 @@
     ];
   }];
 
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "ivan";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -201,7 +178,6 @@
   environment.systemPackages = with pkgs; [
     pkgs.k3s # kubernetes
     libsForQt5.bismuth # tile manager
-    pkgs.sweet # theme
     killall # terminate programs
     wget # downloader
     pciutils # show pci hardware
@@ -213,10 +189,40 @@
     ventoy-bin # multi iso boot
     vial # keyboard config
     hwinfo # hardware info
-    #compress
+    # compress
     zip
     gnutar
     ark # kde
+    #shell
+    neofetch
+    xplr # file manager
+    ranger # file viewer
+    starship # cross shell prompt (git info, etc)
+    terminal-typeracer # warmup
+    exa # improve ls
+    alacritty # opengl terminal
+    # version control
+    git
+    git-crypt
+    gnupg
+    lazygit
+    gitui
+    # languages
+    rustc
+    cargo
+    nodejs
+    go
+    # editor
+    helix
+    # lsp
+    rust-analyzer # rust
+    nodePackages_latest.typescript-language-server # ts
+    marksman # markdown
+    gopls # golang
+    nil # nix
+    ##container
+    podman
+    distrobox
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
