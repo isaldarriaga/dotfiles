@@ -60,6 +60,7 @@ alias shell="nix-shell -p"
 alias repl="nix repl --extra-experimental-features 'flakes repl-flake' nixpkgs"
 alias rf="repl"
 alias sync="sudo nixos-rebuild switch"
+alias test="sudo nixos-rebuild test"
 alias gc="nix-collect-garbage"
 alias listgen="sudo nix-env --profile /nix/var/nix/profiles/system --list-generations"
 #alias upgrade="yay -Su"
@@ -83,4 +84,5 @@ alias warmup="typeracer"
 #   fastfetch --load-config dr460nized
 #end
 
-cd ~/repos && pwd && la
+cd ~/repos && la && pwd
+
