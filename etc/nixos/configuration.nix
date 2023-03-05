@@ -186,7 +186,11 @@
     gnome.gnome-disk-utility # write iso files
     #latte-dock # app launcher
     gcc11 # compiler
-    ventoy-bin # multi iso boot
+    # multi iso boot
+    # find the ventoyWeb script -> $ sudo find / | grep VentoyWeb
+    # start the ventoy web server -> sudo bash <full_path>/VentoyWeb.sh
+    # navigate to the site and install
+    ventoy-bin
     vial # keyboard config
     hwinfo # hardware info
     # compress
