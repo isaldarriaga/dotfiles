@@ -184,9 +184,9 @@
     inxi # show graphics configuration
     glxinfo # show graphic card details
     gnome.gnome-disk-utility # write iso files
-    #latte-dock # app launcher
-    gcc11 # compiler
-    # multi iso boot
+    openssh
+
+    # multi iso boot:
     # find the ventoyWeb script -> $ sudo find / | grep VentoyWeb
     # start the ventoy web server -> sudo bash <full_path>/VentoyWeb.sh
     # navigate to the site and install
@@ -211,11 +211,13 @@
     gnupg
     lazygit
     gitui
-    # languages
+    jq
+    # compilers
     rustc
     cargo
     nodejs
     go
+    gcc11
     # editor
     helix
     # lsp
