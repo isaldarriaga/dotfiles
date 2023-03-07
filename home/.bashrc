@@ -58,6 +58,7 @@ alias psmem='ps auxf | sort -nr -k 4'
 alias tarnow='tar -acf '
 alias untar='tar -zxvf '
 alias wget='wget -c '
+allias less ="less --use-color"
 
 # Get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
