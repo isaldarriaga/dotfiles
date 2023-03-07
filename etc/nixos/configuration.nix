@@ -38,7 +38,7 @@
   
 
   # Set your time zone.
-  time.timeZone = "America/Bogota";
+  time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -82,7 +82,6 @@
 
         sddm = {
           enable = true;
-          autoNumlock = true;
           theme = "Breeze-Dark";
         };
       };
@@ -176,7 +175,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    pkgs.k3s # kubernetes
+    # pkgs.k3s # kubernetes
     libsForQt5.bismuth # tile manager
     killall # terminate programs
     wget # downloader
