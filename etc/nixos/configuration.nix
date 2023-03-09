@@ -62,7 +62,7 @@
       settings = {
         INTERNET_IFACE = "cni0";
         WIFI_IFACE = "wlp4s0";
-        SSID = "Nixtro5 Hotspot";
+        SSID = "Nixtro5";
         PASSPHRASE = "9096312iv";
       };
     };
@@ -165,12 +165,12 @@
 
   # K3s
   # This is required so that pod can reach the API server (running on port 6443 by default)
-  # networking.firewall.allowedTCPPorts = [ 6443 ];
-  # services.k3s.enable = true;
-  # services.k3s.role = "server";
-  # services.k3s.extraFlags = toString [
-  #   # "--kubelet-arg=v=4" # Optionally add additional args to k3s
-  # ];
+  networking.firewall.allowedTCPPorts = [ 6443 ];
+  services.k3s.enable = true;
+  services.k3s.role = "server";
+  services.k3s.extraFlags = toString [
+    # "--kubelet-arg=v=4" # Optionally add additional args to k3s
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
