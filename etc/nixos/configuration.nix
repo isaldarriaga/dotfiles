@@ -142,6 +142,8 @@
       sweethome3d.application
       # gaming
       steam
+      mgba
+      dolphin-emu
     ];
   };
 
@@ -175,6 +177,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
     # pkgs.k3s # kubernetes
     libsForQt5.bismuth # tile manager
     killall # terminate programs
@@ -183,7 +186,7 @@
     inxi # show graphics configuration
     glxinfo # show graphic card details
     gnome.gnome-disk-utility # write iso files
-    openssh
+    #openssh
 
     # multi iso boot:
     # find the ventoyWeb script -> $ sudo find / | grep VentoyWeb
@@ -192,10 +195,12 @@
     ventoy-bin
     vial # keyboard config
     hwinfo # hardware info
+    
     # compress
     zip
     gnutar
     ark # kde
+
     #shell
     neofetch
     xplr # file manager
@@ -204,6 +209,7 @@
     terminal-typeracer # warmup
     exa # improve ls
     alacritty # opengl terminal
+    
     # version control
     git
     git-crypt
@@ -211,20 +217,24 @@
     lazygit
     gitui
     jq
+    
     # compilers
     rustc
     cargo
     nodejs
     go
     gcc11
+
     # editor
     helix
+    
     # lsp
     rust-analyzer # rust
     nodePackages_latest.typescript-language-server # ts
     marksman # markdown
     gopls # golang
     nil # nix
+
     ##container
     podman
     distrobox
