@@ -70,8 +70,8 @@ alias journalctl="jctl"
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # my editor
-export EDITOR=helix
-export VISUAL=helix
+export EDITOR=hx
+export VISUAL=hx
 
 # my aliases
 alias search="nix-env -qaP"
