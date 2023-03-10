@@ -69,7 +69,7 @@
 
     xserver = {
       enable = true;
-      videoDrivers = [ "nvidia" ]; # nvidia / amdgpu
+      videoDrivers = [ "amdgpu" ]; # nvidia / amdgpu
       desktopManager.plasma5.enable = true;
 
       layout = "us"; # latam / us
