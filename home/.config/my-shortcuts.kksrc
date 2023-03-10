@@ -12,7 +12,7 @@ Switch to Next Keyboard Layout=
 AboutApp=
 AboutKDE=
 Activate Next Tab=Ctrl+PgDown; Ctrl+]
-Activate Previous Tab=Ctrl+[; Ctrl+PgUp
+Activate Previous Tab=Ctrl+PgUp; Ctrl+[
 ActualSize=Ctrl+0
 AddBookmark=Ctrl+B
 Back=Alt+Left; Back
@@ -42,14 +42,14 @@ FindPrev=Shift+F3
 FitToHeight=
 FitToPage=
 FitToWidth=
-Forward=Forward; Alt+Right
+Forward=Alt+Right; Forward
 ForwardWord=Ctrl+Right
 FullScreen=Ctrl+Shift+F
 Goto=
 GotoLine=Ctrl+G
 GotoPage=
 Help=F1
-Home=Alt+Home; Home Page
+Home=Home Page; Alt+Home
 KeyBindings=Ctrl+Alt+,
 Mail=
 MoveToTrash=Del
@@ -91,24 +91,24 @@ Undo=Ctrl+Z
 Up=Alt+Up
 WhatsThis=Shift+F1
 Zoom=
-ZoomIn=Ctrl+=; Ctrl++
+ZoomIn=Ctrl++; Ctrl+=
 ZoomOut=Ctrl+-
 
 [bismuth][Global Shortcuts]
 decrease_master_size=
 decrease_master_win_count=
-decrease_window_height=Ctrl+Shift+Up
-decrease_window_width=Ctrl+Shift+Left
+decrease_window_height=
+decrease_window_width=
 focus_bottom_window=Meta+Down
 focus_left_window=Meta+Left
 focus_next_window=
 focus_prev_window=
 focus_right_window=Meta+Right
 focus_upper_window=Meta+Up
-increase_master_size=Meta+Num++
+increase_master_size=
 increase_master_win_count=
-increase_window_height=Ctrl+Shift+Down
-increase_window_width=Ctrl+Shift+Right
+increase_window_height=
+increase_window_width=
 move_window_to_bottom_pos=Meta+Ctrl+Down
 move_window_to_left_pos=Meta+Ctrl+Left
 move_window_to_next_pos=
@@ -156,12 +156,12 @@ decrease_microphone_volume=Microphone Volume Down
 decrease_volume=Volume Down
 increase_microphone_volume=Microphone Volume Up
 increase_volume=Volume Up
-mic_mute=Meta+Volume Mute; Microphone Mute
+mic_mute=Microphone Mute; Meta+Volume Mute
 mute=Volume Mute
 
 [ksmserver][Global Shortcuts]
 Halt Without Confirmation=
-Lock Session=Screensaver
+Lock Session=Meta+L
 Log Out=Ctrl+Alt+Del
 Log Out Without Confirmation=
 Reboot Without Confirmation=
@@ -322,12 +322,22 @@ view_actual_size=
 view_zoom_in=
 view_zoom_out=
 
+[mediacontrol][Global Shortcuts]
+mediavolumedown=
+mediavolumeup=
+nextmedia=Media Next
+pausemedia=Media Pause
+playmedia=
+playpausemedia=Media Play
+previousmedia=Media Previous
+stopmedia=Media Stop
+
 [org.kde.dolphin.desktop][Global Shortcuts]
 _launch=Meta+E
 
 [org.kde.krunner.desktop][Global Shortcuts]
 RunClipboard=
-_launch=Alt+Space; Search
+_launch=Search; Alt+Space
 
 [org.kde.plasma.emojier.desktop][Global Shortcuts]
 _launch=Meta+.
@@ -383,7 +393,7 @@ switch to previous activity=
 toggle do not disturb=
 
 [systemsettings.desktop][Global Shortcuts]
-_launch=Tools; Meta+S
+_launch=Meta+S; Tools
 kcm-kscreen=
 kcm-lookandfeel=
 kcm-users=
