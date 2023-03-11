@@ -69,7 +69,7 @@
 
     xserver = {
       enable = true;
-      videoDrivers = [ "amdgpu" ]; # nvidia / amdgpu
+      videoDrivers = [ "nvidia" ]; # nvidia / amdgpu
       desktopManager.plasma5.enable = true;
 
       layout = "us"; # latam / us
@@ -117,8 +117,9 @@
   # services.xserver.libinput.enable = true;
 
   # bluetooth
-  #hardware.bluetooth.enable = true;
   #services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.package = pkgs.bluezFull; # connection guide: https://functor.tokyo/blog/2018-12-20-playstation-bluetooth-controller
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ivan = {
