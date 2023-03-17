@@ -109,4 +109,4 @@ alias gu="gitui"
 alias tree="xplr"
 alias warmup="typeracer"
 
-cd ~/repos && la && pwd
+la && pwd
