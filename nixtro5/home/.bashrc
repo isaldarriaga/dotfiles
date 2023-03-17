@@ -1,7 +1,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-
 # Replace ls with exa
 LS='exa -al --color=always --group-directories-first' # preferred listing
 LA='exa -al --color=always --group-directories-first' # all files and dirs
@@ -73,29 +72,41 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export EDITOR=hx
 export VISUAL=hx
 
-# my aliases
+# ALIASES
+
+# nix lifecycle
 alias search="nix-env -qaP"
-alias shell="nix-shell -p"
+alias try="nix-shell -p"
+alias dry="nix-env --dry-run"
+alias install="nix-env --install"
+alias upgrade="nix-env --upgrade"
+alias remove="nix-env --uninstall"
+alias uninstall="remove"
+alias listgen="sudo nix-env --profile /nix/var/nix/profiles/system --list-generations"
+alias gc="nix-collect-garbage"
+
+# nix language
 alias repl="nix repl --extra-experimental-features 'flakes repl-flake' nixpkgs"
-alias rf="repl"
+
+# nixos specific
 alias sync="sudo nixos-rebuild switch"
 alias test="sudo nixos-rebuild test"
-alias gc="nix-collect-garbage"
-alias listgen="sudo nix-env --profile /nix/var/nix/profiles/system --list-generations"
-#alias upgrade="yay -Su"
-#alias remove="yay -Rns"
 
+# containers
 alias mk="minikube"
 alias k="sudo k3s kubectl"
 
 alias pm="podman"
 alias db="distrobox"
 
+# git
+
 alias lg="lazygit"
 alias gu="gitui"
+
+# other
 
 alias tree="xplr"
 alias warmup="typeracer"
 
 cd ~/repos && la && pwd
-
