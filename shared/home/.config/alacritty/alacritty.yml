@@ -11,7 +11,7 @@ window:
   dynamic_padding: true
   decorations: full
   decorations_theme_variant: Dark
-  title: Alacritty@Garuda
+  title: Alacritty
   opacity: 0.98
   class:
     instance: Alacritty
