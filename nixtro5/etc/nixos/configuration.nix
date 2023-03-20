@@ -245,8 +245,8 @@
     zoom-us
     discord
 
-    # db
-    # pkgs.surrealdb
+    # tools
+    gnome.gnome-calculator
   ];
 
   virtualisation = {
