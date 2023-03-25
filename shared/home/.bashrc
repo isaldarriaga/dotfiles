@@ -75,6 +75,7 @@ export VISUAL=hx
 # ALIASES
 
 # nix lifecycle
+export NIXPKGS_ALLOW_UNFREE=1
 alias search="nix-env -qaP"
 alias try="nix-shell -p"
 alias dry="nix-env --dry-run"

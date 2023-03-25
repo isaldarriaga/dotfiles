@@ -146,6 +146,7 @@
       mgba
       dolphin-emu
       ppsspp
+      retroarch
     ];
   };
 
