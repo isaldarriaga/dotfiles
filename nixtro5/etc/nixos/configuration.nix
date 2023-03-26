@@ -259,6 +259,7 @@
 
     # tools
     gnome.gnome-calculator
+    gimp
   ];
 
   virtualisation = {
