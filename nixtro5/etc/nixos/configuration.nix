@@ -16,6 +16,12 @@
     experimental-features = nix-command flakes
   '';  
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-runtime"
+  ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -106,8 +112,7 @@
   
   # Configure console keymap
   console.keyMap = "us";
-
-
+  
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -142,12 +147,18 @@
       blender
       sweethome3d.application
       # gaming
-      steam
+      # steam
       mgba
       dolphin-emu
       ppsspp
       retroarch
     ];
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
   fonts.fonts = with pkgs; [
