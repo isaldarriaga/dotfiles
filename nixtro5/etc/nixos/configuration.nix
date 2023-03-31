@@ -22,6 +22,10 @@
     "steam-runtime"
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "googleearth-pro-7.3.4.8248"
+  ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -152,6 +156,8 @@
       dolphin-emu
       ppsspp
       retroarch
+      # gis
+      pkgs.googleearth-pro
     ];
   };
 
