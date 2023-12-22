@@ -17,3 +17,7 @@ auto-format = true
 [[language]]
 name = "toml"
 auto-format = true
+
+[[language]]
+name = "rust"
+auto-format = true

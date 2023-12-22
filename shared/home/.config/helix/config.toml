@@ -2,8 +2,14 @@ theme = "doom_acario_dark"
 
 [editor]
 line-number = "absolute"
-mouse = false
+mouse = true
 bufferline = "always"
+#gutters = ["diagnostics"]
+auto-completion = true
+auto-format = true
+auto-save = true
+auto-info = true
+#rulers = [120]
 
 [editor.cursor-shape]
 insert = "bar"
@@ -17,6 +23,10 @@ hidden = false
 display-messages = true
 
 [editor.statusline]
-left = ["mode", "spinner", "file-type", "file-encoding", "position-percentage"]
-center = ["file-name", "diagnostics"]
-
+left = ["spinner", "mode", "file-type", "file-encoding", "diagnostics"]
+center = ["version-control", "file-name", "read-only-indicator", "position-percentage"]
+right = ["selections", "register", "position"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
