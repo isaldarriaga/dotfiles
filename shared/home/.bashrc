@@ -117,3 +117,6 @@ if [ -f "/etc/arch-release" ]; then
   source /usr/share/doc/find-the-command/ftc.bash
 fi
 
+if [ -f "~/.start-ide.sh" ]; then
+  ~/.start-ide.sh
+fi
