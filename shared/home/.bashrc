@@ -113,6 +113,7 @@ alias warmup="typeracer"
 la && pwd
 
 # Advanced command-not-found hook
-source /usr/share/doc/find-the-command/ftc.bash
-
+if [ -f "/etc/arch-release" ]; then
+  source /usr/share/doc/find-the-command/ftc.bash
+fi
 
