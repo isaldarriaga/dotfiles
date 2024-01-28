@@ -1,7 +1,7 @@
 import = ["/home/ivan/.config/alacritty/themes/blood_moon.toml"]
 live_config_reload = true
-save_to_clipboard = true
-"window.dynamic_title" = true
+#save_to_clipboard = true
+#"window.dynamic_title" = true
 
 [colors]
 draw_bold_text_with_bright_colors = true
@@ -20,7 +20,6 @@ family = "FiraCode Nerd Font Mono"
 
 [font.bold_italic]
 family = "FiraCode Nerd Font Mono"
-size = 12.0
 
 [font.italic]
 family = "FiraCode Nerd Font Mono"
