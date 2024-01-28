@@ -22,4 +22,3 @@ auto-format = true
 name = "rust"
 auto-format = true
 formatter = { command = "rustfmt" }
-
