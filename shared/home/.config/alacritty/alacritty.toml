@@ -79,6 +79,7 @@ decorations = "full"
 decorations_theme_variant = "Dark"
 dynamic_padding = true
 opacity = 0.98
+startup_mode = "Fullscreen"
 title = "Alacritty"
 
 [window.class]
