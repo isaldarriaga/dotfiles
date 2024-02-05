@@ -2,37 +2,39 @@
 [[ $- != *i* ]] && return
 
 # Replace ls with exa
-LS='exa -al --color=always --group-directories-first' # preferred listing
-LA='exa -al --color=always --group-directories-first' # all files and dirs
-LL='exa -l --color=always --group-directories-first --icons' # long format
+LS='exa -al --color=always --group-directories-first'         # preferred listing
+LA='exa -al --color=always --group-directories-first'         # all files and dirs
+LL='exa -l --color=always --group-directories-first --icons'  # long format
 LT='exa -aT --color=always --group-directories-first --icons' # tree listing
-LDOT="exa -a | egrep '^\.'" # only dot files
+LDOT="exa -a | egrep '^\.'"                                   # only dot files
 
 case $(tty) in /dev/tty[0-9]*)
-  echo "tty detected!"
-  setfont -d
-  showconsolefont
+	echo "tty detected!"
+	setfont -d
+	showconsolefont
 
-  alias ls="$LS"
-  alias la="$LA"
-  alias ll="$LL"
-  alias lt="$LT"
-  alias l.="$LDOT"
+	alias ls="$LS"
+	alias la="$LA"
+	alias ll="$LL"
+	alias lt="$LT"
+	alias l.="$LDOT"
+	;;
 esac
 
 case $(tty) in /dev/pts/[0-9]*)
-  if [ $(basename $SHELL) = "bash" ]; then
-    eval "$(starship init bash)"
-  elif [ $(basename $SHELL) = "fish" ]; then
-    starship init fish | source  
-  fi
-  export STARSHIP_CONFIG=~/.config/starship/starship.toml
+	if [ $(basename $SHELL) = "bash" ]; then
+		eval "$(starship init bash)"
+	elif [ $(basename $SHELL) = "fish" ]; then
+		starship init fish | source
+	fi
+	export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
-  alias ls="$LS --icons"
-  alias la="$LA --icons"
-  alias ll="$LL --icons"
-  alias lt="$LT --icons"
-  alias l.="$LDOT"
+	alias ls="$LS --icons"
+	alias la="$LA --icons"
+	alias ll="$LL --icons"
+	alias lt="$LT --icons"
+	alias l.="$LDOT"
+	;;
 esac
 
 echo -e -n "\x1b[\x33 q" # Blinking underline
@@ -69,8 +71,8 @@ alias journalctl="jctl"
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # my editor
-export EDITOR=hx
-export VISUAL=hx
+export EDITOR=nvim
+export VISUAL=nvim
 
 # ALIASES
 
@@ -105,26 +107,30 @@ alias db="distrobox"
 alias lg="lazygit"
 alias gu="gitui"
 
+# editor
+
+alias v=nvim
+
 # other
 
 alias tree="xplr"
 alias warmup="typeracer"
 
-la
-
 # Advanced command-not-found hook
 if [ -f /etc/arch-release ]; then
-  source /usr/share/doc/find-the-command/ftc.bash
+	source /usr/share/doc/find-the-command/ftc.bash
 fi
 
 if [ -f ~/.start-ide.sh ]; then
-  if [ -z $(pgrep java) ]; then
-    ~/.start-ide.sh
-  else
-    printf "\n\tWebstorm is running already\n"
-  fi
+	if [ -z $(pgrep java) ]; then
+		~/.start-ide.sh
+	else
+		printf "\n\tWebstorm is running already\n"
+	fi
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+la
