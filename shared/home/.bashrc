@@ -110,7 +110,7 @@ alias gu="gitui"
 alias tree="xplr"
 alias warmup="typeracer"
 
-la && pwd
+la
 
 # Advanced command-not-found hook
 if [ -f /etc/arch-release ]; then
@@ -118,7 +118,11 @@ if [ -f /etc/arch-release ]; then
 fi
 
 if [ -f ~/.start-ide.sh ]; then
-  ~/.start-ide.sh
+  if [ -z $(pgrep java) ]; then
+    ~/.start-ide.sh
+  else
+    printf "\n\tWebstorm is running already\n"
+  fi
 fi
 
 export NVM_DIR="$HOME/.nvm"
