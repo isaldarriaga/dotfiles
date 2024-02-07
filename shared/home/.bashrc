@@ -74,26 +74,14 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export EDITOR=nvim
 export VISUAL=nvim
 
+# distant
+export PATH=$PATH:~/.local/bin
+
+# fonts
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+
 # ALIASES
-
-# nix lifecycle
-#export NIXPKGS_ALLOW_UNFREE=1
-#alias search="nix-env -qaP"
-#alias try="nix-shell -p"
-#alias dry="nix-env --dry-run"
-#alias install="nix-env -iA"
-#alias upgrade="nix-env --upgrade"
-#alias remove="nix-env --uninstall"
-#alias uninstall="remove"
-#alias listgen="sudo nix-env --profile /nix/var/nix/profiles/system --list-generations"
-#alias gc="nix-collect-garbage"
-
-# nix language
-#alias repl="nix repl --extra-experimental-features 'flakes repl-flake' nixpkgs"
-
-# nixos specific
-#alias sync="sudo nixos-rebuild switch"
-#alias test="sudo nixos-rebuild test"
 
 # containers
 alias mk="minikube"
@@ -103,16 +91,13 @@ alias pm="podman"
 alias db="distrobox"
 
 # git
-
 alias lg="lazygit"
 alias gu="gitui"
 
 # editor
-
 alias v=nvim
 
 # other
-
 alias tree="xplr"
 alias warmup="typeracer"
 
