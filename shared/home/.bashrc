@@ -96,6 +96,8 @@ alias gu="gitui"
 
 # editor
 alias v=nvim
+alias vi=nvim
+alias vim=nvim
 
 # other
 alias tree="xplr"
