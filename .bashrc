@@ -108,13 +108,17 @@ if [ -f /etc/arch-release ]; then
 	source /usr/share/doc/find-the-command/ftc.bash
 fi
 
-if [ -f ~/.start-ide.sh ]; then
-	if [ -z $(pgrep java) ]; then
-		~/.start-ide.sh
-	else
-		printf "\n\tWebstorm is running already\n"
-	fi
-fi
+# if [ -f ~/.start-ide.sh ]; then
+# 	if [ -z $(pgrep java) ]; then
+# 		~/.start-ide.sh
+# 	else
+# 		printf "\n\tIDE is running already\n"
+# 	fi
+# fi
+
+if ! [ -L ~/.config/alacritty ]; then ln -s ~/repos/.dotfiles/.config/alacritty/ ~/.config/alacritty; fi;
+if ! [ -L ~/.config/starship ]; then ln -s ~/repos/.dotfiles/.config/starship/ ~/.config/starship; fi;
+if ! [ -L ~/.config/nvim ]; then ln -s ~/repos/.dotfiles/.config/nvchad/ ~/.config/nvim; fi;
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
