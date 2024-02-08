@@ -1,0 +1,56 @@
+theme = "doom_acario_dark"
+
+[editor]
+line-number = "absolute"
+mouse = true
+bufferline = "always"
+auto-completion = true
+auto-format = true
+auto-save = true
+auto-info = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.gutters]
+layout = ["diff", "diagnostics", "line-numbers", "spacer"]
+
+[editor.indent-guides]
+render = true
+character = "┊" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[editor.lsp]
+enable = true
+display-messages = true
+auto-signature-help = true
+display-inlay-hints	= true
+display-signature-help-docs = true
+snippets = true
+goto-reference-include-declaration = true
+
+[editor.statusline]
+left = ["spinner", "mode", "file-type", "file-encoding", "diagnostics"]
+center = ["version-control", "file-name", "read-only-indicator", "position-percentage"]
+right = ["selections", "register", "position"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[keys.normal."+"]
+b = ":run-shell-command cargo build"
+r = ":run-shell-command cargo run"
+t = ":run-shell-command cargo test"
+
+[keys.normal]
+"C-s" = [ "normal_mode", ":format" , ":write" ] # For quick saving
+"C-\t" = ["normal_mode", ":buffer-next"]
+"C-/" = "toggle_comments"
+"{" = "goto_prev_paragraph"
+"}" = "goto_next_paragraph"
