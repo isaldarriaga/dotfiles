@@ -118,7 +118,11 @@ fi
 
 if ! [ -L ~/.config/alacritty ]; then ln -s ~/repos/.dotfiles/.config/alacritty/ ~/.config/alacritty; fi;
 if ! [ -L ~/.config/starship ]; then ln -s ~/repos/.dotfiles/.config/starship/ ~/.config/starship; fi;
-if ! [ -L ~/.config/nvim ]; then ln -s ~/repos/.dotfiles/.config/nvchad/ ~/.config/nvim; fi;
+# lazyvim
+# if ! [ -L ~/.config/nvim ]; then ln -s ~/repos/.dotfiles/.config/lazyvim/ ~/.config/nvim; fi;
+# nvchad
+if ! [ -d ~/.config/nvim ]; then git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1; fi;
+if ! [ -L ~/.config/nvim/lua/custom ]; then ln -s ~/repos/.dotfiles/.config/nvchad/lua/custom/ ~/.config/nvim/lua/custom; fi;
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
