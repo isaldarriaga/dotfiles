@@ -1,24 +1,28 @@
 ---@type MappingsTable
 local M = {}
 
-M.general = {
+M.disabled = {
   n = {
-    [";"] = { ":", "enter command mode", opts = { nowait = true } },
-
-    --  format with conform
-    ["<leader>fm"] = {
-      function()
-        require("conform").format()
-      end,
-      "formatting",
-    }
-
-  },
-  v = {
-    [">"] = { ">gv", "indent"},
-  },
+    ["<tab>"] = "",
+    ["<S-tab>"] = ""
+ }
 }
 
--- more keybinds!
-
+M.tabufline = {
+  plugin = true,
+  n = {
+    ["<C-tab>"] = {
+      function()
+        require("nvchad.tabufline").tabuflineNext()
+      end,
+      "Goto next buffer",
+    },
+    ["<C-S-tab>"] = {
+      function()
+        require("nvchad.tabufline").tabuflinePrev()
+      end,
+      "Goto prev buffer",
+    },
+  },
+}
 return M
