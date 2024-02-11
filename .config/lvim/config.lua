@@ -79,14 +79,29 @@ lvim.keys.insert_mode["<A-Up>"] = "<Esc>:m .-2<CR>=="
 
 -- PLUGINS
 
--- git blame
 lvim.plugins = {
+  -- git blame
   {
     "f-person/git-blame.nvim",
     event = "BufRead",
     config = function()
       vim.cmd "highlight default link gitblame SpecialComment"
       require("gitblame").setup { enabled = true }
+    end,
+  },
+  -- auto-close html tags
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  -- jump by searching with 2 chars
+  {
+    "ggandor/leap.nvim",
+    name = "leap",
+    config = function()
+      require("leap").add_default_mappings()
     end,
   },
 }
