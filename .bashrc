@@ -116,7 +116,7 @@ MY_CONFIG_PATH="/home/$USER/repos/.dotfiles/.config"
 HOME_CONFIG_PATH=/home/$USER/.config
 
 # easy setups
-for APP in alacritty starship
+for APP in alacritty starship lvim
 do
 	APP_CONFIG_PATH=$HOME_CONFIG_PATH/$APP
 	MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$APP/
