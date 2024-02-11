@@ -50,13 +50,16 @@ lvim.keys.normal_mode["<C-S-Right>"] = ":vertical resize +2<CR>"
 
 -- LSP
 -- go to definition: <F12>
--- go to references: <S-F12>
+  -- go to references: <S-F12>
 -- rename: F2
 
 -- EDITING TEXT
 -- toggle case: <C-u>
 -- delete line: <C-S-l>
 -- save: <C-s>
+-- indenting <tab>
+lvim.keys.visual_mode["<Tab>"] = ">gv"
+lvim.keys.visual_mode["<S-Tab>"] = "<gv"
 
 -- move line up: <A-Up>
 lvim.keys.normal_mode["<A-Down>"] = ":m .+1<CR>=="
