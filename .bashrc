@@ -95,9 +95,9 @@ alias lg="lazygit"
 alias gu="gitui"
 
 # editor
-alias v=nvim
-alias vi=nvim
-alias vim=nvim
+alias v=lvim
+alias vi=lvim
+alias vim=lvim
 
 # other
 alias tree="xplr"
