@@ -50,7 +50,7 @@ lvim.keys.normal_mode["<C-S-Right>"] = ":vertical resize +2<CR>"
 
 -- LSP
 -- go to definition: <F12>
-  -- go to references: <S-F12>
+-- go to references: <S-F12>
 -- rename: F2
 
 -- EDITING TEXT
@@ -107,6 +107,21 @@ lvim.plugins = {
     name = "leap",
     config = function()
       require("leap").add_default_mappings()
+    end,
+  },
+  -- css colorizer
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
+        RGB = true,        -- #RGB hex codes
+        RRGGBB = true,     -- #RRGGBB hex codes
+        RRGGBBAA = true,   -- #RRGGBBAA hex codes
+        rgb_fn = true,     -- CSS rgb() and rgba() functions
+        hsl_fn = true,     -- CSS hsl() and hsla() functions
+        css = true,        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true,     -- Enable all CSS *functions*: rgb_fn, hsl_fn
+      })
     end,
   },
 }
