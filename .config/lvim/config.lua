@@ -54,7 +54,15 @@ lvim.keys.insert_mode["<C-Right>"] = "<Esc><C-w>l<CR>"
 -- toggle case: <C-u>
 -- delete line: <C-S-l>
 -- save: <C-s>
---
+
+-- move line up: <A-Up>
+lvim.keys.normal_mode["<A-Down>"] = ":m .+1<CR>=="
+lvim.keys.insert_mode["<A-Down>"] = "<Esc>:m .+1<CR>=="
+
+-- move line down: <A-Down>
+lvim.keys.normal_mode["<A-Up>"] = ":m .-2<CR>=="
+lvim.keys.insert_mode["<A-Up>"] = "<Esc>:m .-2<CR>=="
+
 -- MULTILINE
 -- add selection: <A-j>
 -- remove selectedL <A-S-j>
