@@ -118,24 +118,24 @@ HOME_CONFIG_PATH=/home/$USER/.config
 # easy setups
 for APP in alacritty starship
 do
-  APP_CONFIG_PATH=$HOME_CONFIG_PATH/$APP
-  MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$APP/
+	APP_CONFIG_PATH=$HOME_CONFIG_PATH/$APP
+	MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$APP/
 
-  MSG_CHECKING="\n🕰 Checking $APP config.."
-  MSG_SYMLINK_CREATING="\t🕰 Creating symlink to $APP config.."
-  MSG_SYMLINK_EXISTS="\t🔴 Symlink already exist\n\t\tpath: $APP_CONFIG_PATH"
-  MSG_SYMLINK_COMPLETE="\t✅ Complete.\n\t$APP config at: $APP_CONFIG_PATH"
+	MSG_CHECKING="\n🕰 Checking $APP config.."
+	MSG_SYMLINK_CREATING="\t🕰 Creating symlink to $APP config.."
+	MSG_SYMLINK_EXISTS="\t🔴 Symlink already exist\n\t\tpath: $APP_CONFIG_PATH"
+	MSG_SYMLINK_COMPLETE="\t✅ Complete.\n\t$APP config at: $APP_CONFIG_PATH"
 
-  echo -e $MSG_CHECKING
+	echo -e $MSG_CHECKING
 
   if ! [ -L $APP_CONFIG_PATH ]
   then
-    echo -e $MSG_SYMLINK_CREATING
-    ln -s $MY_APP_CONFIG_PATH $APP_CONFIG_PATH
-    echo -e $MSG_SYMLINK_COMPLETE
-  else
-    echo -e $MSG_SYMLINK_EXISTS
-  fi
+		echo -e $MSG_SYMLINK_CREATING
+		ln -s $MY_APP_CONFIG_PATH $APP_CONFIG_PATH
+		echo -e $MSG_SYMLINK_COMPLETE
+	else
+		echo -e $MSG_SYMLINK_EXISTS
+	fi
 done
 
 # complex setups
@@ -153,101 +153,101 @@ APP_STATE_PATH=~/.local/state/$APP
 APP_CACHE_PATH=~/.cache/$APP
 
 case "$ACTION" in
-  "keep")
-    if [ -L $APP_CONFIG_PATH ]
-    then
-      echo -e "\n✅ Keeping $APP ($DISTRO) config (symlink)"
-    else
-      if [ -d $APP_CONFIG_PATH ]
-      then
-        echo -e "\t✅ Keeping $APP ($DISTRO) config (folder)"
-      else
-        echo -e "\t🔴 $APP ($DISTRO) config to $ACTION not found.\n\t\tChange ACTION from $ACTION to 'install'"
-      fi
-    fi
-  ;;
+"keep")
+	if [ -L $APP_CONFIG_PATH ]
+	then
+		echo -e "\n✅ Keeping $APP ($DISTRO) config\n\tsymlink: $APP_CONFIG_PATH"
+	else
+		if [ -d $APP_CONFIG_PATH ]
+		then
+			echo -e "\t✅ Keeping $APP ($DISTRO) config\n\t\tfolder: $APP_CONFIG_PATH"
+		else
+			echo -e "\t🔴 $APP ($DISTRO) config to $ACTION not found.\n\t\tChange ACTION from $ACTION to 'install'"
+		fi
+	fi
+	;;
 
-  "backup")
+"backup")
     for DIR in $APP_CONFIG_PATH $APP_SHARE_PATH $APP_STATE_PATH $APP_CACHE_PATH
     do
-      echo -e "\n🕰 Backing up $APP ($DISTRO)\n\tat: $DIR.."
+		echo -e "\n🕰 Backing up $APP ($DISTRO)\n\tat: $DIR.."
 
       if [ -L $DIR ]
       then
-        echo -e "\t\t🕰 Removing existing symlink.."
-        rm $DIR
-        echo -e "\t\t\t✅ Complete.\n\t\t\t\tSymlink removed at: $DIR"
-      else
+			echo -e "\t\t🕰 Removing existing symlink.."
+			rm $DIR
+			echo -e "\t\t\t✅ Complete.\n\t\t\t\tSymlink removed at: $DIR"
+		else
         if [ -d $DIR ]
         then
-          echo -e "\t\t🕰 Moving existing config folder.."
-          mv $DIR{,-$CUR_DATETIME.bak}
-          echo -e "\t\t\t✅ Complete.\n\t\t\t\tMoved to: $DIR-$CUR_DATETIME.bak"
-        else
-          echo -e "\t\t🟡 There's no symlink or folder to backup.\n\t\t\tChange ACTION from $ACTION to 'install'"
-        fi
-      fi
-    done
-   ;;
+				echo -e "\t\t🕰 Moving existing config folder.."
+				mv $DIR{,-$CUR_DATETIME.bak}
+				echo -e "\t\t\t✅ Complete.\n\t\t\t\tMoved to: $DIR-$CUR_DATETIME.bak"
+			else
+				echo -e "\t\t🟡 There's no symlink or folder to backup.\n\t\t\tChange ACTION from $ACTION to 'install'"
+			fi
+		fi
+	done
+	;;
 
-  "install")
+"install")
 
-    MSG_INSTALLING="\n🕰 Installing $APP ($DISTRO).."
+	MSG_INSTALLING="\n🕰 Installing $APP ($DISTRO).."
 
-    MSG_CLONING="\t🕰 Cloning repo.."
-    MSG_CLONING_COMPLETE="\t\t✅ Complete.\n\t\t\tCloned at: $APP_CONFIG_PATH"
+	MSG_CLONING="\t🕰 Cloning repo.."
+	MSG_CLONING_COMPLETE="\t\t✅ Complete.\n\t\t\tCloned at: $APP_CONFIG_PATH"
 
-    MSG_CALLING="\t🕰 Calling $APP ($DISTRO).."
-    MSG_CALLING_COMPLETE="\t\t✅ Complete.\n\t\t\tPlugins Setup"
+	MSG_CALLING="\t🕰 Calling $APP ($DISTRO).."
+	MSG_CALLING_COMPLETE="\t\t✅ Complete.\n\t\t\tPlugins Setup"
 
-    MSG_SYMLINK_CREATING="\t🕰 Creating symlink..\n\t\tfrom: $MY_CONFIG_PATH/$DISTRO/\n\t\tto: $APP_CONFIG_PATH"
-    MSG_SYMLINK_EXISTS="\t\t🔴 Symlink to config already exist.\n\t\t\tChange ACTION from $ACTION to 'backup' or 'keep'"
-    MSG_SYMLINK_COMPLETE="\t\t✅ Complete.\n\t\t\tsymlink at: $APP_CONFIG_PATH"
+	MSG_SYMLINK_CREATING="\t🕰 Creating symlink..\n\t\tfrom: $MY_CONFIG_PATH/$DISTRO/\n\t\tto: $APP_CONFIG_PATH"
+	MSG_SYMLINK_EXISTS="\t\t🔴 Symlink to config already exist.\n\t\t\tChange ACTION from $ACTION to 'backup' or 'keep'"
+	MSG_SYMLINK_COMPLETE="\t\t✅ Complete.\n\t\t\tsymlink at: $APP_CONFIG_PATH"
 
-    echo -e $MSG_INSTALLING
+	echo -e $MSG_INSTALLING
 
-    case "$DISTRO" in
-      "lazyvim")
+	case "$DISTRO" in
+	"lazyvim")
           if ! [ -L $APP_CONFIG_PATH ]
           then
-            echo -e $MSG_SYMLINK_CREATING
-            ln -s $MY_CONFIG_PATH/$DISTRO/ $APP_CONFIG_PATH
-            echo -e $MSG_SYMLINK_COMPLETE
+			echo -e $MSG_SYMLINK_CREATING
+			ln -s $MY_CONFIG_PATH/$DISTRO/ $APP_CONFIG_PATH
+			echo -e $MSG_SYMLINK_COMPLETE
 
-            echo -e $MSG_CALLING
-            sleep 2
-            nvim
-            echo -e $MSG_CALLING_COMPLETE
-          else
-            echo -e $MSG_SYMLINK_EXISTS
-          fi
-      ;;
+			echo -e $MSG_CALLING
+			sleep 2
+			nvim
+			echo -e $MSG_CALLING_COMPLETE
+		else
+			echo -e $MSG_SYMLINK_EXISTS
+		fi
+		;;
 
-      "nvchad")
+	"nvchad")
         if ! [ -d $APP_CONFIG_PATH ]
         then
-          echo -e $MSG_CLONING
-          git clone -q https://github.com/NvChad/NvChad $APP_CONFIG_PATH --depth 1
-          echo -e $MSG_CLONING_COMPLETE
+			echo -e $MSG_CLONING
+			git clone -q https://github.com/NvChad/NvChad $APP_CONFIG_PATH --depth 1
+			echo -e $MSG_CLONING_COMPLETE
 
-          echo -e $MSG_CALLING
-          sleep 2
-          nvim
-          echo -e $MSG_CALLING_COMPLETE
-        fi
+			echo -e $MSG_CALLING
+			sleep 2
+			nvim
+			echo -e $MSG_CALLING_COMPLETE
+		fi
 
-        LUA_CUSTOM_PATH=lua/custom
+		LUA_CUSTOM_PATH=lua/custom
         if ! [ -L $APP_CONFIG_PATH/$LUA_CUSTOM_PATH ]
         then
-          echo -e $MSG_SYMLINK_CREATING
-          ln -s $MY_CONFIG_PATH/$DISTRO/$LUA_CUSTOM_PATH/ $APP_CONFIG_PATH/$LUA_CUSTOM_PATH
-          echo -e $MSG_SYMLINK_COMPLETE/$LUA_CUSTOM_PATH
-        else
-          echo -e $MSG_SYMLINK_EXISTS
-        fi
-      ;;
-    esac
-  ;;
+			echo -e $MSG_SYMLINK_CREATING
+			ln -s $MY_CONFIG_PATH/$DISTRO/$LUA_CUSTOM_PATH/ $APP_CONFIG_PATH/$LUA_CUSTOM_PATH
+			echo -e $MSG_SYMLINK_COMPLETE/$LUA_CUSTOM_PATH
+		else
+			echo -e $MSG_SYMLINK_EXISTS
+		fi
+		;;
+	esac
+	;;
 
 esac
 
