@@ -24,33 +24,36 @@ lvim.keys.insert_mode["<C-S-Tab>"] = "<Esc>:BufferLineCyclePrev<CR>"
 
 -- window navigation
 
--- go window up
+-- jump window up
 lvim.keys.normal_mode["<C-Up>"] = "<C-w>k"
 lvim.keys.insert_mode["<C-Up>"] = "<Esc><C-w>k<CR>"
 
--- go window down
+-- jump window down
 lvim.keys.normal_mode["<C-Down>"] = "<C-w>j"
 lvim.keys.insert_mode["<C-Down>"] = "<Esc><C-w>j<CR>"
 
--- go window left
+-- jump window left
 lvim.keys.normal_mode["<C-Left>"] = "<C-w>h"
 lvim.keys.insert_mode["<C-Left>"] = "<Esc><C-w>h<CR>"
 
+-- jump window right
 lvim.keys.normal_mode["<C-Right>"] = "<C-w>l"
 lvim.keys.insert_mode["<C-Right>"] = "<Esc><C-w>l<CR>"
 
 -- terminal: <C-S-t>
 
 -- resizing
--- bigger: <C-S-Up>
--- smaller: <C-S-Down>
+lvim.keys.normal_mode["<C-S-Up>"] = ":resize -2<CR>"
+lvim.keys.normal_mode["<C-S-Down>"] = ":resize +2<CR>"
+lvim.keys.normal_mode["<C-S-Left>"] = ":vertical resize -2<CR>"
+lvim.keys.normal_mode["<C-S-Right>"] = ":vertical resize +2<CR>"
 
 -- LSP
 -- go to definition: <F12>
 -- go to references: <S-F12>
 -- rename: F2
 
--- INSERT MODE
+-- EDITING TEXT
 -- toggle case: <C-u>
 -- delete line: <C-S-l>
 -- save: <C-s>
