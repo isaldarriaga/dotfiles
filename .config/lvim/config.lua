@@ -15,18 +15,30 @@ lvim.keys.insert_mode["<C-Tab>"] = "<Esc>:BufferLineCycleNext<CR>"
 
 lvim.keys.normal_mode["<C-S-Tab>"] = ":BufferLineCyclePrev<CR>"
 lvim.keys.insert_mode["<C-S-Tab>"] = "<Esc>:BufferLineCyclePrev<CR>"
--- close: <C-F4>
 
+-- close: <C-F4>
+-- lvim.keys.normal_mode["<C-F4>"] = ":BufferKill<CR>"
+-- lvim.keys.insert_mode["<C-Tab>"] = "<Esc>:BufferKill<CR>"
 
 -- close all: <C-S-F4>
 
--- window
+-- window navigation
 
--- navigation
--- up: <C-Up>
--- down: <C-Down>
--- left: <C-Left>
--- right: <C-Right>
+-- go window up
+lvim.keys.normal_mode["<C-Up>"] = "<C-w>k"
+lvim.keys.insert_mode["<C-Up>"] = "<Esc><C-w>k<CR>"
+
+-- go window down
+lvim.keys.normal_mode["<C-Down>"] = "<C-w>j"
+lvim.keys.insert_mode["<C-Down>"] = "<Esc><C-w>j<CR>"
+
+-- go window left
+lvim.keys.normal_mode["<C-Left>"] = "<C-w>h"
+lvim.keys.insert_mode["<C-Left>"] = "<Esc><C-w>h<CR>"
+
+lvim.keys.normal_mode["<C-Right>"] = "<C-w>l"
+lvim.keys.insert_mode["<C-Right>"] = "<Esc><C-w>l<CR>"
+
 -- terminal: <C-S-t>
 
 -- resizing
