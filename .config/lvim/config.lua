@@ -76,3 +76,17 @@ lvim.keys.insert_mode["<A-Up>"] = "<Esc>:m .-2<CR>=="
 
 -- NEOTREE
 -- rename: F2
+
+-- PLUGINS
+
+-- git blame
+lvim.plugins = {
+  {
+    "f-person/git-blame.nvim",
+    event = "BufRead",
+    config = function()
+      vim.cmd "highlight default link gitblame SpecialComment"
+      require("gitblame").setup { enabled = true }
+    end,
+  },
+}
