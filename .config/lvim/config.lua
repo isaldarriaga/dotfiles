@@ -89,6 +89,11 @@ lvim.plugins = {
       require("gitblame").setup { enabled = true }
     end,
   },
+  -- merge/diff tool
+  {
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+  },
   -- auto-close html tags
   {
     "windwp/nvim-ts-autotag",
