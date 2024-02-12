@@ -123,7 +123,7 @@ do
 
 	MSG_CHECKING="\n🕰 Checking $APP config.."
 	MSG_SYMLINK_CREATING="\t🕰 Creating symlink to $APP config.."
-	MSG_SYMLINK_EXISTS="\t🔴 Symlink already exist\n\t\tpath: $APP_CONFIG_PATH"
+	MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist\n\t\tpath: $APP_CONFIG_PATH"
 	MSG_SYMLINK_COMPLETE="\t✅ Complete.\n\t$APP config at: $APP_CONFIG_PATH"
 
 	echo -e $MSG_CHECKING
@@ -162,7 +162,7 @@ case "$ACTION" in
 		then
 			echo -e "\t✅ Keeping $APP ($DISTRO) config\n\t\tfolder: $APP_CONFIG_PATH"
 		else
-			echo -e "\t🔴 $APP ($DISTRO) config to $ACTION not found.\n\t\tChange ACTION from $ACTION to 'install'"
+			echo -e "\t🟡 $APP ($DISTRO) config to $ACTION not found.\n\t\tChange ACTION from $ACTION to 'install'"
 		fi
 	fi
 	;;
@@ -201,7 +201,7 @@ case "$ACTION" in
 	MSG_CALLING_COMPLETE="\t\t✅ Complete.\n\t\t\tPlugins Setup"
 
 	MSG_SYMLINK_CREATING="\t🕰 Creating symlink..\n\t\tfrom: $MY_CONFIG_PATH/$DISTRO/\n\t\tto: $APP_CONFIG_PATH"
-	MSG_SYMLINK_EXISTS="\t\t🔴 Symlink to config already exist.\n\t\t\tChange ACTION from $ACTION to 'backup' or 'keep'"
+	MSG_SYMLINK_EXISTS="\t\t🟡 Symlink to config already exist.\n\t\t\tChange ACTION from $ACTION to 'backup' or 'keep'"
 	MSG_SYMLINK_COMPLETE="\t\t✅ Complete.\n\t\t\tsymlink at: $APP_CONFIG_PATH"
 
 	echo -e $MSG_INSTALLING
