@@ -51,6 +51,7 @@ lvim.keys.normal_mode["<C-S-Right>"] = ":vertical resize +2<CR>"
 -- LSP
 -- go to definition: <F12>
 -- go to references: <S-F12>
+-- code action: <A-Enter>
 -- rename: F2
 
 -- EDITING TEXT
@@ -76,6 +77,16 @@ lvim.keys.insert_mode["<A-Up>"] = "<Esc>:m .-2<CR>=="
 
 -- NEOTREE
 -- rename: F2
+
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Diagnostics",
+  t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
+  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
 
 -- PLUGINS
 
@@ -148,5 +159,10 @@ lvim.plugins = {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
     config = function() require "lsp_signature".on_attach() end,
+  },
+  -- diagnostics
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
   },
 }
