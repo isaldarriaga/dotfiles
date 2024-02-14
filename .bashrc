@@ -146,6 +146,9 @@ ACTION=${1:-"keep"}
 # DISTROS: lazyvim | nvchad | lunarvim ..
 DISTRO=${2:-"lunarvim"}
 
+# CHANNEL (for lunarvim): release | nightly
+CHANNEL=${3:-"release"}
+
 if [ $DISTRO == "lunarvim" ]
 then
   APP=lvim
@@ -282,8 +285,19 @@ case "$ACTION" in
     if ! [ -L $APP_CONFIG_PATH ]
     then
 			echo -e $MSG_SETTING_UP
-			LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+      case "$CHANNEL" in
+        "release")
+          LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+          ;;
+        "nightly")
+          bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+          ;;
+      esac
       echo -e $MSG_SETTING_UP_COMPLETE
+
+      $(echo "$APP -v")
+
+      $(echo "$APP -c checkhealth")
 		else
 			echo -e $MSG_SYMLINK_EXISTS
 		fi
