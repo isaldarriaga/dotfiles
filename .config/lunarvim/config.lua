@@ -3,15 +3,8 @@
 -- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
---
--- lvim.colorscheme = "tokionight"
-
--- options
--- vim.opt.relativenumber = true
 
 -- keymaps
-
--- Navigation
 
 -- next buffer: Ctrl + Tab
 lvim.keys.normal_mode["<C-Tab>"] = ":BufferLineCycleNext<CR>"
@@ -79,16 +72,6 @@ lvim.keys.insert_mode["<A-Up>"] = "<Esc>:m .-2<CR>=="
 -- NEOTREE
 -- rename: F2
 
-lvim.builtin.which_key.mappings["t"] = {
-  name = "Diagnostics",
-  t = { "<cmd>TroubleToggle<cr>", "trouble" },
-  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
-  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
-  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
-  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
-  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
-}
-
 -- PLUGINS
 
 lvim.plugins = {
@@ -98,14 +81,16 @@ lvim.plugins = {
     event = "BufRead",
     config = function()
       vim.cmd "highlight default link gitblame SpecialComment"
-      require("gitblame").setup { enabled = true }
+      require("gitblame").setup { enabled = false }
     end,
   },
+
   -- merge/diff tool
   {
     "sindrets/diffview.nvim",
     event = "BufRead",
   },
+
   -- auto-close html tags
   {
     "windwp/nvim-ts-autotag",
@@ -113,6 +98,7 @@ lvim.plugins = {
       require("nvim-ts-autotag").setup()
     end,
   },
+
   -- search by typing 2-3 chars of word
   {
     "ggandor/leap.nvim",
@@ -121,6 +107,7 @@ lvim.plugins = {
       require("leap").add_default_mappings()
     end,
   },
+
   -- css colorizer
   {
     "norcalli/nvim-colorizer.lua",
@@ -136,6 +123,7 @@ lvim.plugins = {
       })
     end,
   },
+
   -- preview definition, references, implementation with a floating window via LSP
   {
     "rmagatti/goto-preview",
@@ -147,32 +135,15 @@ lvim.plugins = {
         debug = false,           -- Print debug information
         opacity = nil,           -- 0-100 opacity level of the floating window where 100 is fully transparent.
         post_open_hook = nil     -- A function taking two arguments, a buffer and a window to be ran as a hook.
-        -- You can use "default_mappings = true" setup option
-        -- Or explicitly set keybindings
-        -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-        -- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
-        -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
       }
     end
   },
-  -- preview function signature via LSP
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "BufRead",
-    config = function() require "lsp_signature".on_attach() end,
-  },
-  -- diagnostics window
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
-  -- tokionight
-  -- {
-    -- "folke/tokionight.vim"
-  -- },
-}
 
--- vim.g.tokyonight_style = "storm" -- can be storm, night, or day
--- lvim.colorscheme = 'tokyonight'
---
-lvim.colorscheme = "lunar"
+}
+-- WIP: use biome instead of tsserver ?
+-- -- add `tsserver` to `skipped_servers` list
+-- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "tsserver" })
+-- -- remove `biome` from `skipped_servers` list
+-- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
+--   return server ~= "biome"
+-- end, lvim.lsp.automatic_configuration.skipped_servers)
