@@ -71,8 +71,8 @@ alias journalctl="jctl"
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # my editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=lvim
+export VISUAL=lvim
 
 # distant
 export PATH=$PATH:~/.local/bin
@@ -282,8 +282,8 @@ case "$ACTION" in
     if ! [ -L $APP_CONFIG_PATH ]
     then
 			echo -e $MSG_SETTING_UP
-      bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-			echo -e $MSG_SETTING_UP_COMPLETE
+			LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+      echo -e $MSG_SETTING_UP_COMPLETE
 		else
 			echo -e $MSG_SYMLINK_EXISTS
 		fi
