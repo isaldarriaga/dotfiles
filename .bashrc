@@ -116,15 +116,15 @@ MY_CONFIG_PATH="/home/$USER/repos/.dotfiles/.config"
 HOME_CONFIG_PATH=/home/$USER/.config
 
 # easy setups
-for APP in alacritty starship
+for EASY_APP in alacritty starship
 do
-	APP_CONFIG_PATH=$HOME_CONFIG_PATH/$APP
-	MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$APP/
+	APP_CONFIG_PATH=$HOME_CONFIG_PATH/$EASY_APP
+	MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$EASY_APP/
 
-	MSG_CHECKING="\n🕰 Checking $APP config.."
-	MSG_SYMLINK_CREATING="\t🕰 Creating symlink to $APP config.."
+	MSG_CHECKING="\n🕰 Checking $EASY_APP config.."
+	MSG_SYMLINK_CREATING="\t🕰 Creating symlink to $EASY_APP config.."
 	MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist\n\t\tpath: $APP_CONFIG_PATH"
-	MSG_SYMLINK_COMPLETE="\t✅ Complete.\n\t$APP config at: $APP_CONFIG_PATH"
+	MSG_SYMLINK_COMPLETE="\t✅ Complete.\n\t$EASY_APP config at: $APP_CONFIG_PATH"
 
 	echo -e $MSG_CHECKING
 
@@ -141,33 +141,54 @@ done
 # complex setups
 
 # ACTIONS: backup | install | keep
-ACTION=${1:-keep}
+ACTION=${1:-"keep"}
 
 # DISTROS: lazyvim | nvchad | lunarvim ..
 DISTRO=${2:-"lunarvim"}
 
-if [ $DISTRO = "lunarvim" ]
+if [ $DISTRO == "lunarvim" ]
 then
   APP=lvim
 else
   APP=nvim
 fi
 
+MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$DISTRO/
+
 APP_CONFIG_PATH=$HOME_CONFIG_PATH/$APP
-APP_SHARE_PATH=~/.local/share/$APP
-APP_STATE_PATH=~/.local/state/$APP
-APP_CACHE_PATH=~/.cache/$APP
+APP_SHARE_PATH=/home/$USER/.local/share/$APP
+APP_STATE_PATH=/home/$USER/.local/state/$APP
+APP_CACHE_PATH=/home/$USER/.cache/$APP
 
 case "$ACTION" in
 "keep")
 	echo -e "\n🕰 Keeping $APP ($DISTRO) config.."
+	
+  MSG_SYMLINK_CREATING="\t🕰 Creating symlink to $APP ($DISTRO) config.."
+	MSG_SYMLINK_COMPLETE="\t\t✅ Complete\n\t\t\tSymlink at: $APP_CONFIG_PATH\n\t\t\tTargets: $MY_APP_CONFIG_PATH"
+
+	if ! [ -L $APP_CONFIG_PATH ] && ! [ -d $APP_CONFIG_PATH ]
+	then
+      echo -e $MSG_SYMLINK_CREATING
+  		ln -s $MY_APP_CONFIG_PATH $APP_CONFIG_PATH
+	  	echo -e $MSG_SYMLINK_COMPLETE
+  fi
+
 	if [ -L $APP_CONFIG_PATH ]
 	then
 		echo -e "\t🟢 Symlink: $APP_CONFIG_PATH"
 	else
 		if [ -d $APP_CONFIG_PATH ]
 		then
-			echo -e "\t🟢 Folder: $APP_CONFIG_PATH"
+      echo -e "\t🟢 Folder detected (incomplete setup): $APP_CONFIG_PATH"
+
+      echo -e "\t\t🕰 Moving existing config folder.."
+  		mv $APP_CONFIG_PATH{,-$CUR_DATETIME.bak}
+  		echo -e "\t\t✅ Complete.\n\t\t\tMoved to: $APP_CONFIG_PATH-$CUR_DATETIME.bak"
+
+      echo -e $MSG_SYMLINK_CREATING
+  		ln -s $MY_APP_CONFIG_PATH $APP_CONFIG_PATH
+	  	echo -e $MSG_SYMLINK_COMPLETE
 		else
 			echo -e "\t🟡 Config not found.\n\t\tChange ACTION from $ACTION to 'install'"
 		fi
@@ -205,7 +226,7 @@ case "$ACTION" in
 	MSG_CLONING_COMPLETE="\t\t✅ Complete.\n\t\t\tCloned at: $APP_CONFIG_PATH"
 
 	MSG_SETTING_UP="\t🕰 Setting up.."
-	MSG_SETTING_UP_COMPLETE="\t\t✅ Complete.\n\t\t\tSetup at: $APP_CONFIG_PATH"
+  MSG_SETTING_UP_COMPLETE="\t\t✅ Complete.\n\t\t\tSettings at: $APP_CONFIG_PATH (folder)"
 
 	MSG_CALLING="\t🕰 Calling $APP ($DISTRO).."
 	MSG_CALLING_COMPLETE="\t\t✅ Complete.\n\t\t\tPlugins Setup"
@@ -263,15 +284,6 @@ case "$ACTION" in
 			echo -e $MSG_SETTING_UP
       bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 			echo -e $MSG_SETTING_UP_COMPLETE
-
-			# echo -e $MSG_SYMLINK_CREATING
-			# ln -s $MY_CONFIG_PATH/$DISTRO/ $APP_CONFIG_PATH
-			# echo -e $MSG_SYMLINK_COMPLETE
-
-			# echo -e $MSG_CALLING
-			# sleep 2
-			# lvim
-			# echo -e $MSG_CALLING_COMPLETE
 		else
 			echo -e $MSG_SYMLINK_EXISTS
 		fi
