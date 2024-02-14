@@ -116,7 +116,7 @@ MY_CONFIG_PATH="/home/$USER/repos/.dotfiles/.config"
 HOME_CONFIG_PATH=/home/$USER/.config
 
 # easy setups
-for APP in alacritty starship lvim
+for APP in alacritty starship
 do
 	APP_CONFIG_PATH=$HOME_CONFIG_PATH/$APP
 	MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$APP/
@@ -139,13 +139,19 @@ do
 done
 
 # complex setups
-APP=nvim
 
 # ACTIONS: backup | install | keep
 ACTION=${1:-keep}
 
-# DISTROS: lazyvim | nvchad ..
-DISTRO=${2:-"lazyvim"}
+# DISTROS: lazyvim | nvchad | lunarvim ..
+DISTRO=${2:-"lunarvim"}
+
+if [ $DISTRO = "lunarvim" ]
+then
+  APP=lvim
+else
+  APP=nvim
+fi
 
 APP_CONFIG_PATH=$HOME_CONFIG_PATH/$APP
 APP_SHARE_PATH=~/.local/share/$APP
@@ -154,40 +160,41 @@ APP_CACHE_PATH=~/.cache/$APP
 
 case "$ACTION" in
 "keep")
+	echo -e "\n🕰 Keeping $APP ($DISTRO) config.."
 	if [ -L $APP_CONFIG_PATH ]
 	then
-		echo -e "\n✅ Keeping $APP ($DISTRO) config\n\tsymlink: $APP_CONFIG_PATH"
+		echo -e "\t🟢 Symlink: $APP_CONFIG_PATH"
 	else
 		if [ -d $APP_CONFIG_PATH ]
 		then
-			echo -e "\t✅ Keeping $APP ($DISTRO) config\n\t\tfolder: $APP_CONFIG_PATH"
+			echo -e "\t🟢 Folder: $APP_CONFIG_PATH"
 		else
-			echo -e "\t🟡 $APP ($DISTRO) config to $ACTION not found.\n\t\tChange ACTION from $ACTION to 'install'"
+			echo -e "\t🟡 Config not found.\n\t\tChange ACTION from $ACTION to 'install'"
 		fi
 	fi
 	;;
 
 "backup")
+    echo -e "\n🕰 Backing up $APP ($DISTRO).."
     for DIR in $APP_CONFIG_PATH $APP_SHARE_PATH $APP_STATE_PATH $APP_CACHE_PATH
     do
-		echo -e "\n🕰 Backing up $APP ($DISTRO)\n\tat: $DIR.."
-
+      echo -e "\tat: $DIR.."
       if [ -L $DIR ]
       then
-			echo -e "\t\t🕰 Removing existing symlink.."
-			rm $DIR
-			echo -e "\t\t\t✅ Complete.\n\t\t\t\tSymlink removed at: $DIR"
-		else
+    	  echo -e "\t\t🕰 Removing existing symlink.."
+  	  	rm $DIR
+  			echo -e "\t\t\t✅ Complete.\n\t\t\t\tSymlink removed at: $DIR"
+  		else
         if [ -d $DIR ]
         then
-				echo -e "\t\t🕰 Moving existing config folder.."
-				mv $DIR{,-$CUR_DATETIME.bak}
-				echo -e "\t\t\t✅ Complete.\n\t\t\t\tMoved to: $DIR-$CUR_DATETIME.bak"
-			else
-				echo -e "\t\t🟡 There's no symlink or folder to backup.\n\t\t\tChange ACTION from $ACTION to 'install'"
-			fi
-		fi
-	done
+  				  echo -e "\t\t🕰 Moving existing config folder.."
+  				  mv $DIR{,-$CUR_DATETIME.bak}
+  				  echo -e "\t\t\t✅ Complete.\n\t\t\t\tMoved to: $DIR-$CUR_DATETIME.bak"
+  			else
+  				echo -e "\t\t🟡 There's no symlink or folder to backup.\n\t\t\tChange ACTION from $ACTION to 'install'"
+  			fi
+  		fi
+  	done
 	;;
 
 "install")
@@ -197,19 +204,22 @@ case "$ACTION" in
 	MSG_CLONING="\t🕰 Cloning repo.."
 	MSG_CLONING_COMPLETE="\t\t✅ Complete.\n\t\t\tCloned at: $APP_CONFIG_PATH"
 
+	MSG_SETTING_UP="\t🕰 Setting up.."
+	MSG_SETTING_UP_COMPLETE="\t\t✅ Complete.\n\t\t\tSetup at: $APP_CONFIG_PATH"
+
 	MSG_CALLING="\t🕰 Calling $APP ($DISTRO).."
 	MSG_CALLING_COMPLETE="\t\t✅ Complete.\n\t\t\tPlugins Setup"
 
-	MSG_SYMLINK_CREATING="\t🕰 Creating symlink..\n\t\tfrom: $MY_CONFIG_PATH/$DISTRO/\n\t\tto: $APP_CONFIG_PATH"
-	MSG_SYMLINK_EXISTS="\t\t🟡 Symlink to config already exist.\n\t\t\tChange ACTION from $ACTION to 'backup' or 'keep'"
+	MSG_SYMLINK_CREATING="\t🕰 Creating symlink..\n\t\tfrom: $MY_CONFIG_PATH/$DISTRO/ to: $APP_CONFIG_PATH"
+	MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist.\n\t\tChange ACTION from $ACTION to 'backup' or 'keep'"
 	MSG_SYMLINK_COMPLETE="\t\t✅ Complete.\n\t\t\tsymlink at: $APP_CONFIG_PATH"
 
 	echo -e $MSG_INSTALLING
 
 	case "$DISTRO" in
 	"lazyvim")
-          if ! [ -L $APP_CONFIG_PATH ]
-          then
+    if ! [ -L $APP_CONFIG_PATH ]
+    then
 			echo -e $MSG_SYMLINK_CREATING
 			ln -s $MY_CONFIG_PATH/$DISTRO/ $APP_CONFIG_PATH
 			echo -e $MSG_SYMLINK_COMPLETE
@@ -224,8 +234,8 @@ case "$ACTION" in
 		;;
 
 	"nvchad")
-        if ! [ -d $APP_CONFIG_PATH ]
-        then
+    if ! [ -d $APP_CONFIG_PATH ]
+    then
 			echo -e $MSG_CLONING
 			git clone -q https://github.com/NvChad/NvChad $APP_CONFIG_PATH --depth 1
 			echo -e $MSG_CLONING_COMPLETE
@@ -237,11 +247,31 @@ case "$ACTION" in
 		fi
 
 		LUA_CUSTOM_PATH=lua/custom
-        if ! [ -L $APP_CONFIG_PATH/$LUA_CUSTOM_PATH ]
-        then
+    if ! [ -L $APP_CONFIG_PATH/$LUA_CUSTOM_PATH ]
+    then
 			echo -e $MSG_SYMLINK_CREATING
 			ln -s $MY_CONFIG_PATH/$DISTRO/$LUA_CUSTOM_PATH/ $APP_CONFIG_PATH/$LUA_CUSTOM_PATH
 			echo -e $MSG_SYMLINK_COMPLETE/$LUA_CUSTOM_PATH
+		else
+			echo -e $MSG_SYMLINK_EXISTS
+		fi
+		;;
+
+  "lunarvim")
+    if ! [ -L $APP_CONFIG_PATH ]
+    then
+			echo -e $MSG_SETTING_UP
+      bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+			echo -e $MSG_SETTING_UP_COMPLETE
+
+			# echo -e $MSG_SYMLINK_CREATING
+			# ln -s $MY_CONFIG_PATH/$DISTRO/ $APP_CONFIG_PATH
+			# echo -e $MSG_SYMLINK_COMPLETE
+
+			# echo -e $MSG_CALLING
+			# sleep 2
+			# lvim
+			# echo -e $MSG_CALLING_COMPLETE
 		else
 			echo -e $MSG_SYMLINK_EXISTS
 		fi
