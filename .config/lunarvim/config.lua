@@ -41,8 +41,6 @@ lvim.keys.insert_mode["<C-Left>"] = "<Esc><C-w>h<CR>"
 lvim.keys.normal_mode["<C-Right>"] = "<C-w>l"
 lvim.keys.insert_mode["<C-Right>"] = "<Esc><C-w>l<CR>"
 
--- terminal: <C-S-t>
-
 -- resize window: Ctrl + Shift + <direction>
 lvim.keys.normal_mode["<C-S-Up>"] = ":resize -2<CR>"
 lvim.keys.normal_mode["<C-S-Down>"] = ":resize +2<CR>"
