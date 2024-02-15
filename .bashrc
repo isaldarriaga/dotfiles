@@ -65,6 +65,17 @@ alias less="less --use-color"
 alias jctl="journalctl -p 3 -xb"
 alias journalctl="jctl"
 
+# .dot files repo
+alias cddf='cd ~/repos/.dotfiles' # cd dot files
+alias vdf='v ~/.repos/.dotfiles' # vim dot files
+
+alias vbash='v ~/.bashrc' # vim bashrc
+alias sbash='source ~/.bashrc' # source bashrc
+
+alias vbak='source ~/.bashrc backup astronvim' # vim backup
+alias vinstall='source ~/.bashrc install astronvim stable' # vim install
+alias vkeep='source ~/.bashrc keep astronvim' # vim keep
+
 # ---------------------------------------------------
 
 # k3s
@@ -185,7 +196,7 @@ case "$ACTION" in
 	else
 		if [ -d $APP_CONFIG_PATH ]
 		then
-    #   echo -e "\t🟢 Folder detected (incomplete setup): $APP_CONFIG_PATH"
+      echo -e "\t🟢 Folder detected (incomplete setup): $APP_CONFIG_PATH"
     #
     #   echo -e "\t\t🕰 Moving existing config folder.."
   		# mv $APP_CONFIG_PATH{,-$CUR_DATETIME.bak}
