@@ -140,10 +140,16 @@ lvim.plugins = {
   },
 
 }
--- WIP: use biome instead of tsserver ?
--- -- add `tsserver` to `skipped_servers` list
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "tsserver" })
--- -- remove `biome` from `skipped_servers` list
--- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
---   return server ~= "biome"
--- end, lvim.lsp.automatic_configuration.skipped_servers)
+
+-- CONFIG LVIM
+lvim.reload_config_on_save = true
+lvim.format_on_save = {
+  enabled = true,
+  pattern = { "*" }
+}
+
+-- Replace tsserver with biome (Run :LvimCacheReset if does not work)
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "tsserver" })
+lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
+  return server ~= "biome"
+end, lvim.lsp.automatic_configuration.skipped_servers)
