@@ -71,8 +71,8 @@ alias journalctl="jctl"
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # my editor
-export EDITOR=lvim
-export VISUAL=lvim
+export EDITOR=nvim
+export VISUAL=nvim
 
 # distant
 export PATH=$PATH:~/.local/bin
@@ -95,9 +95,9 @@ alias lg="lazygit"
 alias gu="gitui"
 
 # editor
-alias v=lvim
-alias vi=lvim
-alias vim=lvim
+alias v=nvim
+alias vi=nvim
+alias vim=nvim
 
 # other
 alias tree="xplr"
@@ -143,11 +143,13 @@ done
 # ACTIONS: backup | install | keep
 ACTION=${1:-"keep"}
 
-# DISTROS: lazyvim | nvchad | lunarvim ..
-DISTRO=${2:-"lunarvim"}
+# DISTROS: lazyvim | nvchad | lunarvim | astronvim
+DISTRO=${2:-"astronvim"}
 
-# CHANNEL (for lunarvim): release | nightly
-CHANNEL=${3:-"release"}
+# CHANNEL
+#   lunarvim: release | nightly
+#   astronvim: stable | nightly
+CHANNEL=${3:-"stable"}
 
 if [ $DISTRO == "lunarvim" ]
 then
@@ -183,15 +185,15 @@ case "$ACTION" in
 	else
 		if [ -d $APP_CONFIG_PATH ]
 		then
-      echo -e "\t🟢 Folder detected (incomplete setup): $APP_CONFIG_PATH"
-
-      echo -e "\t\t🕰 Moving existing config folder.."
-  		mv $APP_CONFIG_PATH{,-$CUR_DATETIME.bak}
-  		echo -e "\t\t✅ Complete.\n\t\t\tMoved to: $APP_CONFIG_PATH-$CUR_DATETIME.bak"
-
-      echo -e $MSG_SYMLINK_CREATING
-  		ln -s $MY_APP_CONFIG_PATH $APP_CONFIG_PATH
-	  	echo -e $MSG_SYMLINK_COMPLETE
+    #   echo -e "\t🟢 Folder detected (incomplete setup): $APP_CONFIG_PATH"
+    #
+    #   echo -e "\t\t🕰 Moving existing config folder.."
+  		# mv $APP_CONFIG_PATH{,-$CUR_DATETIME.bak}
+  		# echo -e "\t\t✅ Complete.\n\t\t\tMoved to: $APP_CONFIG_PATH-$CUR_DATETIME.bak"
+    #
+    #   echo -e $MSG_SYMLINK_CREATING
+  		# ln -s $MY_APP_CONFIG_PATH $APP_CONFIG_PATH
+	  	# echo -e $MSG_SYMLINK_COMPLETE
 		else
 			echo -e "\t🟡 Config not found.\n\t\tChange ACTION from $ACTION to 'install'"
 		fi
@@ -266,7 +268,7 @@ case "$ACTION" in
 
 			echo -e $MSG_CALLING
 			sleep 2
-			nvim
+      $(echo "$APP")
 			echo -e $MSG_CALLING_COMPLETE
 		fi
 
@@ -302,6 +304,34 @@ case "$ACTION" in
 			echo -e $MSG_SYMLINK_EXISTS
 		fi
 		;;
+
+  "astronvim")
+    
+    if ! [ -d $APP_CONFIG_PATH ]
+    then
+			echo -e $MSG_CLONING
+			git clone --depth 1 https://github.com/AstroNvim/AstroNvim $APP_CONFIG_PATH --depth 1
+			echo -e $MSG_CLONING_COMPLETE
+
+			echo -e $MSG_CALLING
+      $(echo "$APP --headless +q")
+			echo -e $MSG_CALLING_COMPLETE
+
+      $(echo "$APP -v")
+
+      $(echo "$APP -c checkhealth")
+		fi
+
+		LUA_CUSTOM_PATH=lua/user
+    if ! [ -L $APP_CONFIG_PATH/$LUA_CUSTOM_PATH ]
+    then
+			echo -e $MSG_SYMLINK_CREATING
+			ln -s $MY_CONFIG_PATH/$DISTRO/$LUA_CUSTOM_PATH/ $APP_CONFIG_PATH/$LUA_CUSTOM_PATH
+			echo -e $MSG_SYMLINK_COMPLETE/$LUA_CUSTOM_PATH
+		else
+			echo -e $MSG_SYMLINK_EXISTS
+		fi
+	  ;;
 	esac
 	;;
 
