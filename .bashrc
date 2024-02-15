@@ -88,8 +88,10 @@ export VISUAL=nvim
 # distant
 export PATH=$PATH:~/.local/bin
 
-# fonts
+# locales (fix fonts)
+export LC_ALL=C.UTF-8
 export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 # ALIASES
