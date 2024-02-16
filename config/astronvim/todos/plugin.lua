@@ -1,0 +1,8 @@
+-- TODO: lazygit delta pager
+-- TODO: git blame
+-- TODO: diff view
+-- TODO: autotag
+-- TODO: leap 
+-- TODO: colorizer
+-- TODO: goto-preview
+-- TODO: file type (ftplugin)
