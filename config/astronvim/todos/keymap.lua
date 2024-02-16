@@ -7,8 +7,8 @@
 -- TODO: delete line: Ctrl + Shift + l
 -- TODO: comment line: Ctrl + / (keypad)
 
--- TODO: next / prev buffer: Ctrl + Tab / Ctrl + Shift Tab
 -- TODO: close current buffer: Ctrl + F4
+-- TODO: close all buffers: Ctrl + Shift + F4
 -- TODO: reload from disk (ask): Ctrl + Shift + r
 
 -- TODO: find word in buffer: Ctrl + f
