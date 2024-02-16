@@ -66,8 +66,8 @@ alias jctl="journalctl -p 3 -xb"
 alias journalctl="jctl"
 
 # dot files repo
-alias cddf='cd ~/repos/dotfiles' # cd dot files
-alias vdf='v ~/repos/dotfiles' # vim dot files
+alias cddot='cd ~/repos/dotfiles' # cd dot files
+alias vdot='v ~/repos/dotfiles' # vim dot files
 
 alias vbash='v ~/.bashrc' # vim bashrc
 alias sbash='source ~/.bashrc' # source bashrc
