@@ -1,4 +1,3 @@
--- TODO: install TODO plugin
 -- TODO: open lazygit in fullscreen mode
 -- TODO: display clock
 -- TODO: display mode
