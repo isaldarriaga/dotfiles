@@ -65,9 +65,9 @@ alias less="less --use-color"
 alias jctl="journalctl -p 3 -xb"
 alias journalctl="jctl"
 
-# .dot files repo
-alias cddf='cd ~/repos/.dotfiles' # cd dot files
-alias vdf='v ~/.repos/.dotfiles' # vim dot files
+# dot files repo
+alias cddf='cd ~/repos/dotfiles' # cd dot files
+alias vdf='v ~/repos/dotfiles' # vim dot files
 
 alias vbash='v ~/.bashrc' # vim bashrc
 alias sbash='source ~/.bashrc' # source bashrc
@@ -124,7 +124,7 @@ fi
 # Setup apps at ~/.config
 
 CUR_DATETIME=$(date '+%Y-%m-%dT%H:%M:%S')
-MY_CONFIG_PATH="/home/$USER/repos/.dotfiles/.config"
+MY_CONFIG_PATH="/home/$USER/repos/dotfiles/config"
 
 HOME_CONFIG_PATH=/home/$USER/.config
 
