@@ -41,3 +41,6 @@
 -- TODO: keymap - toggle uppercase: Ctrl + Shift + u
 
 -- TODO: keymap - display custom keys in <space> menu
+--
+-- TODO: lsp - prefer biome over tsserver
+-- TODO: lsp - use prettier if biome cannot format
