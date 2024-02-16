@@ -69,16 +69,31 @@ alias journalctl="jctl"
 HOME_PATH=/home/$USER
 REPOS_PATH=$HOME_PATH/repos
 DOTFILES_PATH=$REPOS_PATH/dotfiles
+HOME_SHARE_PATH=$HOME_PATH/.local/share
+BASHRC_PATH=$HOME_PATH/.bashrc
+
+DEFAULT_DISTRO=astronvim
+DEFAULT_CHANNEL=stable
+
+if [ $DISTRO == "lunarvim" ]
+then
+  DEFAULT_APP=lvim
+else
+  DEFAULT_APP=nvim
+fi
 
 alias cddot="cd $DOTFILES_PATH" # cd dot files
 alias vdot='cddot && v .' # vim dot files
 
-alias vbash='v ~/.bashrc' # vim bashrc
-alias sbash='source ~/.bashrc' # source bashrc
+alias cddistro="cd $HOME_SHARE_PATH/$DEFAULT_APP"
+alias vdistro='cddistro && v .'
 
-alias vbak='source ~/.bashrc backup astronvim' # vim backup
-alias vinstall='source ~/.bashrc install astronvim stable' # vim install
-alias vkeep='source ~/.bashrc keep astronvim' # vim keep
+alias vbash="v $BASHRC_PATH" # vim bashrc
+alias sbash="source $BASHRC_PATH" # source bashrc
+
+alias vbak="source $BASHRC_PATH backup $DEFAULT_DISTRO" # vim backup
+alias vinstall="source $BASHRC_PATH install $DEFAULT_DISTRO $DEFAULT_CHANNEL" # vim install
+alias vkeep="source $BASHRC_PATH keep $DEFAULT_DISTRO" # vim keep
 
 # ---------------------------------------------------
 
@@ -160,12 +175,12 @@ done
 ACTION=${1:-"keep"}
 
 # DISTROS: lazyvim | nvchad | lunarvim | astronvim
-DISTRO=${2:-"astronvim"}
+DISTRO=${2:-"$DEFAULT_DISTRO"}
 
 # CHANNEL
 #   lunarvim: release | nightly
 #   astronvim: stable | nightly
-CHANNEL=${3:-"stable"}
+CHANNEL=${3:-"$DEFAULT_CHANNEL"}
 
 if [ $DISTRO == "lunarvim" ]
 then
@@ -177,9 +192,9 @@ fi
 MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$DISTRO/
 
 APP_CONFIG_PATH=$HOME_CONFIG_PATH/$APP
-APP_SHARE_PATH=/home/$USER/.local/share/$APP
-APP_STATE_PATH=/home/$USER/.local/state/$APP
-APP_CACHE_PATH=/home/$USER/.cache/$APP
+APP_SHARE_PATH=$HOME_SHARE_PATH/$APP
+APP_STATE_PATH=$HOME_CONFIG_PATH/.local/state/$APP
+APP_CACHE_PATH=$HOME_CONFIG_PATH/.cache/$APP
 
 case "$ACTION" in
 "keep")
