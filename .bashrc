@@ -66,8 +66,12 @@ alias jctl="journalctl -p 3 -xb"
 alias journalctl="jctl"
 
 # dot files repo
-alias cddot='cd ~/repos/dotfiles' # cd dot files
-alias vdot='cddot && v ~/repos/dotfiles' # vim dot files
+HOME_PATH=/home/$USER
+REPOS_PATH=$HOME_PATH/repos
+DOTFILES_PATH=$REPOS_PATH/dotfiles
+
+alias cddot="cd $DOTFILES_PATH" # cd dot files
+alias vdot='cddot && v .' # vim dot files
 
 alias vbash='v ~/.bashrc' # vim bashrc
 alias sbash='source ~/.bashrc' # source bashrc
@@ -124,9 +128,8 @@ fi
 # Setup apps at ~/.config
 
 CUR_DATETIME=$(date '+%Y-%m-%dT%H:%M:%S')
-MY_CONFIG_PATH="/home/$USER/repos/dotfiles/config"
-
-HOME_CONFIG_PATH=/home/$USER/.config
+MY_CONFIG_PATH="$DOTFILES_PATH/config"
+HOME_CONFIG_PATH="$HOME_PATH/.config"
 
 # easy setups
 for EASY_APP in alacritty starship
