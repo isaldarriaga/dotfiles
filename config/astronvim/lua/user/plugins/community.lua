@@ -1,7 +1,8 @@
 return {
     "AstroNvim/astrocommunity",
     { import = "astrocommunity.editing-support.todo-comments-nvim" },
-        -- configure
+    { import = "astrocommunity.colorscheme.tokyonight-nvim" },
+    -- configure imported plugins
     {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
