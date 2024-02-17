@@ -75,12 +75,17 @@ BASHRC_PATH=$HOME_PATH/.bashrc
 DEFAULT_DISTRO=astronvim
 DEFAULT_CHANNEL=stable
 
-if [ $DISTRO == "lunarvim" ]
+if [ "$DISTRO" == "lunarvim" ]
 then
   DEFAULT_APP=lvim
 else
   DEFAULT_APP=nvim
 fi
+
+# quick editdots
+
+alias cdrepos="cd $REPOS_PATH" # cd repos files
+alias vrepos='cdrepos && v .' # vim dot files
 
 alias cddot="cd $DOTFILES_PATH" # cd dot files
 alias vdot='cddot && v .' # vim dot files
@@ -182,7 +187,7 @@ DISTRO=${2:-"$DEFAULT_DISTRO"}
 #   astronvim: stable | nightly
 CHANNEL=${3:-"$DEFAULT_CHANNEL"}
 
-if [ $DISTRO == "lunarvim" ]
+if [ "$DISTRO" == "lunarvim" ]
 then
   APP=lvim
 else
