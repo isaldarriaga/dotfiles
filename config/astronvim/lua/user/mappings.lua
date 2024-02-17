@@ -69,26 +69,39 @@ local sections = {
 }
 
 -- reset keymaps - <space> menu + backspace
-maps.n["h"] = { "" }
-maps.n["j"] = { "" }
-maps.n["k"] = { "" }
-maps.n["l"] = { "" }
-maps.n["<C-q>"] = { "" }
-maps.n["<leader>/"] = is_available "Comment.nvim" and "" or nil
-maps.v["<leader>/"] = is_available "Comment.nvim" and "" or nil
-maps.n["<leader>w"] = { "" }
-maps.n["<leader>q"] = { "" }
-maps.n["<leader>Q"] = { "" }
-maps.n["<leader>c"] = { "" }
-maps.n["<leader>C"] = { "" }
-maps.n["<leader>e"] = is_available "neo-tree.nvim" and { "" } or nil
-maps.n["<leader>o"] = is_available "neo-tree.nvim" and { "" } or nil
-maps.n["<F7>"]       = is_available "toggleterm.nvim" and { "" } or nil
-maps.t["<F7>"]       = is_available "toggleterm.nvim" and { "" } or nil
-maps.n["<C-'>"]      = is_available "toggleterm.nvim" and { "" } or nil
-maps.t["<C-'>"]      = is_available "toggleterm.nvim" and { "" } or nil
-maps.t["<leader>th"] = is_available "toggleterm.nvim" and { "" } or nil
-maps.t["<leader>tv"] = is_available "toggleterm.nvim" and { "" } or nil
+maps.n["h"]          = ""
+maps.n["j"]          = ""
+maps.n["k"]          = ""
+maps.n["l"]          = ""
+maps.n["<C-q>"]      = ""
+maps.n["<leader>/"]  = is_available "Comment.nvim" and "" or nil
+maps.v["<leader>/"]  = is_available "Comment.nvim" and "" or nil
+maps.n["<leader>w"]  = ""
+maps.n["<leader>q"]  = ""
+maps.n["<leader>Q"]  = ""
+maps.n["<leader>c"]  = ""
+maps.n["<leader>C"]  = ""
+maps.n["<leader>e"]  = is_available "neo-tree.nvim"   and "" or nil
+maps.n["<leader>o"]  = is_available "neo-tree.nvim"   and "" or nil
+maps.n["<F7>"]       = is_available "toggleterm.nvim" and "" or nil
+maps.t["<F7>"]       = is_available "toggleterm.nvim" and "" or nil
+maps.n["<C-'>"]      = is_available "toggleterm.nvim" and "" or nil
+maps.t["<C-'>"]      = is_available "toggleterm.nvim" and "" or nil
+maps.t["<leader>th"] = is_available "toggleterm.nvim" and "" or nil
+maps.t["<leader>tv"] = is_available "toggleterm.nvim" and "" or nil
+maps.n["<leader>p"] = sections.p
+maps.n["<leader>pi"] = is_available "lazy.vim" and "" or nil
+maps.n["<leader>ps"] = is_available "lazy.vim" and "" or nil
+maps.n["<leader>pS"] = is_available "lazy.vim" and "" or nil
+maps.n["<leader>pu"] = is_available "lazy.vim" and "" or nil
+maps.n["<leader>pU"] = is_available "lazy.vim" and "" or nil
+maps.n["<leader>pl"] = is_available "lazy.vim" and "" or nil
+maps.n["<leader>pl"] = is_available "lazy.vim" and "" or nil
+maps.n["<leader>pa"] = ""
+maps.n["<leader>pA"] = ""
+maps.n["<leader>pv"] = ""
+maps.n["<leader>pm"] = is_available "mason.nvim" and "" or nil
+maps.n["<leader>pM"] = is_available "mason.nvim" and "" or nil
 
 -- apply keymaps
 maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File " }
@@ -107,23 +120,7 @@ maps.n["<leader>tf"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm dir
 maps.n["<leader>tb"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "bottom 󱂩 " } or nil
 maps.n["<leader>tr"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "right 󱂫 " } or nil
 
-
--- Reset keymaps - packages section
-maps.n["<leader>p"] = sections.p
-maps.n["<leader>pi"] = ""
-maps.n["<leader>ps"] = ""
-maps.n["<leader>pS"] = ""
-maps.n["<leader>pu"] = ""
-maps.n["<leader>pU"] = ""
-maps.n["<leader>pa"] = ""
-maps.n["<leader>pA"] = ""
-maps.n["<leader>pv"] = ""
-maps.n["<leader>pl"] = ""
-maps.n["<leader>pm"] = is_available "mason.nvim" and "" or nil
-maps.n["<leader>pM"] = is_available "mason.nvim" and "" or nil
-
--- Apply keymaps
-
+-- plugins + packages
 maps.n["<leader>pp"] = is_available "lazy.nvim" and { function() require("lazy").home() end, desc = " plugins  " } or nil
 maps.n["<leader>pP"] = is_available "mason.nvim" and { "<cmd>Mason<cr>", desc = " PACKAGES  " } or nil
 
@@ -142,6 +139,7 @@ maps.n["<leader>pS"] = is_available "mason.nvim" and { nil, desc = " SYNC PAC
 maps.n["<leader>pu"] = is_available "lazy.nvim" and { function() require("lazy").update() end, desc = " update plugins  " } or nil
 maps.n["<leader>pU"] = is_available "mason.nvim" and { "<cmd>MasonUpdate<cr>", desc = " UPDATE PACKAGES  " } or nil
 
+-- new ASTRO section
 maps.n["<leader>A"] = sections.A
 maps.n["<leader>Au"] = { "<cmd>AstroUpdate<cr>", desc = "󰫣 update program  " }
 maps.n["<leader>AU"] = { "<cmd>AstroUpdatePackages<cr>", desc = "󰫣 UPDATE ALL (  +  )  " }
@@ -149,20 +147,10 @@ maps.n["<leader>Av"] = { "<cmd>AstroVersion<cr>", desc = "󰫣 version  " }
 maps.n["<leader>Al"] = { "<cmd>AstroChangelog<cr>", desc = "󰫣 log  " }
 
 -- Manage Buffers
-maps.n["<C-Tab>"] =
-  { function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "buffer " }
-maps.n["[b"] = {
-  function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
-  desc = " buffer",
-}
-maps.n[">b"] = {
-  function() require("astronvim.utils.buffer").move(vim.v.count > 0 and vim.v.count or 1) end,
-  desc = "Move buffer tab right",
-}
-maps.n["<b"] = {
-  function() require("astronvim.utils.buffer").move(-(vim.v.count > 0 and vim.v.count or 1)) end,
-  desc = "Move buffer tab left",
-}
+maps.n["<C-Tab>"] = { function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "next buffer  " }
+maps.n["<C-S-Tab>"] = { function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = " prev buffer" }
+-- maps.n[">b"] = { function() require("astronvim.utils.buffer").move(vim.v.count > 0 and vim.v.count or 1) end, desc = "Move buffer tab right" }
+-- maps.n["<b"] = { function() require("astronvim.utils.buffer").move(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Move buffer tab left" }
 
 maps.n["<leader>b"] = sections.b
 maps.n["<leader>bc"] =
