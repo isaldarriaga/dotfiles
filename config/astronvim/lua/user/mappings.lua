@@ -1,44 +1,25 @@
--- Mapping data with "desc" stored directly by vim.keymap.set().
---
--- Please use this mappings table to set keyboard mapping since this is the
--- lower level configuration and more robust one. (which-key will
--- automatically pick-up stored data by this setting.)
 return {
-  -- mode
   n = {
-  --   lefthand side of the map
-  
-    -- Next buffer: Ctrl + Tab 
     ["<C-Tab>"] = {
       function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
       desc = "Next buffer",
     },
-    -- Previous buffer: Ctrl + Shift + Tab
     ["<C-S-Tab>"] = {
       function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
       desc = "Previous buffer",
     },
--- jump window up: Ctrl + Up
-["<C-Up>"] = "<C-w>k",
-["<C-Up>"] = "<Esc><C-w>k<CR>",
+    -- close buffer: Ctrl + F4
+    ["<F28>"] = { function() require("astronvim.utils.buffer").close() end, desc = "Close buffer" },
+    ["<C-Up>"] = {"<C-w>k", desc = "Move to split Up"},
+    ["<C-Down>"] = {"<C-w>j", desc = "Move to split Down"},
+    ["<C-Left>"] = {"<C-w>h", desc = "Move to split Left"},
+    ["<C-Right>"] = {"<C-w>l", desc = "Move to split Right"},
+    
+    ["<C-S-Up>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" },
+    ["<C-S-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" },
+    ["<C-S-Left>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" },
+    ["<C-S-Right>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" },
 
--- jump window down: Ctrl + Down
-["<C-Down>"] = "<C-w>j",
-["<C-Down>"] = "<Esc><C-w>j<CR>",
-
--- jump window left: Ctrl + Left
-["<C-Left>"] = "<C-w>h",
-["<C-Left>"] = "<Esc><C-w>h<CR>",
-
--- jump window right: Ctrl + Right
-["<C-Right>"] = "<C-w>l",
-["<C-Right>"] = "<Esc><C-w>l<CR>",
-
-["<C-S-Up>"] = ":resize -2<CR>",
-["<C-S-Down>"] = ":resize +2<CR>",
-["<C-S-Left>"] = ":vertical resize -2<CR>",
-["<C-S-Right>"] = ":vertical resize +2<CR>",
-  --
   --   -- mappings seen under group name "Buffer"
   --   ["<leader>bD"] = {
   --     function()

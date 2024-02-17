@@ -5,7 +5,6 @@
 -- TODO: delete line: Ctrl + Shift + l
 -- TODO: comment line: Ctrl + / (keypad)
 
--- TODO: close current buffer: Ctrl + F4
 -- TODO: close all buffers: Ctrl + Shift + F4
 -- TODO: reload from disk (ask): Ctrl + Shift + r
 
@@ -34,6 +33,6 @@
 
 -- TODO: toggle uppercase: Ctrl + Shift + u
 
--- TODO: display custom keys in <space> menu
+-- TODO: remove old keys from <space> menu
 --
 -- TODO: toggle diagnostics: Alt + 7
