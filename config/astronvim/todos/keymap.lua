@@ -1,5 +1,3 @@
--- TODO: switch to next window: Ctrl + Arrow
--- TODO: resize window: Ctrl + Shift + Arrow
 -- TODO: close current window: Escape / q
 
 -- TODO: move line up / down: Alt + Arrow
@@ -37,3 +35,5 @@
 -- TODO: toggle uppercase: Ctrl + Shift + u
 
 -- TODO: display custom keys in <space> menu
+--
+-- TODO: toggle diagnostics: Alt + 7
