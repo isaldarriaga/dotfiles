@@ -55,33 +55,58 @@ local ui = require "astronvim.utils.ui"
 local maps = require("astronvim.utils").empty_map_table()
 
 local sections = {
-  f = { desc = get_icon("Search", 1, true) .. "Find" },
-  p = { desc = get_icon("Package", 1, true) .. "Packages" },
-  A = { desc = "󰫣 Astro" },
-  l = { desc = get_icon("ActiveLSP", 1, true) .. "LSP" },
-  u = { desc = get_icon("Window", 1, true) .. "UI/UX" },
-  b = { desc = get_icon("Tab", 1, true) .. "Buffers" },
-  bs = { desc = get_icon("Sort", 1, true) .. "Sort Buffers" },
-  d = { desc = get_icon("Debugger", 1, true) .. "Debugger" },
-  g = { desc = get_icon("Git", 1, true) .. "Git" },
-  S = { desc = get_icon("Session", 1, true) .. "Session" },
-  t = { desc = get_icon("Terminal", 1, true) .. "Terminal" },
+  f = { desc = get_icon("Search", 1, true) .. "find" },
+  p = { desc = get_icon("Package", 1, true) .. "packages" },
+  A = { desc = "󰫣 ASTRO" },
+  l = { desc = get_icon("ActiveLSP", 1, true) .. "lsp" },
+  u = { desc = get_icon("Window", 1, true) .. "ui" },
+  b = { desc = get_icon("Tab", 1, true) .. "buffers" },
+  bs = { desc = get_icon("Sort", 1, true) .. "sort buffers" },
+  d = { desc = get_icon("Debugger", 1, true) .. "debugger" },
+  g = { desc = get_icon("Git", 1, true) .. "git" },
+  S = { desc = get_icon("Session", 1, true) .. "SESSION" },
+  t = { desc = get_icon("Terminal", 1, true) .. "terminal" },
 }
 
--- Normal --
--- Standard Operations
-maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down 󰜺" }
-maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up 󰜺" }
-maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save 󰜺" }
-maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit 󰜺" }
-maps.n["<leader>Q"] = { "<cmd>confirm qall<cr>", desc = "Quit all 󰜺" }
-maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File " }
+-- reset keymaps - <space> menu + backspace
+maps.n["h"] = { "" }
+maps.n["j"] = { "" }
+maps.n["k"] = { "" }
+maps.n["l"] = { "" }
+maps.n["<C-q>"] = { "" }
+maps.n["<leader>/"] = is_available "Comment.nvim" and "" or nil
+maps.v["<leader>/"] = is_available "Comment.nvim" and "" or nil
+maps.n["<leader>w"] = { "" }
+maps.n["<leader>q"] = { "" }
+maps.n["<leader>Q"] = { "" }
+maps.n["<leader>c"] = { "" }
+maps.n["<leader>C"] = { "" }
+maps.n["<leader>e"] = is_available "neo-tree.nvim" and { "" } or nil
+maps.n["<leader>o"] = is_available "neo-tree.nvim" and { "" } or nil
+maps.n["<F7>"]       = is_available "toggleterm.nvim" and { "" } or nil
+maps.t["<F7>"]       = is_available "toggleterm.nvim" and { "" } or nil
+maps.n["<C-'>"]      = is_available "toggleterm.nvim" and { "" } or nil
+maps.t["<C-'>"]      = is_available "toggleterm.nvim" and { "" } or nil
+maps.t["<leader>th"] = is_available "toggleterm.nvim" and { "" } or nil
+maps.t["<leader>tv"] = is_available "toggleterm.nvim" and { "" } or nil
+
+-- apply keymaps
+maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File " }
 maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Save " }
-maps.n["<C-q>"] = { "<cmd>qa!<cr>", desc = "Force quit 󰜺" }
 maps.n["|"] = { "<cmd>vsplit<cr>", desc = "V-Split " }
 maps.n["\\"] = { "<cmd>split<cr>", desc = "H-Split " }
--- TODO: Remove when dropping support for <Neovim v0.10
-if not vim.ui.open then maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app " } end
+maps.n["<M-1>"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
+
+-- comments
+maps.n["<C-/>"] = is_available "Comment.nvim" and { function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end, desc = "comment line 󰆅" } or nil
+maps.v["<C-/>"] = is_available "Comment.nvim" and { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "comment selection 󰆅" } or nil
+
+-- terminal
+maps.n[""]         = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm<cr>", desc = "terminal 󱂬 " } or nil
+maps.n["<leader>tf"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm direction=float<cr>", desc = "float 󱂬 " } or nil
+maps.n["<leader>tb"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "bottom 󱂩 " } or nil
+maps.n["<leader>tr"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "right 󱂫 " } or nil
+
 
 -- Reset keymaps - packages section
 maps.n["<leader>p"] = sections.p
@@ -94,31 +119,28 @@ maps.n["<leader>pa"] = ""
 maps.n["<leader>pA"] = ""
 maps.n["<leader>pv"] = ""
 maps.n["<leader>pl"] = ""
-
-if is_available "mason.nvim" then
-  maps.n["<leader>pm"] = ""
-  maps.n["<leader>pM"] = ""
-end
+maps.n["<leader>pm"] = is_available "mason.nvim" and "" or nil
+maps.n["<leader>pM"] = is_available "mason.nvim" and "" or nil
 
 -- Apply keymaps
 
-maps.n["<leader>pP"] = is_available "mason.nvim" and { "<cmd>Mason<cr>", desc = " PACKAGES  " } or nil
 maps.n["<leader>pp"] = is_available "lazy.nvim" and { function() require("lazy").home() end, desc = " plugins  " } or nil
+maps.n["<leader>pP"] = is_available "mason.nvim" and { "<cmd>Mason<cr>", desc = " PACKAGES  " } or nil
 
-maps.n["<leader>pC"] = is_available "mason.nvim" and { "<cmd>MasonUpdateAll<cr>", desc = " CHECK PACKAGES  " } or nil
 maps.n["<leader>pc"] = is_available "lazy.nvim" and { function() require("lazy").check() end, desc = " check plugins  " } or nil
+maps.n["<leader>pC"] = is_available "mason.nvim" and { "<cmd>MasonUpdateAll<cr>", desc = " CHECK PACKAGES  " } or nil
 
-maps.n["<leader>pI"] = is_available "mason.nvim" and { ":call feedkeys(':MasonInstall ')<cr>", desc = " INSTALL <PACKAGE>  " } or nil
 maps.n["<leader>pi"] = is_available "lazy.nvim" and { function() require("lazy").install() end, desc = " install plugins  " } or nil
+maps.n["<leader>pI"] = is_available "mason.nvim" and { ":call feedkeys(':MasonInstall ')<cr>", desc = " INSTALL <PACKAGE>  " } or nil
 
-maps.n["<leader>pL"] = is_available "mason.nvim" and { "<cmd>MasonLog<cr>", desc = " LOG PACKAGES  " } or nil
 maps.n["<leader>pl"] = is_available "lazy.nvim" and { function() require("lazy").log() end, desc = " log plugins  " } or nil
+maps.n["<leader>pL"] = is_available "mason.nvim" and { "<cmd>MasonLog<cr>", desc = " LOG PACKAGES  " } or nil
 
-maps.n["<leader>pS"] = is_available "mason.nvim" and { nil, desc = " SYNC PACKAGES 󰜺 " } or nil -- not implemented yet
 maps.n["<leader>ps"] = is_available "lazy.nvim" and { function() require("lazy").sync() end, desc = " sync plugins  " } or nil
+maps.n["<leader>pS"] = is_available "mason.nvim" and { nil, desc = " SYNC PACKAGES 󰜺 " } or nil -- not implemented yet
 
-maps.n["<leader>pU"] = is_available "mason.nvim" and { "<cmd>MasonUpdate<cr>", desc = " UPDATE PACKAGES  " } or nil
 maps.n["<leader>pu"] = is_available "lazy.nvim" and { function() require("lazy").update() end, desc = " update plugins  " } or nil
+maps.n["<leader>pU"] = is_available "mason.nvim" and { "<cmd>MasonUpdate<cr>", desc = " UPDATE PACKAGES  " } or nil
 
 maps.n["<leader>A"] = sections.A
 maps.n["<leader>Au"] = { "<cmd>AstroUpdate<cr>", desc = "󰫣 update program  " }
@@ -127,8 +149,6 @@ maps.n["<leader>Av"] = { "<cmd>AstroVersion<cr>", desc = "󰫣 version  " }
 maps.n["<leader>Al"] = { "<cmd>AstroChangelog<cr>", desc = "󰫣 log  " }
 
 -- Manage Buffers
-maps.n["<leader>c"] = { function() require("astronvim.utils.buffer").close() end, desc = "Close buffer 󰜺" }
-maps.n["<leader>C"] = { function() require("astronvim.utils.buffer").close(0, true) end, desc = "Force close buffer 󰜺" }
 maps.n["<C-Tab>"] =
   { function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "buffer " }
 maps.n["[b"] = {
@@ -210,19 +230,7 @@ if is_available "alpha-nvim" then
       end
       require("alpha").start(false)
     end,
-    desc = "Home Screen",
-  }
-end
-
--- Comment
-if is_available "Comment.nvim" then
-  maps.n["<leader>/"] = {
-    function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
-    desc = "Toggle comment line",
-  }
-  maps.v["<leader>/"] = {
-    "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-    desc = "Toggle comment for selection",
+    desc = "Home Screen  ",
   }
 end
 
@@ -242,20 +250,6 @@ if is_available "gitsigns.nvim" then
   maps.n["<leader>gd"] = { function() require("gitsigns").diffthis() end, desc = "View Git diff" }
 end
 
--- NeoTree
-if is_available "neo-tree.nvim" then
-  maps.n["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
-  maps.n["<leader>o"] = {
-    function()
-      if vim.bo.filetype == "neo-tree" then
-        vim.cmd.wincmd "p"
-      else
-        vim.cmd.Neotree "focus"
-      end
-    end,
-    desc = "Toggle Explorer Focus",
-  }
-end
 
 -- Session Manager
 if is_available "neovim-session-manager" then
@@ -393,7 +387,7 @@ if is_available "telescope.nvim" then
   }
 end
 
--- Terminal
+-- Terminal for plugins
 if is_available "toggleterm.nvim" then
   maps.n["<leader>t"] = sections.t
   if vim.fn.executable "lazygit" == 1 then
@@ -404,29 +398,26 @@ if is_available "toggleterm.nvim" then
         local flags = worktree and (" --work-tree=%s --git-dir=%s"):format(worktree.toplevel, worktree.gitdir) or ""
         utils.toggle_term_cmd("lazygit " .. flags)
       end,
-      desc = "ToggleTerm lazygit",
+      desc = "lazygit ",
     }
     maps.n["<leader>tl"] = maps.n["<leader>gg"]
   end
   if vim.fn.executable "node" == 1 then
-    maps.n["<leader>tn"] = { function() utils.toggle_term_cmd "node" end, desc = "ToggleTerm node" }
+    maps.n["<leader>tn"] = { function() utils.toggle_term_cmd "node" end, desc = "node 󰎙" }
   end
   local gdu = vim.fn.has "mac" == 1 and "gdu-go" or "gdu"
   if vim.fn.executable(gdu) == 1 then
-    maps.n["<leader>tu"] = { function() utils.toggle_term_cmd(gdu) end, desc = "ToggleTerm gdu" }
+    maps.n["<leader>tu"] = ""
+    maps.n["<leader>td"] = { function() utils.toggle_term_cmd(gdu) end, desc = "disks 󰡦" }
   end
   if vim.fn.executable "btm" == 1 then
-    maps.n["<leader>tt"] = { function() utils.toggle_term_cmd "btm" end, desc = "ToggleTerm btm" }
+    maps.n["<leader>tt"] = ""
+    maps.n["<leader>tm"] = { function() utils.toggle_term_cmd "btm" end, desc = "monitor 󰨇" }
   end
   local python = vim.fn.executable "python" == 1 and "python" or vim.fn.executable "python3" == 1 and "python3"
-  if python then maps.n["<leader>tp"] = { function() utils.toggle_term_cmd(python) end, desc = "ToggleTerm python" } end
-  maps.n["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float" }
-  maps.n["<leader>th"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" }
-  maps.n["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "ToggleTerm vertical split" }
-  maps.n["<F7>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" }
-  maps.t["<F7>"] = maps.n["<F7>"]
-  maps.n["<C-'>"] = maps.n["<F7>"] -- requires terminal that supports binding <C-'>
-  maps.t["<C-'>"] = maps.n["<F7>"] -- requires terminal that supports binding <C-'>
+  if python then
+    maps.n["<leader>tp"] = { function() utils.toggle_term_cmd(python) end, desc = "python " }
+  end
 end
 
 if is_available "nvim-dap" then

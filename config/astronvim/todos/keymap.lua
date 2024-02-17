@@ -1,7 +1,6 @@
 -- TODO: move line up / down: Alt + Arrow
 -- TODO: duplicate line: Ctrl + d
 -- TODO: delete line: Ctrl + Shift + l
--- TODO: comment line: Ctrl + / (keypad)
 
 -- TODO: reload from disk (ask): Ctrl + Shift + r
 
@@ -13,10 +12,6 @@
 
 -- TODO: rename lsp token: F2
 
--- TODO: toggle floating terminal: Ctrl + \
--- TODO: toggle bottom terminal: Ctrl + Shift + t
-
--- TODO: toggle file tree: Alt + 1
 -- TODO: toggle search results: Alt + 3
 -- TODO: toggle run window: Alt + 4
 -- TODO: toggle git window: Alt + 9
@@ -30,6 +25,4 @@
 
 -- TODO: toggle uppercase: Ctrl + Shift + u
 
--- TODO: remove old keys from <space> menu
---
 -- TODO: toggle diagnostics: Alt + 7
