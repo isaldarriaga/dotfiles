@@ -5,3 +5,4 @@
 -- TODO: prefer biome over tsserver          
 -- TODO: use prettier if biome cannot format
 -- TODO: disable insert comment on new line
+-- TODO: show Caps Lock On + sound

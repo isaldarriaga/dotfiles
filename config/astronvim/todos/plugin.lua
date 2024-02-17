@@ -11,3 +11,4 @@
 -- TODO: nav buddy (symbols ala ranger: https://github.com/Elteoremadebeethoven/nvim-config/blob/master/lua/lazy-plugins.lua)
 -- TODO: vim-spectre (replace globally)
 -- TODO: vim visual multi (https://github.com/Elteoremadebeethoven/nvim-config/blob/master/lua/lazy-plugins.lua)
+-- TODO: stylua
