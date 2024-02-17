@@ -1,11 +1,8 @@
--- TODO: close current window: Escape / q
-
 -- TODO: move line up / down: Alt + Arrow
 -- TODO: duplicate line: Ctrl + d
 -- TODO: delete line: Ctrl + Shift + l
 -- TODO: comment line: Ctrl + / (keypad)
 
--- TODO: close all buffers: Ctrl + Shift + F4
 -- TODO: reload from disk (ask): Ctrl + Shift + r
 
 -- TODO: find word in buffer: Ctrl + f

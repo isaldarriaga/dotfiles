@@ -8,8 +8,9 @@ return {
       function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
       desc = "Previous buffer",
     },
-    -- close buffer: Ctrl + F4
+    -- Ctrl + F4
     ["<F28>"] = { function() require("astronvim.utils.buffer").close() end, desc = "Close buffer" },
+
     ["<C-Up>"] = {"<C-w>k", desc = "Move to split Up"},
     ["<C-Down>"] = {"<C-w>j", desc = "Move to split Down"},
     ["<C-Left>"] = {"<C-w>h", desc = "Move to split Left"},
@@ -19,7 +20,8 @@ return {
     ["<C-S-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" },
     ["<C-S-Left>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" },
     ["<C-S-Right>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" },
-
+    -- Ctrl + Shift + F4
+    ["<F40>"] = { function() require("astronvim.utils.buffer").close_all() end, desc = "Close all buffers" }
   --   -- mappings seen under group name "Buffer"
   --   ["<leader>bD"] = {
   --     function()
