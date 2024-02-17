@@ -6,3 +6,8 @@
 -- TODO: colorizer
 -- TODO: goto-preview
 -- TODO: file type (ftplugin)
+-- TODO: git signs (https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/editor.lua)
+-- TODO: indent scope (https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/ui.lua)
+-- TODO: nav buddy (symbols ala ranger: https://github.com/Elteoremadebeethoven/nvim-config/blob/master/lua/lazy-plugins.lua)
+-- TODO: vim-spectre (replace globally)
+-- TODO: vim visual multi (https://github.com/Elteoremadebeethoven/nvim-config/blob/master/lua/lazy-plugins.lua)
