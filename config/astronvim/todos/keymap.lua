@@ -4,12 +4,7 @@
 
 -- TODO: reload from disk (ask): Ctrl + Shift + r
 
--- TODO: find word in buffer: Ctrl + f
--- TODO: replace word in buffer: Ctrl + h
-
--- TODO: find word in workspace: Ctrl + Shift + f
 -- TODO: replace word in workspace: Ctrl + Shift + h
-
 -- TODO: rename lsp token: F2
 
 -- TODO: toggle search results: Alt + 3
@@ -26,3 +21,5 @@
 -- TODO: toggle uppercase: Ctrl + Shift + u
 
 -- TODO: toggle diagnostics: Alt + 7
+--
+-- TODO: find file: Ctrl + .

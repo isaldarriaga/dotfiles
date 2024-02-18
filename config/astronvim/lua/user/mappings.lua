@@ -1,51 +1,3 @@
--- return {
---   n = {
---     -- Navigate buffers
---     ["<C-Tab>"] = {
---       function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
---       desc = "Next buffer",
---     },
---     ["<C-S-Tab>"] = {
---       function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
---       desc = "Previous buffer",
---     },
---     -- close buffer: Ctrl + F4
---     ["<F28>"] = { function() require("astronvim.utils.buffer").close() end, desc = "Close buffer" },
---     -- Move to next window
---     ["<C-Up>"] = {"<C-w>k", desc = "Move to split Up"},
---     ["<C-Down>"] = {"<C-w>j", desc = "Move to split Down"},
---     ["<C-Left>"] = {"<C-w>h", desc = "Move to split Left"},
---     ["<C-Right>"] = {"<C-w>l", desc = "Move to split Right"},
---     -- window resize    
---     ["<C-S-Up>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" },
---     ["<C-S-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" },
---     ["<C-S-Left>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" },
---     ["<C-S-Right>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" },
---     -- close all buffers: Ctrl + Shift + F4
---     ["<F40>"] = { function() require("astronvim.utils.buffer").close_all() end, desc = "Close all buffers" },
---     -- "/" in keypad is not recognized atm
---     ["<C-/>"] = { function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end, desc = "Toggle comment line" },
---
---   --   -- mappings seen under group name "Buffer"
---   --   ["<leader>bD"] = {
---   --     function()
---   --       require("astronvim.utils.status").heirline.buffer_picker(
---   --         function(bufnr) require("astronvim.utils.buffer").close(bufnr) end
---   --       )
---   --     end,
---   --     desc = "Pick to close",
---   --   },
---   --   -- tables with the `name` key will be registered with which-key if it's installed
---   --   -- this is useful for naming menus
---   --   ["<leader>b"] = { name = "Buffers" },
---   --   -- quick save
---   --   -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
---   },
---   -- t = {
---   --   -- setting a mapping to false will disable it
---   --   -- ["<esc>"] = false,
---   -- },
--- }
 -- taken from https://github.com/AstroNvim/AstroNvim/blob/main/lua/astronvim/mappings.lua
 local utils = require "astronvim.utils"
 local get_icon = utils.get_icon
@@ -102,20 +54,42 @@ maps.n["<leader>pA"] = ""
 maps.n["<leader>pv"] = ""
 maps.n["<leader>pm"] = is_available "mason.nvim" and "" or nil
 maps.n["<leader>pM"] = is_available "mason.nvim" and "" or nil
+maps.n["<C-h>"] = ""
+maps.n["<C-j>"] = ""
+maps.n["<C-k>"] = ""
+maps.n["<C-l>"] = ""
+maps.t["<C-Left>"]   = ""
+maps.t["<C-Down>"]   = ""
+maps.t["<C-Up>"]     = ""
+maps.t["<C-Right>"]  = ""
+maps.n["<C-S-Up>"]   = ""
+maps.n["<C-S-Down>"] = ""
+maps.n["<C-S-Left>"] = ""
+maps.n["<C-S-Right>"]= ""
 
 -- apply keymaps
-maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File " }
-maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Save " }
-maps.n["|"] = { "<cmd>vsplit<cr>", desc = "V-Split " }
-maps.n["\\"] = { "<cmd>split<cr>", desc = "H-Split " }
-maps.n["<M-1>"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
+maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "new file " }
+maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "save " }
+maps.i["<C-s>"] = { "<esc><cmd>w!<cr>", desc = "save " }
+maps.n["|"] = { "<cmd>vsplit<cr>", desc = "v-split " }
+maps.n["\\"] = { "<cmd>split<cr>", desc = "h-split " }
+maps.n["<M-1>"] = { "<cmd>Neotree toggle<cr>", desc = "file explorer 󰝰 " }
 
 -- comments
 maps.n["<C-/>"] = is_available "Comment.nvim" and { function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end, desc = "comment line 󰆅" } or nil
+maps.i["<C-/>"] = is_available "Comment.nvim" and { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "comment selection 󰆅" } or nil
 maps.v["<C-/>"] = is_available "Comment.nvim" and { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "comment selection 󰆅" } or nil
 
 -- terminal
-maps.n[""]         = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm<cr>", desc = "terminal 󱂬 " } or nil
+maps.n[""] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm<cr>", desc = "terminal 󱂬 " } or nil
+maps.t[""] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm<cr>", desc = "terminal 󱂬 " } or nil
+
+maps.n["<C-S-|>"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "right 󱂫 " } or nil
+maps.t["<C-S-|>"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm<cr>", desc = "right 󱂫 " } or nil
+
+maps.n["<C-S-T>"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "bottom 󱂩 " } or nil
+maps.t["<C-S-T>"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm<cr>", desc = "bottom 󱂩 " } or nil
+
 maps.n["<leader>tf"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm direction=float<cr>", desc = "float 󱂬 " } or nil
 maps.n["<leader>tb"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "bottom 󱂩 " } or nil
 maps.n["<leader>tr"] = is_available "toggleterm.nvim" and { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "right 󱂫 " } or nil
@@ -146,35 +120,61 @@ maps.n["<leader>AU"] = { "<cmd>AstroUpdatePackages<cr>", desc = "󰫣 UPDATE ALL
 maps.n["<leader>Av"] = { "<cmd>AstroVersion<cr>", desc = "󰫣 version  " }
 maps.n["<leader>Al"] = { "<cmd>AstroChangelog<cr>", desc = "󰫣 log  " }
 
--- Manage Buffers
+-- Navigation
 maps.n["<C-Tab>"] = { function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "next buffer  " }
 maps.n["<C-S-Tab>"] = { function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = " prev buffer" }
--- maps.n[">b"] = { function() require("astronvim.utils.buffer").move(vim.v.count > 0 and vim.v.count or 1) end, desc = "Move buffer tab right" }
--- maps.n["<b"] = { function() require("astronvim.utils.buffer").move(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Move buffer tab left" }
+
+maps.n["<C-Left>"]    = is_available "smart-splits.nvim" and { function() require("smart-splits").move_cursor_left() end,  desc = "Move to left split"  }  or { "<C-w>h", desc = "Move to left split"  }
+maps.n["<C-Down>"]    = is_available "smart-splits.nvim" and { function() require("smart-splits").move_cursor_down() end,  desc = "Move to below split" }  or { "<C-w>j", desc = "Move to below split" }
+maps.n["<C-Up>"]      = is_available "smart-splits.nvim" and { function() require("smart-splits").move_cursor_up() end,    desc = "Move to above split" }  or { "<C-w>k", desc = "Move to above split" }
+maps.n["<C-Right>"]   = is_available "smart-splits.nvim" and { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }  or { "<C-w>l", desc = "Move to right split" }
+
+maps.t["<C-Left>"]    = is_available "smart-splits.nvim" and { function() require("smart-splits").move_cursor_left() end,  desc = "Move to left split"  }  or { "<C-w>h", desc = "Move to left split"  }
+maps.t["<C-Down>"]    = is_available "smart-splits.nvim" and { function() require("smart-splits").move_cursor_down() end,  desc = "Move to below split" }  or { "<C-w>j", desc = "Move to below split" }
+maps.t["<C-Up>"]      = is_available "smart-splits.nvim" and { function() require("smart-splits").move_cursor_up() end,    desc = "Move to above split" }  or { "<C-w>k", desc = "Move to above split" }
+maps.t["<C-Right>"]   = is_available "smart-splits.nvim" and { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }  or { "<C-w>l", desc = "Move to right split" }
+
+maps.n["<C-S-Up>"]    = is_available "smart-splits.nvim" and { function() require("smart-splits").resize_up() end,    desc = "Resize split up" }    or { "<cmd>resize -2<CR>", desc = "Resize split up" }             
+maps.n["<C-S-Down>"]  = is_available "smart-splits.nvim" and { function() require("smart-splits").resize_down() end,  desc = "Resize split down" }  or { "<cmd>resize +2<CR>", desc = "Resize split down" }           
+maps.n["<C-S-Left>"]  = is_available "smart-splits.nvim" and { function() require("smart-splits").resize_left() end,  desc = "Resize split left" }  or { "<cmd>vertical resize -2<CR>", desc = "Resize split left" }  
+maps.n["<C-S-Right>"] = is_available "smart-splits.nvim" and { function() require("smart-splits").resize_right() end, desc = "Resize split right" } or { "<cmd>vertical resize +2<CR>", desc = "Resize split right" } 
+
+maps.t["<C-S-Up>"]    = is_available "smart-splits.nvim" and { function() require("smart-splits").resize_up() end,    desc = "Resize split up" }    or { "<cmd>resize -2<CR>", desc = "Resize split up" }             
+maps.t["<C-S-Down>"]  = is_available "smart-splits.nvim" and { function() require("smart-splits").resize_down() end,  desc = "Resize split down" }  or { "<cmd>resize +2<CR>", desc = "Resize split down" }           
+maps.t["<C-S-Left>"]  = is_available "smart-splits.nvim" and { function() require("smart-splits").resize_left() end,  desc = "Resize split left" }  or { "<cmd>vertical resize -2<CR>", desc = "Resize split left" }  
+maps.t["<C-S-Right>"] = is_available "smart-splits.nvim" and { function() require("smart-splits").resize_right() end, desc = "Resize split right" } or { "<cmd>vertical resize +2<CR>", desc = "Resize split right" } 
+
+-- Stay in indent mode
+maps.v["<S-Tab>"] = { "<gv", desc = "Unindent line" }
+maps.v["<Tab>"]   = { ">gv", desc = "Indent line" }
+
+-- Manage Buffers
+maps.n[">b"] = { function() require("astronvim.utils.buffer").move(vim.v.count > 0 and vim.v.count or 1) end, desc = "move buffer 󰔰 " }
+maps.n["<b"] = { function() require("astronvim.utils.buffer").move(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "󰶢 move buffer" }
 
 maps.n["<leader>b"] = sections.b
-maps.n["<leader>bc"] =
-  { function() require("astronvim.utils.buffer").close_all(true) end, desc = "Close all buffers except current" }
-maps.n["<leader>bC"] = { function() require("astronvim.utils.buffer").close_all() end, desc = "Close all buffers" }
-maps.n["<leader>bl"] =
-  { function() require("astronvim.utils.buffer").close_left() end, desc = "Close all buffers to the left" }
-maps.n["<leader>bp"] = { function() require("astronvim.utils.buffer").prev() end, desc = "Previous buffer" }
-maps.n["<leader>br"] =
-  { function() require("astronvim.utils.buffer").close_right() end, desc = "Close all buffers to the right" }
+maps.n["<leader>bc"] = { function() require("astronvim.utils.buffer").close_all(true) end, desc = "close all but this" }
+maps.n["<leader>bC"] = { function() require("astronvim.utils.buffer").close_all() end, desc = "CLOSE ALL BUFFERS 󰱞" }
+
+maps.n["<leader>bl"] = { function() require("astronvim.utils.buffer").close_left() end, desc = "󰁛 close to left" }
+maps.n["<leader>br"] = { function() require("astronvim.utils.buffer").close_right() end, desc = "close to right 󰁜" }
+
+maps.n["<leader>bp"] = { function() require("astronvim.utils.buffer").prev() end, desc = " prev buffer" }
+maps.n["<leader>bn"] = { function() require("astronvim.utils.buffer").prev() end, desc = "next buffer  " }
+
 maps.n["<leader>bs"] = sections.bs
-maps.n["<leader>bse"] = { function() require("astronvim.utils.buffer").sort "extension" end, desc = "By extension" }
-maps.n["<leader>bsr"] =
-  { function() require("astronvim.utils.buffer").sort "unique_path" end, desc = "By relative path" }
-maps.n["<leader>bsp"] = { function() require("astronvim.utils.buffer").sort "full_path" end, desc = "By full path" }
-maps.n["<leader>bsi"] = { function() require("astronvim.utils.buffer").sort "bufnr" end, desc = "By buffer number" }
-maps.n["<leader>bsm"] = { function() require("astronvim.utils.buffer").sort "modified" end, desc = "By modification" }
+maps.n["<leader>bse"] = { function() require("astronvim.utils.buffer").sort "extension" end, desc = "by extension 󰸭 " }
+maps.n["<leader>bsr"] = { function() require("astronvim.utils.buffer").sort "unique_path" end, desc = "by relative path  " }
+maps.n["<leader>bsp"] = { function() require("astronvim.utils.buffer").sort "full_path" end, desc = "by full path /" }
+maps.n["<leader>bsi"] = { function() require("astronvim.utils.buffer").sort "bufnr" end, desc = "by buffer number " }
+maps.n["<leader>bsm"] = { function() require("astronvim.utils.buffer").sort "modified" end, desc = "by modification " }
 
 if is_available "heirline.nvim" then
   maps.n["<leader>bb"] = {
     function()
       require("astronvim.utils.status.heirline").buffer_picker(function(bufnr) vim.api.nvim_win_set_buf(0, bufnr) end)
     end,
-    desc = "Select buffer from tabline",
+    desc = "Select buffer from tabline 󰊄",
   }
   maps.n["<leader>bd"] = {
     function()
@@ -182,7 +182,7 @@ if is_available "heirline.nvim" then
         function(bufnr) require("astronvim.utils.buffer").close(bufnr) end
       )
     end,
-    desc = "Close buffer from tabline",
+    desc = "Close buffer from tabline 󰦀",
   }
   maps.n["<leader>b\\"] = {
     function()
@@ -191,7 +191,7 @@ if is_available "heirline.nvim" then
         vim.api.nvim_win_set_buf(0, bufnr)
       end)
     end,
-    desc = "Horizontal split buffer from tabline",
+    desc = "h-split from tabline ",
   }
   maps.n["<leader>b|"] = {
     function()
@@ -200,13 +200,13 @@ if is_available "heirline.nvim" then
         vim.api.nvim_win_set_buf(0, bufnr)
       end)
     end,
-    desc = "Vertical split buffer from tabline",
+    desc = "v-split from tabline ",
   }
 end
 
 -- Navigate tabs
-maps.n["]t"] = { function() vim.cmd.tabnext() end, desc = "Next tab" }
-maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" }
+maps.n["]t"] = { function() vim.cmd.tabnext() end, desc = "next tab  " }
+maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "󰌥 prev tab" }
 
 -- Alpha
 if is_available "alpha-nvim" then
@@ -218,69 +218,43 @@ if is_available "alpha-nvim" then
       end
       require("alpha").start(false)
     end,
-    desc = "Home Screen  ",
+    desc = "home screen  ",
   }
 end
 
 -- GitSigns
 if is_available "gitsigns.nvim" then
   maps.n["<leader>g"] = sections.g
-  maps.n["]g"] = { function() require("gitsigns").next_hunk() end, desc = "Next Git hunk" }
-  maps.n["[g"] = { function() require("gitsigns").prev_hunk() end, desc = "Previous Git hunk" }
-  maps.n["<leader>gl"] = { function() require("gitsigns").blame_line() end, desc = "View Git blame" }
-  maps.n["<leader>gL"] = { function() require("gitsigns").blame_line { full = true } end, desc = "View full Git blame" }
-  maps.n["<leader>gp"] = { function() require("gitsigns").preview_hunk() end, desc = "Preview Git hunk" }
-  maps.n["<leader>gh"] = { function() require("gitsigns").reset_hunk() end, desc = "Reset Git hunk" }
-  maps.n["<leader>gr"] = { function() require("gitsigns").reset_buffer() end, desc = "Reset Git buffer" }
-  maps.n["<leader>gs"] = { function() require("gitsigns").stage_hunk() end, desc = "Stage Git hunk" }
-  maps.n["<leader>gS"] = { function() require("gitsigns").stage_buffer() end, desc = "Stage Git buffer" }
-  maps.n["<leader>gu"] = { function() require("gitsigns").undo_stage_hunk() end, desc = "Unstage Git hunk" }
-  maps.n["<leader>gd"] = { function() require("gitsigns").diffthis() end, desc = "View Git diff" }
+  maps.n["]g"] = { function() require("gitsigns").next_hunk() end, desc = "next change  " }
+  maps.n["[g"] = { function() require("gitsigns").prev_hunk() end, desc = " prev change" }
+  maps.n["<leader>gl"] = { function() require("gitsigns").blame_line() end, desc = "blame " }
+  maps.n["<leader>gL"] = { function() require("gitsigns").blame_line { full = true } end, desc = "FULL GIT BLAME  " }
+  maps.n["<leader>gp"] = { function() require("gitsigns").preview_hunk() end, desc = "preview change  " }
+  maps.n["<leader>gh"] = { function() require("gitsigns").reset_hunk() end, desc = "reset change 󱓍 " }
+  maps.n["<leader>gr"] = { function() require("gitsigns").reset_buffer() end, desc = "reset buffer 󰤘 " }
+  maps.n["<leader>gs"] = { function() require("gitsigns").stage_hunk() end, desc = "stage change 󰧩 " }
+  maps.n["<leader>gS"] = { function() require("gitsigns").stage_buffer() end, desc = "STAGE BUFFER 󰥦" }
+  maps.n["<leader>gu"] = { function() require("gitsigns").undo_stage_hunk() end, desc = "unstage change 󰠽 " }
+  maps.n["<leader>gd"] = { function() require("gitsigns").diffthis() end, desc = "diff  " }
 end
-
 
 -- Session Manager
 if is_available "neovim-session-manager" then
   maps.n["<leader>S"] = sections.S
-  maps.n["<leader>Sl"] = { "<cmd>SessionManager! load_last_session<cr>", desc = "Load last session" }
-  maps.n["<leader>Ss"] = { "<cmd>SessionManager! save_current_session<cr>", desc = "Save this session" }
-  maps.n["<leader>Sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" }
-  maps.n["<leader>Sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions" }
-  maps.n["<leader>S."] =
-    { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
+  maps.n["<leader>Sl"] = { "<cmd>SessionManager! load_last_session<cr>", desc = "Load last session 󰱃 " }
+  maps.n["<leader>Ss"] = { "<cmd>SessionManager! save_current_session<cr>", desc = "Save this session 󰰽 " }
+  maps.n["<leader>Sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session 󰱁 " }
+  maps.n["<leader>Sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions 󰱂 " }
+  maps.n["<leader>S."] = { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session 󰃙" }
 end
 if is_available "resession.nvim" then
   maps.n["<leader>S"] = sections.S
-  maps.n["<leader>Sl"] = { function() require("resession").load "Last Session" end, desc = "Load last session" }
-  maps.n["<leader>Ss"] = { function() require("resession").save() end, desc = "Save this session" }
-  maps.n["<leader>St"] = { function() require("resession").save_tab() end, desc = "Save this tab's session" }
-  maps.n["<leader>Sd"] = { function() require("resession").delete() end, desc = "Delete a session" }
-  maps.n["<leader>Sf"] = { function() require("resession").load() end, desc = "Load a session" }
-  maps.n["<leader>S."] = {
-    function() require("resession").load(vim.fn.getcwd(), { dir = "dirsession" }) end,
-    desc = "Load current directory session",
-  }
-end
-
--- Smart Splits
-if is_available "smart-splits.nvim" then
-  maps.n["<C-h>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" }
-  maps.n["<C-j>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" }
-  maps.n["<C-k>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" }
-  maps.n["<C-l>"] = { function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" }
-  maps.n["<C-Up>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" }
-  maps.n["<C-Down>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" }
-  maps.n["<C-Left>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" }
-  maps.n["<C-Right>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" }
-else
-  maps.n["<C-h>"] = { "<C-w>h", desc = "Move to left split" }
-  maps.n["<C-j>"] = { "<C-w>j", desc = "Move to below split" }
-  maps.n["<C-k>"] = { "<C-w>k", desc = "Move to above split" }
-  maps.n["<C-l>"] = { "<C-w>l", desc = "Move to right split" }
-  maps.n["<C-Up>"] = { "<cmd>resize -2<CR>", desc = "Resize split up" }
-  maps.n["<C-Down>"] = { "<cmd>resize +2<CR>", desc = "Resize split down" }
-  maps.n["<C-Left>"] = { "<cmd>vertical resize -2<CR>", desc = "Resize split left" }
-  maps.n["<C-Right>"] = { "<cmd>vertical resize +2<CR>", desc = "Resize split right" }
+  maps.n["<leader>Sl"] = { function() require("resession").load "Last Session" end, desc = "Load last session 󰱃 " }
+  maps.n["<leader>Ss"] = { function() require("resession").save() end, desc = "Save this session 󰰽 " }
+  maps.n["<leader>St"] = { function() require("resession").save_tab() end, desc = "Save this tab's session 󰃘 " }
+  maps.n["<leader>Sd"] = { function() require("resession").delete() end, desc = "Delete a session 󰱁 " }
+  maps.n["<leader>Sf"] = { function() require("resession").load() end, desc = "Load a session 󰨭 " }
+  maps.n["<leader>S."] = { function() require("resession").load(vim.fn.getcwd(), { dir = "dirsession" }) end, desc = "Load current directory session 󰃙 " }
 end
 
 -- SymbolsOutline
@@ -474,15 +448,6 @@ if is_available "nvim-ufo" then
   maps.n["zp"] = { function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Peek fold" }
 end
 
--- Stay in indent mode
-maps.v["<S-Tab>"] = { "<gv", desc = "Unindent line" }
-maps.v["<Tab>"] = { ">gv", desc = "Indent line" }
-
--- Improved Terminal Navigation
-maps.t["<C-h>"] = { "<cmd>wincmd h<cr>", desc = "Terminal left window navigation" }
-maps.t["<C-j>"] = { "<cmd>wincmd j<cr>", desc = "Terminal down window navigation" }
-maps.t["<C-k>"] = { "<cmd>wincmd k<cr>", desc = "Terminal up window navigation" }
-maps.t["<C-l>"] = { "<cmd>wincmd l<cr>", desc = "Terminal right window navigation" }
 
 maps.n["<leader>u"] = sections.u
 -- Custom menu for modification of the user experience
