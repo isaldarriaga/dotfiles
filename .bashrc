@@ -66,39 +66,59 @@ alias jctl="journalctl -p 3 -xb"
 alias journalctl="jctl"
 
 # dot files repo
-HOME_PATH=/home/$USER
-REPOS_PATH=$HOME_PATH/repos
-DOTFILES_PATH=$REPOS_PATH/dotfiles
-HOME_SHARE_PATH=$HOME_PATH/.local/share
-BASHRC_PATH=$HOME_PATH/.bashrc
+HOME_PATH="/home/$USER"
+REPOS_PATH="$HOME_PATH/repos"
+DOTFILES_PATH="$REPOS_PATH/dotfiles"
+HOME_SHARE_PATH="$HOME_PATH/.local/share"
+BASHRC_PATH="$HOME_PATH/.bashrc"
 
-DEFAULT_DISTRO=astronvim
-DEFAULT_CHANNEL=stable
+# ACTIONS: backup | install | keep
+DEFAULT_ACTION="keep"
+# DISTROS: lazyvim | nvchad | lunarvim | astronvim
+DEFAULT_DISTRO="helix"
+# CHANNEL
+#   lunarvim: release | nightly
+#   astronvim: stable | nightly
+DEFAULT_CHANNEL="release"
 
-if [ "$DISTRO" == "lunarvim" ]
-then
-  DEFAULT_APP=lvim
-else
-  DEFAULT_APP=nvim
-fi
+case "$DEFAULT_DISTRO" in
+  "helix")
+    DEFAULT_EDITOR=hx
+    ;;
+  "lazyvim")
+    DEFAULT_EDITOR=nvim
+    ;;
+  "nvchad")
+    DEFAULT_EDITOR=nvim
+		LUA_CUSTOM_PATH=lua/custom
+		;;
+  "lunarvim")
+    DEFAULT_EDITOR=lvim
+    ;;
+  "astronvim")
+    DEFAULT_EDITOR=nvim
+		LUA_CUSTOM_PATH=lua/user
+    ;;
+esac
 
-# quick editdots
+# quick edits
 
 alias cdrepos="cd $REPOS_PATH" # cd repos files
-alias vrepos='cdrepos && v .' # vim dot files
+alias erepos=$(echo "cdrepos && $DEFAULT_EDITOR .") # edit at repos folder
 
 alias cddot="cd $DOTFILES_PATH" # cd dot files
-alias vdot='cddot && v .' # vim dot files
+alias edot=$(echo "cddot && $DEFAULT_EDITOR .") # edit at dotfiles folder
 
-alias cddistro="cd $HOME_SHARE_PATH/$DEFAULT_APP"
-alias vdistro='cddistro && v .'
+alias cddistro="cd $HOME_SHARE_PATH/$DEFAULT_APP" # cd distro folder (installed path)
+alias edistro=$(echo "cddot && $DEFAULT_EDITOR .") # edit at distro folder
 
-alias vbash="v $BASHRC_PATH" # vim bashrc
-alias sbash="source $BASHRC_PATH" # source bashrc
+alias cdbash=cd $HOME_
+alias ebash=$(echo "$DEFAULT_EDITOR $BASHRC_PATH") # edit .bashrc
+alias sbash="source $BASHRC_PATH" # source .bashrc
 
-alias vbak="source $BASHRC_PATH backup $DEFAULT_DISTRO" # vim backup
-alias vinstall="source $BASHRC_PATH install $DEFAULT_DISTRO $DEFAULT_CHANNEL" # vim install
-alias vkeep="source $BASHRC_PATH keep $DEFAULT_DISTRO" # vim keep
+alias ebak="source $BASHRC_PATH backup $DEFAULT_DISTRO" # editor backup
+alias einstall="source $BASHRC_PATH install $DEFAULT_DISTRO $DEFAULT_CHANNEL" # editor install
+alias ekeep="source $BASHRC_PATH keep $DEFAULT_DISTRO" # editor keep
 
 # ---------------------------------------------------
 
@@ -106,8 +126,8 @@ alias vkeep="source $BASHRC_PATH keep $DEFAULT_DISTRO" # vim keep
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # my editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=$DEFAULT_EDITOR
+export VISUAL=$DEFAULT_EDITOR
 
 # distant
 export PATH=$PATH:~/.local/bin
@@ -152,15 +172,15 @@ MY_CONFIG_PATH="$DOTFILES_PATH/config"
 HOME_CONFIG_PATH="$HOME_PATH/.config"
 
 # easy setups
-for EASY_APP in alacritty starship
+for EASY_APP in alacritty starship helix
 do
 	APP_CONFIG_PATH=$HOME_CONFIG_PATH/$EASY_APP
 	MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$EASY_APP/
 
 	MSG_CHECKING="\n🕰 Checking $EASY_APP config.."
-	MSG_SYMLINK_CREATING="\t🕰 Creating symlink to $EASY_APP config.."
-	MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist\n\t\tpath: $APP_CONFIG_PATH"
-	MSG_SYMLINK_COMPLETE="\t✅ Complete.\n\t$EASY_APP config at: $APP_CONFIG_PATH"
+	MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist\n\t\tat: $APP_CONFIG_PATH"
+	MSG_SYMLINK_CREATING="\t🕰 Creating symlink to config.."
+	MSG_SYMLINK_COMPLETE="\t\t✅ Complete.\n\t\t\tconfig at: $APP_CONFIG_PATH"
 
 	echo -e $MSG_CHECKING
 
@@ -174,25 +194,13 @@ do
 	fi
 done
 
-# complex setups
+# phased setups
 
-# ACTIONS: backup | install | keep
-ACTION=${1:-"keep"}
-
-# DISTROS: lazyvim | nvchad | lunarvim | astronvim
-DISTRO=${2:-"$DEFAULT_DISTRO"}
-
-# CHANNEL
-#   lunarvim: release | nightly
-#   astronvim: stable | nightly
+ACTION=${1:-"$DEFAULT_ACTION"}
+DISTRO=${2:-"$DEFAULT_DISTO"}
 CHANNEL=${3:-"$DEFAULT_CHANNEL"}
 
-if [ "$DISTRO" == "lunarvim" ]
-then
-  APP=lvim
-else
-  APP=nvim
-fi
+APP=$DEFAULT_EDITOR
 
 MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$DISTRO/
 
@@ -206,6 +214,7 @@ case "$ACTION" in
 	echo -e "\n🕰 Keeping $APP ($DISTRO) config.."
 	
   MSG_SYMLINK_CREATING="\t🕰 Creating symlink to $APP ($DISTRO) config.."
+	MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist\n\t\tat: $APP_CONFIG_PATH"
 	MSG_SYMLINK_COMPLETE="\t\t✅ Complete\n\t\t\tSymlink at: $APP_CONFIG_PATH\n\t\t\tTargets: $MY_APP_CONFIG_PATH"
 
 	if ! [ -L $APP_CONFIG_PATH ] && ! [ -d $APP_CONFIG_PATH ]
@@ -217,19 +226,26 @@ case "$ACTION" in
 
 	if [ -L $APP_CONFIG_PATH ]
 	then
-		echo -e "\t🟢 Symlink: $APP_CONFIG_PATH"
+		echo -e $MSG_SYMLINK_EXISTS
 	else
 		if [ -d $APP_CONFIG_PATH ]
 		then
       echo -e "\t🟢 Folder detected (incomplete setup): $APP_CONFIG_PATH"
-    #
-    #   echo -e "\t\t🕰 Moving existing config folder.."
-  		# mv $APP_CONFIG_PATH{,-$CUR_DATETIME.bak}
-  		# echo -e "\t\t✅ Complete.\n\t\t\tMoved to: $APP_CONFIG_PATH-$CUR_DATETIME.bak"
-    #
-    #   echo -e $MSG_SYMLINK_CREATING
-  		# ln -s $MY_APP_CONFIG_PATH $APP_CONFIG_PATH
-	  	# echo -e $MSG_SYMLINK_COMPLETE
+
+      if [ $LUA_CUSTOM_PATH == "" ]
+      then
+      	echo -e "\t\t🕰 backing up existing config folder.."
+  			mv $APP_CONFIG_PATH{,-$CUR_DATETIME.bak}
+  			echo -e "\t\t✅ Complete.\n\t\t\tMoved to: $APP_CONFIG_PATH-$CUR_DATETIME.bak"
+
+      	echo -e $MSG_SYMLINK_CREATING
+  			ln -s $MY_APP_CONFIG_PATH $APP_CONFIG_PATH
+	  		echo -e $MSG_SYMLINK_COMPLETE
+      else
+      	echo -e $MSG_SYMLINK_CREATING
+  			ln -s $MY_APP_CONFIG_PATH/$LUA_CUSTOM_PATH/ $APP_CONFIG_PATH/$LUA_CUSTOM_PATH
+	  		echo -e $MSG_SYMLINK_COMPLETE
+      fi
 		else
 			echo -e "\t🟡 Config not found.\n\t\tChange ACTION from $ACTION to 'install'"
 		fi
@@ -308,7 +324,6 @@ case "$ACTION" in
 			echo -e $MSG_CALLING_COMPLETE
 		fi
 
-		LUA_CUSTOM_PATH=lua/custom
     if ! [ -L $APP_CONFIG_PATH/$LUA_CUSTOM_PATH ]
     then
 			echo -e $MSG_SYMLINK_CREATING
@@ -358,7 +373,6 @@ case "$ACTION" in
       $(echo "$APP -c checkhealth")
 		fi
 
-		LUA_CUSTOM_PATH=lua/user
     if ! [ -L $APP_CONFIG_PATH/$LUA_CUSTOM_PATH ]
     then
 			echo -e $MSG_SYMLINK_CREATING
@@ -377,5 +391,3 @@ esac
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# la
