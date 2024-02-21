@@ -1,3 +1,8 @@
+# fonts setup:
+# install nerd font in linux / wsl (repo or download)
+# fc-cache -f && fc-list
+# WSL - manually install after: cp ~/.local/share/fonts/* /mnt/d/fonts/
+
 theme = "doom_acario_dark"
 
 [editor]
