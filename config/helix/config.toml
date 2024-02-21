@@ -1,6 +1,7 @@
 theme = "doom_acario_dark"
 
 [editor]
+true-color = true
 line-number = "relative"
 mouse = true
 bufferline = "always"
