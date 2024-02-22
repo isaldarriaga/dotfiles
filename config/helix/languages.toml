@@ -28,4 +28,7 @@ language-servers = [ { name = "vscode-json-language-server", except-features = [
 [[language]]
 name = "rust"
 auto-format = true
+# try setting up rust-analyser first
+# sudo ln -s $(rustup which rust-analyzer ) /usr/local/bin/rust-analyzer
+
 
