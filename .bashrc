@@ -202,7 +202,7 @@ alias cdshare="cd $LOCAL_SHARE_PATH"
 # quick user moves
 alias cdrepos="cd $REPOS_PATH"
 alias cddot="cd $DOTFILES_PATH"
-alias cdhelix="cd $HELIXIS_PATH"
+alias cdhelixis="cd $HELIX_IS_PATH"
 
 # quick folder edits
 alias erepos=$(cdrepos && echo "$DEFAULT_COMMAND .")
@@ -254,6 +254,7 @@ alias v=$DEFAULT_COMMAND
 alias vi=$DEFAULT_COMMAND
 alias vim=$DEFAULT_COMMAND
 alias nano=$DEFAULT_COMMAND
+alias hx=$DEFAULT_COMMAND
 
 # other
 alias tree="xplr"
