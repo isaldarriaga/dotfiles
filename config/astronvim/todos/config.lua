@@ -1,0 +1,8 @@
+-- TODO: open lazygit in fullscreen mode
+-- TODO: display clock
+-- TODO: display edit mode
+-- TODO: format on save
+-- TODO: prefer biome over tsserver          
+-- TODO: use prettier if biome cannot format
+-- TODO: disable insert comment on new line
+-- TODO: show Caps Lock On + sound

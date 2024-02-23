@@ -65,21 +65,28 @@ return {
   --   },
   -- },
   --
-  -- -- This function is run last and is a good place to configuring
-  -- -- augroups/autocommands and custom filetypes also this just pure lua so
-  -- -- anything that doesn't fit in the normal config locations above can go here
+  -- This function is run last and is a good place to configuring
+  -- augroups/autocommands and custom filetypes also this just pure lua so
+  -- anything that doesn't fit in the normal config locations above can go here
   -- polish = function()
-  --   -- Set up custom filetypes
-  --   -- vim.filetype.add {
-  --   --   extension = {
-  --   --     foo = "fooscript",
-  --   --   },
-  --   --   filename = {
-  --   --     ["Foofile"] = "fooscript",
-  --   --   },
-  --   --   pattern = {
-  --   --     ["~/%.config/foo/.*"] = "fooscript",
-  --   --   },
-  --   -- }
+    -- Disable mappings
+    -- hjkl movements
+    -- vim.keymap.del("n", "h");
+    -- vim.keymap.del("n", "j");
+    -- vim.keymap.del("n", "k");
+    -- vim.keymap.del("n", "l");
+    
+    -- Set up custom filetypes
+    -- vim.filetype.add {
+    --   extension = {
+    --     foo = "fooscript",
+    --   },
+    --   filename = {
+    --     ["Foofile"] = "fooscript",
+    --   },
+    --   pattern = {
+    --     ["~/%.config/foo/.*"] = "fooscript",
+    --   },
+    -- }
   -- end,
 }

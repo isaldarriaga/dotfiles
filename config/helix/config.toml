@@ -1,7 +1,13 @@
+# fonts setup:
+# install nerd font in linux / wsl (repo or download)
+# fc-cache -f && fc-list
+# WSL - manually install after: cp ~/.local/share/fonts/* /mnt/d/fonts/
+
 theme = "doom_acario_dark"
 
 [editor]
-line-number = "absolute"
+true-color = true
+line-number = "relative"
 mouse = true
 bufferline = "always"
 auto-completion = true
@@ -15,7 +21,7 @@ normal = "block"
 select = "underline"
 
 [editor.file-picker]
-hidden = false
+hidden = true
 
 [editor.gutters]
 layout = ["diff", "diagnostics", "line-numbers", "spacer"]
@@ -43,14 +49,3 @@ mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
-[keys.normal."+"]
-b = ":run-shell-command cargo build"
-r = ":run-shell-command cargo run"
-t = ":run-shell-command cargo test"
-
-[keys.normal]
-"C-s" = [ "normal_mode", ":format" , ":write" ] # For quick saving
-"C-\t" = ["normal_mode", ":buffer-next"]
-"C-/" = "toggle_comments"
-"{" = "goto_prev_paragraph"
-"}" = "goto_next_paragraph"
