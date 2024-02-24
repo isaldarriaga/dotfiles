@@ -21,13 +21,14 @@ case $(tty) in
 		
 		setfont -d
 		showconsolefont
-
+		
 		alias ls="$LS"
 		alias la="$LA"
 		alias ll="$LL"
 		alias lt="$LT"
 		alias l.="$LDOT"
 	;;
+	
 esac
 
 # =======================
@@ -45,15 +46,16 @@ case $(tty) in
 		elif [ "$EMULATOR" = "fish" ]; then
 			starship init fish | source
 		fi
-
+		
 		export STARSHIP_CONFIG=~/.config/starship/starship.toml
-
+		
 		alias ls="$LS --icons"
 		alias la="$LA --icons"
 		alias ll="$LL --icons"
 		alias lt="$LT --icons"
 		alias l.="$LDOT"
 	;;
+	
 esac
 
 # ==================
@@ -110,7 +112,7 @@ LOCAL_SHARE_PATH="$HOME_PATH/.local/share"
 REPOS_PATH="$HOME_PATH/repos"
 DOTFILES_PATH="$REPOS_PATH/dotfiles"
 MY_CONFIG_PATH="$DOTFILES_PATH/config"
-HELIX_IS_PATH="$REPOS_PATH/rust/helixis"
+HELIXIS_PATH="$REPOS_PATH/helixis"
 
 # ==============
 # setup defaults
@@ -152,9 +154,11 @@ case "$DEFAULT_EDITOR" in
     	"$HELIX_UPSTREAM")
 		    DEFAULT_COMMAND=hx
 	    ;;
+	    
 			"$HELIX_IS")
-				DEFAULT_COMMAND="cd $HELIX_IS_PATH && cargo run"
+				DEFAULT_COMMAND="cd $HELIXIS_PATH && cargo run"
 			;;
+			
 		esac
     EDITOR_CONFIG_PATH="$CONFIG_PATH/helix"
 		EDITOR_SHARE_PATH="$HOME_SHARE_PATH/helix"
@@ -162,22 +166,27 @@ case "$DEFAULT_EDITOR" in
 		EDITOR_CACHE_PATH="$CONFIG_PATH/.cache/helix"
 		MY_EDITOR_CONFIG_PATH="$MY_CONFIG_PATH/helix"
   ;;
+	
   "$NEOVIM_EDITOR")
   	case "$DEFAULT_DISTRO" in
 		  "$LAZY_VIM")
 		    DEFAULT_COMMAND=nvim
 	    ;;
+	    
 		  "$NV_CHAD")
 		    DEFAULT_COMMAND=nvim
 				LUA_CUSTOM_PATH=lua/custom
 			;;
+			
 		  "$LUNAR_VIM")
 		    DEFAULT_COMMAND=lvim
 	    ;;
+	    
 		  "$ASTRO_NVIM")
 		    DEFAULT_COMMAND=nvim
 				LUA_CUSTOM_PATH=lua/user
 	    ;;
+	    
 		esac
     EDITOR_CONFIG_PATH="$CONFIG_PATH/$DEFAULT_COMMAND"
 		EDITOR_SHARE_PATH="$HOME_SHARE_PATH/$DEFAULT_COMMAND"
@@ -185,8 +194,8 @@ case "$DEFAULT_EDITOR" in
 		EDITOR_CACHE_PATH="$CONFIG_PATH/.cache/$DEFAULT_COMMAND"
 		MY_EDITOR_CONFIG_PATH="$MY_CONFIG_PATH/$DEFAULT_DISTRO" # config is saved per neovim distro
 	;;
+	
 esac
-
 
 # ALIASES
 
@@ -202,11 +211,11 @@ alias cdshare="cd $LOCAL_SHARE_PATH"
 # quick user moves
 alias cdrepos="cd $REPOS_PATH"
 alias cddot="cd $DOTFILES_PATH"
-alias cdhelixis="cd $HELIX_IS_PATH"
+alias cdhelixis="cd $HELIXIS_PATH"
 
 # quick folder edits
 alias erepos=$(cdrepos && echo "$DEFAULT_COMMAND .")
-alias ehelix=$(cdhelix && echo "$DEFAULT_COMMAND .")
+alias ehelix=$(cdhelixis && echo "$DEFAULT_COMMAND .")
 alias edot=$(cddot && echo "$DEFAULT_COMMAND .")
 alias eshare=$(cdshare && echo "$DEFAULT_COMMAND .")
 
@@ -254,7 +263,7 @@ alias v=$DEFAULT_COMMAND
 alias vi=$DEFAULT_COMMAND
 alias vim=$DEFAULT_COMMAND
 alias nano=$DEFAULT_COMMAND
-alias hx=$DEFAULT_COMMAND
+alias gedit=$DEFAULT_COMMAND
 
 # other
 alias tree="xplr"
@@ -273,14 +282,14 @@ for APP in alacritty starship
 do
   APP_CONFIG_PATH=$CONFIG_PATH/$APP
 	MY_APP_CONFIG_PATH=$MY_CONFIG_PATH/$APP/
-
+	
 	MSG_CHECKING="\n🕰 Checking $APP config.."
 	MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist\n\t\tat: $APP_CONFIG_PATH"
 	MSG_SYMLINK_CREATING="\t🕰 Creating symlink to config.."
 	MSG_SYMLINK_COMPLETE="\t\t✅ Complete\n\t\t\tSymlink: $APP_CONFIG_PATH\n\t\t\tTargeting: $MY_APP_CONFIG_PATH"
-
+	
 	echo -e $MSG_CHECKING
-
+	
   if ! [ -L $APP_CONFIG_PATH ]
   then
 		echo -e $MSG_SYMLINK_CREATING
@@ -297,7 +306,7 @@ done
 
 ACTION=${1:-"$DEFAULT_ACTION"}
 EDITOR=${2:-"$DEFAULT_EDITOR"}
-DISTRO=${3:-"$DEFAULT_DISTO"}
+DISTRO=${3:-"$DEFAULT_DISTRO"}
 CHANNEL=${4:-"$DEFAULT_CHANNEL"}
 
 COMMAND=$DEFAULT_COMMAND
@@ -308,7 +317,7 @@ case "$ACTION" in
 	"$SYMLINK_ACTION")
 		MSG_SYMLINK_START="\n🕰 Symlinking $EDITOR ($DISTRO) config.."
 		MSG_SYMLINK_ERROR="\t🟡 Config not found.\n\t\tChange ACTION from $ACTION to 'install'"
-	
+		
 		MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist\n\t\tat: $EDITOR_CONFIG_PATH"
 		MSG_FOLDER_EXISTS="\t🟢 Folder detected (verifying setup): $EDITOR_CONFIG_PATH"
 		
@@ -317,9 +326,9 @@ case "$ACTION" in
 		
 		MSG_BACKUP_CREATING="\t🕰 Backing up $EDITOR ($DISTRO) config.."
 		MSG_BACKUP_COMPLETE="\t\t✅ Complete\n\t\t\tBackup: $EDITOR_CONFIG_PATH-$CUR_DATETIME.bak"
-
+		
 		echo -e $MSG_SYMLINK_START
-
+		
 		# symlink nor folder exist
 		if ! [ -L $EDITOR_CONFIG_PATH ] && ! [ -d $EDITOR_CONFIG_PATH ]
 		then
@@ -327,7 +336,7 @@ case "$ACTION" in
 	  		ln -s $MY_EDITOR_CONFIG_PATH $EDITOR_CONFIG_PATH
 		  	echo -e $MSG_SYMLINK_COMPLETE
 	  fi
-
+		
 		if [ -L $EDITOR_CONFIG_PATH ]
 		then
 			echo -e $MSG_SYMLINK_EXISTS
@@ -335,14 +344,14 @@ case "$ACTION" in
 			if [ -d $EDITOR_CONFIG_PATH ]
 			then
 	      echo -e $MSG_FOLDER_EXISTS
-
+				
 	      if [ $LUA_CUSTOM_PATH == "" ]
 	      then
 	    		# folder should not exist
 	      	echo -e $MSG_BACKUP_CREATING
 	  			mv $EDITOR_CONFIG_PATH{,-$CUR_DATETIME.bak}
 	  			echo -e $MSG_BACKUP_COMPLETE
-
+					
 					# symlink to editor config is needed
 	      	echo -e $MSG_SYMLINK_CREATING
 	  			ln -s $MY_EDITOR_CONFIG_PATH $EDITOR_CONFIG_PATH
@@ -358,58 +367,86 @@ case "$ACTION" in
 				echo -e $MSG_SYMLINK_ERROR
 			fi
 		fi
-		;;
-
+	;;
+	
 	"$BACKUP_ACTION")
-	    echo -e "\n🕰 Backing up $EDITOR ($DISTRO).."
-	    for DIR in $EDITOR_CONFIG_PATH $EDITOR_SHARE_PATH $EDITOR_STATE_PATH $EDITOR_CACHE_PATH
-	    do
-	      echo -e "\tat: $DIR.."
-	      if [ -L $DIR ]
-	      then
-	    	  echo -e "\t\t🕰 Removing existing symlink.."
-	  	  	rm $DIR
-	  			echo -e "\t\t\t✅ Complete.\n\t\t\t\tSymlink removed at: $DIR"
-	  		else
-	        if [ -d $DIR ]
-	        then
-	  				  echo -e "\t\t🕰 Moving existing config folder.."
-	  				  mv $DIR{,-$CUR_DATETIME.bak}
-	  				  echo -e "\t\t\t✅ Complete.\n\t\t\t\tMoved to: $DIR-$CUR_DATETIME.bak"
-	  			else
-	  				echo -e "\t\t🟡 There's no symlink or folder to backup.\n\t\t\tChange ACTION from $BACKUP_ACTION to $INSTALL_ACTION"
-	  			fi
-	  		fi
-	  	done
-		;;
-
+    echo -e "\n🕰 Backing up $EDITOR ($DISTRO).."
+    for DIR in $EDITOR_CONFIG_PATH $EDITOR_SHARE_PATH $EDITOR_STATE_PATH $EDITOR_CACHE_PATH
+    do
+      echo -e "\tat: $DIR.."
+      if [ -L $DIR ]
+      then
+    	  echo -e "\t\t🕰 Removing existing symlink.."
+  	  	rm $DIR
+  			echo -e "\t\t\t✅ Complete.\n\t\t\t\tSymlink removed at: $DIR"
+  		else
+        if [ -d $DIR ]
+        then
+  				  echo -e "\t\t🕰 Moving existing config folder.."
+  				  mv $DIR{,-$CUR_DATETIME.bak}
+  				  echo -e "\t\t\t✅ Complete.\n\t\t\t\tMoved to: $DIR-$CUR_DATETIME.bak"
+  			else
+  				echo -e "\t\t🟡 There's no symlink or folder to backup.\n\t\t\tChange ACTION from $BACKUP_ACTION to $INSTALL_ACTION"
+  			fi
+  		fi
+  	done
+	;;
+	
 	"$INSTALL_ACTION")
-
+		
 		MSG_INSTALLING="\n🕰 Installing $EDITOR ($DISTRO).."
-
+		
 		MSG_CLONING="\t🕰 Cloning repo.."
 		MSG_CLONING_COMPLETE="\t\t✅ Complete.\n\t\t\tCloned at: $EDITOR_CONFIG_PATH"
-
+		
 		MSG_SETTING_UP="\t🕰 Setting up.."
 	  MSG_SETTING_UP_COMPLETE="\t\t✅ Complete.\n\t\t\tSettings at: $EDITOR_CONFIG_PATH (folder)"
-
+		
 		MSG_CALLING="\t🕰 Calling $EDITOR ($DISTRO).."
 		MSG_CALLING_COMPLETE="\t\t✅ Complete.\n\t\t\tPlugins Setup"
-
+		
 		MSG_SYMLINK_CREATING="\t🕰 Creating symlink..\n\t\tfrom: $MY_EDITOR_CONFIG_PATH/$DISTRO/\n\t\tto: $EDITOR_CONFIG_PATH"
 		MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist.\n\t\tChange ACTION from $INSTALL_ACTION to $BACKUP_ACTION or $SYMLINK_ACTION"
 		MSG_SYMLINK_COMPLETE="\t\t✅ Complete.\n\t\t\tsymlink at: $EDITOR_CONFIG_PATH"
-
+		
 		echo -e $MSG_INSTALLING
-
+		
 		case "$DISTRO" in
+		"$HELIX_IS")
+			if ! [ -d $EDITOR_CONFIG_PATH ]
+	    then
+				echo -e $MSG_CLONING
+				mkdir --parents $REPOS_PATH
+				git clone -q git@github.com:isaldarriaga/helixis.git $HELIXIS_PATH --depth 1
+				echo -e $MSG_CLONING_COMPLETE
+				
+				echo -e $MSG_CALLING
+				sleep 2
+				
+				$(echo "$COMMAND -v")
+				
+	      $(echo "$COMMAND --health")
+
+				echo -e $MSG_CALLING_COMPLETE
+			fi
+			
+	    if ! [ -L $EDITOR_CONFIG_PATH ]
+	    then
+				echo -e $MSG_SYMLINK_CREATING
+				ln -s $MY_EDITOR_CONFIG_PATH/ $EDITOR_CONFIG_PATH
+				echo -e $MSG_SYMLINK_COMPLETE
+			else
+				echo -e $MSG_SYMLINK_EXISTS
+			fi
+		;;
+		
 		"$LAZY_VIM")
 	    if ! [ -L $EDITOR_CONFIG_PATH ]
 	    then
 				echo -e $MSG_SYMLINK_CREATING
 				ln -s $MY_EDITOR_CONFIG_PATH/$DISTRO/ $EDITOR_CONFIG_PATH
 				echo -e $MSG_SYMLINK_COMPLETE
-
+				
 				echo -e $MSG_CALLING
 				sleep 2
 				$(echo $COMMAND)
@@ -417,21 +454,21 @@ case "$ACTION" in
 			else
 				echo -e $MSG_SYMLINK_EXISTS
 			fi
-			;;
-
+		;;
+		
 		"$NV_CHAD")
 	    if ! [ -d $EDITOR_CONFIG_PATH ]
 	    then
 				echo -e $MSG_CLONING
-				git clone -q https://github.com/NvChad/NvChad $APP_CONFIG_PATH --depth 1
+				git clone -q https://github.com/NvChad/NvChad $EDITOR_CONFIG_PATH --depth 1
 				echo -e $MSG_CLONING_COMPLETE
-
+				
 				echo -e $MSG_CALLING
 				sleep 2
 	      $(echo $COMMAND)
 				echo -e $MSG_CALLING_COMPLETE
 			fi
-
+			
 	    if ! [ -L $EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH ]
 	    then
 				echo -e $MSG_SYMLINK_CREATING
@@ -440,8 +477,8 @@ case "$ACTION" in
 			else
 				echo -e $MSG_SYMLINK_EXISTS
 			fi
-			;;
-
+		;;
+		
 	  "$LUNAR_VIM")
 	    if ! [ -L $EDITOR_CONFIG_PATH ]
 	    then
@@ -455,31 +492,31 @@ case "$ACTION" in
 	          ;;
 	      esac
 	      echo -e $MSG_SETTING_UP_COMPLETE
-
+				
 	      $(echo "$COMMAND -v")
-
+				
 	      $(echo "$COMMAND -c checkhealth")
 			else
 				echo -e $MSG_SYMLINK_EXISTS
 			fi
-			;;
-
+		;;
+		
 	  "$ASTRO_NVIM")    
 	    if ! [ -d $EDITOR_CONFIG_PATH ]
 	    then
 				echo -e $MSG_CLONING
-				git clone --depth 1 https://github.com/AstroNvim/AstroNvim $APP_CONFIG_PATH --depth 1
+				git clone --depth 1 https://github.com/AstroNvim/AstroNvim $EDITOR_CONFIG_PATH --depth 1
 				echo -e $MSG_CLONING_COMPLETE
-
+				
 				echo -e $MSG_CALLING
 	      $(echo "$COMMAND --headless +q")
 				echo -e $MSG_CALLING_COMPLETE
-
+				
 	      $(echo "$COMMAND -v")
-
+				
 	      $(echo "$COMMAND -c checkhealth")
 			fi
-
+			
 	    if ! [ -L $EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH ]
 	    then
 				echo -e $MSG_SYMLINK_CREATING
@@ -488,8 +525,8 @@ case "$ACTION" in
 			else
 				echo -e $MSG_SYMLINK_EXISTS
 			fi
-		  ;;
+		;;
 		esac
 	;;
-
+	
 esac
