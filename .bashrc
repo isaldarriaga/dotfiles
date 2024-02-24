@@ -345,7 +345,7 @@ case "$ACTION" in
 			then
 	      echo -e $MSG_FOLDER_EXISTS
 				
-	      if [ $LUA_CUSTOM_PATH == "" ]
+	      if [ $LUA_CUSTOM_PATH = "" ]
 	      then
 	    		# folder should not exist
 	      	echo -e $MSG_BACKUP_CREATING
@@ -405,7 +405,7 @@ case "$ACTION" in
 		MSG_CALLING="\t🕰 Calling $EDITOR ($DISTRO).."
 		MSG_CALLING_COMPLETE="\t\t✅ Complete.\n\t\t\tPlugins Setup"
 		
-		MSG_SYMLINK_CREATING="\t🕰 Creating symlink..\n\t\tfrom: $MY_EDITOR_CONFIG_PATH/$DISTRO/\n\t\tto: $EDITOR_CONFIG_PATH"
+		MSG_SYMLINK_CREATING="\t🕰 Creating symlink..\n\t\tfrom: $MY_EDITOR_CONFIG_PATH/\n\t\tto: $EDITOR_CONFIG_PATH"
 		MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist.\n\t\tChange ACTION from $INSTALL_ACTION to $BACKUP_ACTION or $SYMLINK_ACTION"
 		MSG_SYMLINK_COMPLETE="\t\t✅ Complete.\n\t\t\tsymlink at: $EDITOR_CONFIG_PATH"
 		
@@ -413,7 +413,7 @@ case "$ACTION" in
 		
 		case "$DISTRO" in
 		"$HELIX_IS")
-			if ! [ -d $EDITOR_CONFIG_PATH ]
+			if ! [ -d $HELIXIS_PATH ]
 	    then
 				echo -e $MSG_CLONING
 				mkdir --parents $REPOS_PATH
