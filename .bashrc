@@ -215,7 +215,7 @@ alias cdhelixis="cd $HELIXIS_PATH"
 
 # quick folder edits
 alias erepos=$(cdrepos && echo "$DEFAULT_COMMAND .")
-alias ehelix=$(cdhelixis && echo "$DEFAULT_COMMAND .")
+alias ehelixis=$(cdhelixis && echo "$DEFAULT_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs")
 alias edot=$(cddot && echo "$DEFAULT_COMMAND .")
 alias eshare=$(cdshare && echo "$DEFAULT_COMMAND .")
 
