@@ -52,7 +52,6 @@ DISTRO_HELIX_IS="HELIX-IS" # my fork
 
 CHANNEL_RELEASE="release" # LUNAR-VIM
 CHANNEL_NIGHTLY="nightly" # LUNAR-VIM, ASTRO-NVIM
-CHANNEL_STABLE="stable" # ASTRO-NVIM
 CHANNEL_NONE="" # HELIX-IS (main branch)
 
 # defaults for:
@@ -74,9 +73,9 @@ case "$DEFAULT_EDITOR" in
 		MY_EDITOR_CONFIG_PATH="$PATH_REPOS_DOTFILES_CONFIG/helix"
 		
     case "$DEFAULT_DISTRO" in
-    	"$DISTRO_HELIX_UPSTREAM")
+      "$DISTRO_HELIX_UPSTREAM")
 		    DEFAULT_COMMAND=hx
-	    ;;
+      ;;
 	    
 			"$DISTRO_HELIX_IS")
 				DEFAULT_COMMAND="cd $PATH_REPOS_HELIX_IS && cargo run"
@@ -130,15 +129,15 @@ do
 	MSG_SYMLINK_CREATING="\t🕰 Creating symlink to config.."
 	MSG_SYMLINK_COMPLETE="\t\t✅ Complete\n\t\t\tSymlink: $APP_CONFIG_PATH\n\t\t\tTargeting: $MY_APP_CONFIG_PATH"
 	
-	echo -e $MSG_CHECKING
+	echo -e "$MSG_CHECKING"
 	
-  if ! [ -L $APP_CONFIG_PATH ]
+  if ! [ -L "$APP_CONFIG_PATH" ]
   then
-		echo -e $MSG_SYMLINK_CREATING
-		ln -s $MY_APP_CONFIG_PATH $APP_CONFIG_PATH
-		echo -e $MSG_SYMLINK_COMPLETE
+		echo -e "$MSG_SYMLINK_CREATING"
+		ln -s "$MY_APP_CONFIG_PATH" "$APP_CONFIG_PATH"
+		echo -e "$MSG_SYMLINK_COMPLETE"
 	else
-		echo -e $MSG_SYMLINK_EXISTS
+		echo -e "$MSG_SYMLINK_EXISTS"
 	fi
 done
 
@@ -158,7 +157,7 @@ CUR_DATETIME=$(date '+%Y-%m-%dT%H:%M:%S')
 case "$ACTION" in
 	"$ACTION_LINK")
 		MSG_SYMLINK_START="\n🕰 Symlinking $EDITOR ($DISTRO) config.."
-		MSG_SYMLINK_ERROR="\t🟡 Config not found.\n\t\tChange ACTION from $ACTION to 'install'"
+		MSG_SYMLINK_ERROR="\t🟡 Config not found.\n\t\tChange ACTION from $ACTION to $ACTION_INSTALL"
 		
 		MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist\n\t\tat: $EDITOR_CONFIG_PATH"
 		MSG_FOLDER_EXISTS="\t🟢 Folder detected (verifying setup): $EDITOR_CONFIG_PATH"
@@ -169,47 +168,47 @@ case "$ACTION" in
 		MSG_BACKUP_CREATING="\t🕰 Backing up $EDITOR ($DISTRO) config.."
 		MSG_BACKUP_COMPLETE="\t\t✅ Complete\n\t\t\tBackup: $EDITOR_CONFIG_PATH-$CUR_DATETIME.bak"
 		
-		echo -e $MSG_SYMLINK_START
+		echo -e "$MSG_SYMLINK_START"
 		
 		# symlink nor folder exist
-		if ! [ -L $EDITOR_CONFIG_PATH ] && ! [ -d $EDITOR_CONFIG_PATH ]
+		if ! [ -L "$EDITOR_CONFIG_PATH" ] && ! [ -d "$EDITOR_CONFIG_PATH" ]
 		then
-	      echo -e $MSG_SYMLINK_CREATING
-	  		ln -s $MY_EDITOR_CONFIG_PATH $EDITOR_CONFIG_PATH
-		  	echo -e $MSG_SYMLINK_COMPLETE
+	      echo -e "$MSG_SYMLINK_CREATING"
+	  		ln -s "$MY_EDITOR_CONFIG_PATH" "$EDITOR_CONFIG_PATH"
+		  	echo -e "$MSG_SYMLINK_COMPLETE"
 	  fi
 		
-		if [ -L $EDITOR_CONFIG_PATH ]
+		if [ -L "$EDITOR_CONFIG_PATH" ]
 		then
-			echo -e $MSG_SYMLINK_EXISTS
+			echo -e "$MSG_SYMLINK_EXISTS"
 		else
 		  # symlink doesn't exist
-			if [ -d $EDITOR_CONFIG_PATH ]
+			if [ -d "$EDITOR_CONFIG_PATH" ]
 			then
 			  # but folder exists
-	      echo -e $MSG_FOLDER_EXISTS
+	      echo -e "$MSG_FOLDER_EXISTS"
 				
-	      if [ $LUA_CUSTOM_PATH = "" ]
+	      if [ "$LUA_CUSTOM_PATH" = "" ]
 	      then
 	    		# folder should not exist
-	      	echo -e $MSG_BACKUP_CREATING
-	  			mv $EDITOR_CONFIG_PATH{,-$CUR_DATETIME.bak}
-	  			echo -e $MSG_BACKUP_COMPLETE
+	      	echo -e "$MSG_BACKUP_CREATING"
+	  			mv "$EDITOR_CONFIG_PATH" "$EDITOR_CONFIG_PATH-$CUR_DATETIME.bak"
+	  			echo -e "$MSG_BACKUP_COMPLETE"
 					
 					# symlink to editor config is needed
-	      	echo -e $MSG_SYMLINK_CREATING
-	  			ln -s $MY_EDITOR_CONFIG_PATH $EDITOR_CONFIG_PATH
-		  		echo -e $MSG_SYMLINK_COMPLETE
+	      	echo -e "$MSG_SYMLINK_CREATING"
+	  			ln -s "$MY_EDITOR_CONFIG_PATH" "$EDITOR_CONFIG_PATH"
+		  		echo -e "$MSG_SYMLINK_COMPLETE"
 	      else
 	        # keep editor config folder (do nothing)
 	        # symlink to lua folder is needed
-	      	echo -e $MSG_SYMLINK_CREATING
-	  			ln -s $MY_EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH/ $EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH
-		  		echo -e $MSG_SYMLINK_COMPLETE
+	      	echo -e "$MSG_SYMLINK_CREATING"
+	  			ln -s "$MY_EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH/" "$EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH"
+		  		echo -e "$MSG_SYMLINK_COMPLETE"
 	      fi
 			else
 			  # fatal: the sysmlink was not created
-				echo -e $MSG_SYMLINK_ERROR
+				echo -e "$MSG_SYMLINK_ERROR"
 			fi
 		fi
 	;;
@@ -219,16 +218,16 @@ case "$ACTION" in
     for DIR in $EDITOR_CACHE_PATH $EDITOR_CONFIG_PATH $EDITOR_SHARE_PATH $EDITOR_STATE_PATH
     do
       echo -e "\tat: $DIR.."
-      if [ -L $DIR ]
+      if [ -L "$DIR" ]
       then
     	  echo -e "\t\t🕰 Removing existing symlink.."
-  	  	rm $DIR
+  	  	rm "$DIR"
   			echo -e "\t\t\t✅ Complete.\n\t\t\t\tSymlink removed at: $DIR"
   		else
-        if [ -d $DIR ]
+        if [ -d "$DIR" ]
         then
   				  echo -e "\t\t🕰 Moving existing config folder.."
-  				  mv $DIR{,-$CUR_DATETIME.bak}
+  				  mv "$DIR" "$DIR-$CUR_DATETIME.bak"
   				  echo -e "\t\t\t✅ Complete.\n\t\t\t\tMoved to: $DIR-$CUR_DATETIME.bak"
   			else
   				echo -e "\t\t🟡 There's no symlink or folder to backup.\n\t\t\tChange ACTION from $ACTION_BACKUP to $ACTION_INSTALL"
@@ -254,81 +253,79 @@ case "$ACTION" in
 		MSG_SYMLINK_EXISTS="\t🟢 Symlink already exist.\n\t\tChange ACTION from $ACTION_INSTALL to $ACTION_BACKUP or $ACTION_LINK"
 		MSG_SYMLINK_COMPLETE="\t\t✅ Complete.\n\t\t\tsymlink at: $EDITOR_CONFIG_PATH"
 		
-		echo -e $MSG_INSTALLING
+		echo -e "$MSG_INSTALLING"
 		
 		case "$DISTRO" in
 		"$DISTRO_HELIX_IS")
-			if ! [ -d $PATH_REPOS_HELIX_IS ]
-	    then
-				echo -e $MSG_CLONING
-				mkdir --parents $PATH_REPOS
-				git clone -q git@github.com:isaldarriaga/helixis.git $PATH_REPOS_HELIX_IS --depth 1
-				echo -e $MSG_CLONING_COMPLETE
+			if ! [ -d "$PATH_REPOS_HELIX_IS" ]
+      then
+				echo -e "$MSG_CLONING"
+				mkdir --parents "$PATH_REPOS"
+				git clone -q git@github.com:isaldarriaga/helixis.git "$PATH_REPOS_HELIX_IS" --depth 1
+				echo -e "$MSG_CLONING_COMPLETE"
 				
-				echo -e $MSG_CALLING
+				echo -e "$MSG_CALLING"
 				sleep 2
-				
-				$(echo "$COMMAND -v")
-				
-	      $(echo "$COMMAND --health")
-
-				echo -e $MSG_CALLING_COMPLETE
+				$COMMAND -v
+        $COMMAND --health
+				echo -e "$MSG_CALLING_COMPLETE"
 			fi
 			
-	    if ! [ -L $EDITOR_CONFIG_PATH ]
-	    then
-				echo -e $MSG_SYMLINK_CREATING
-				ln -s $MY_EDITOR_CONFIG_PATH/ $EDITOR_CONFIG_PATH
-				echo -e $MSG_SYMLINK_COMPLETE
+      if ! [ -L "$EDITOR_CONFIG_PATH" ]
+      then
+				echo -e "$MSG_SYMLINK_CREATING"
+				ln -s "$MY_EDITOR_CONFIG_PATH/" "$EDITOR_CONFIG_PATH"
+				echo -e "$MSG_SYMLINK_COMPLETE"
 			else
-				echo -e $MSG_SYMLINK_EXISTS
+				echo -e "$MSG_SYMLINK_EXISTS"
 			fi
 		;;
 		
 		"$DISTRO_LAZY_VIM")
-	    if ! [ -L $EDITOR_CONFIG_PATH ]
+	    if ! [ -L "$EDITOR_CONFIG_PATH" ]
 	    then
-				echo -e $MSG_SYMLINK_CREATING
-				ln -s $MY_EDITOR_CONFIG_PATH/ $EDITOR_CONFIG_PATH
-				echo -e $MSG_SYMLINK_COMPLETE
+				echo -e "$MSG_SYMLINK_CREATING"
+				ln -s "$MY_EDITOR_CONFIG_PATH/" "$EDITOR_CONFIG_PATH"
+				echo -e "$MSG_SYMLINK_COMPLETE"
 				
-				echo -e $MSG_CALLING
+				echo -e "$MSG_CALLING"
 				sleep 2
-				$(echo $COMMAND)
-				echo -e $MSG_CALLING_COMPLETE
+				$COMMAND
+				echo -e "$MSG_CALLING_COMPLETE"
 			else
-				echo -e $MSG_SYMLINK_EXISTS
+				echo -e "$MSG_SYMLINK_EXISTS"
 			fi
 		;;
 		
 		"$DISTRO_NV_CHAD")
-	    if ! [ -d $EDITOR_CONFIG_PATH ]
+	    if ! [ -d "$EDITOR_CONFIG_PATH" ]
 	    then
-				echo -e $MSG_CLONING
-				mkdir --parents $PATH_REPOS
-				git clone -q https://github.com/NvChad/NvChad $EDITOR_CONFIG_PATH --depth 1
-				echo -e $MSG_CLONING_COMPLETE
+				echo -e "$MSG_CLONING"
+				mkdir --parents "$PATH_REPOS"
+				git clone -q https://github.com/NvChad/NvChad "$EDITOR_CONFIG_PATH" --depth 1
+				echo -e "$MSG_CLONING_COMPLETE"
 				
-				echo -e $MSG_CALLING
+				echo -e "$MSG_CALLING"
 				sleep 2
-	      $(echo $COMMAND)
-				echo -e $MSG_CALLING_COMPLETE
+        $COMMAND
+				echo -e "$MSG_CALLING_COMPLETE"
 			fi
 			
-	    if ! [ -L $EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH ]
+	    if ! [ -L "$EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH" ]
 	    then
-				echo -e $MSG_SYMLINK_CREATING
-				ln -s $MY_EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH/ $EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH
-				echo -e $MSG_SYMLINK_COMPLETE/$LUA_CUSTOM_PATH # appends lua path to msg
+				echo -e "$MSG_SYMLINK_CREATING"
+				ln -s "$MY_EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH/" "$EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH"
+				echo -e "$MSG_SYMLINK_COMPLETE/$LUA_CUSTOM_PATH" # appends lua path to msg
 			else
-				echo -e $MSG_SYMLINK_EXISTS
+				echo -e "$MSG_SYMLINK_EXISTS"
 			fi
 		;;
 		
 	  "$DISTRO_LUNAR_VIM")
-	    if ! [ -L $EDITOR_CONFIG_PATH ]
+      if ! [ -L "$EDITOR_CONFIG_PATH" ]
 	    then
-				echo -e $MSG_SETTING_UP
+        echo -e "$MSG_SETTING_UP"
+
 	      case "$CHANNEL" in
 	        "$CHANNEL_RELEASE")
 	          LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
@@ -337,40 +334,39 @@ case "$ACTION" in
 	          bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 	          ;;
 	      esac
-	      echo -e $MSG_SETTING_UP_COMPLETE
-				
-	      $(echo "$COMMAND -v")
-				
-	      $(echo "$COMMAND -c checkhealth")
+
+	      echo -e "$MSG_SETTING_UP_COMPLETE"
+	      $COMMAND -v
+	      $COMMAND -c checkhealth
 			else
-				echo -e $MSG_SYMLINK_EXISTS
+				echo -e "$MSG_SYMLINK_EXISTS"
 			fi
 		;;
 		
 	  "$DISTRO_ASTRO_NVIM")    
-	    if ! [ -d $EDITOR_CONFIG_PATH ]
+	    if ! [ -d "$EDITOR_CONFIG_PATH" ]
 	    then
-				echo -e $MSG_CLONING
-				mkdir --parents $PATH_REPOS
-				git clone --depth 1 https://github.com/AstroNvim/AstroNvim $EDITOR_CONFIG_PATH --depth 1
-				echo -e $MSG_CLONING_COMPLETE
+				echo -e "$MSG_CLONING"
+				mkdir --parents "$PATH_REPOS"
+				git clone --depth 1 https://github.com/AstroNvim/AstroNvim "$EDITOR_CONFIG_PATH" --depth 1
+				echo -e "$MSG_CLONING_COMPLETE"
 				
-				echo -e $MSG_CALLING
-	      $(echo "$COMMAND --headless +q")
-				echo -e $MSG_CALLING_COMPLETE
+				echo -e "$MSG_CALLING"
+	      $COMMAND --headless +q
+				echo -e "$MSG_CALLING_COMPLETE"
 				
-	      $(echo "$COMMAND -v")
+	      $COMMAND -v
 				
-	      $(echo "$COMMAND -c checkhealth")
+	      $COMMAND -c checkhealth
 			fi
 			
-	    if ! [ -L $EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH ]
+	    if ! [ -L "$EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH" ]
 	    then
-				echo -e $MSG_SYMLINK_CREATING
-				ln -s $MY_EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH/ $EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH
-				echo -e $MSG_SYMLINK_COMPLETE/$LUA_CUSTOM_PATH # appends lua path to msg
+				echo -e "$MSG_SYMLINK_CREATING"
+				ln -s "$MY_EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH/" "$EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH"
+				echo -e "$MSG_SYMLINK_COMPLETE/$LUA_CUSTOM_PATH" # appends lua path to msg
 			else
-				echo -e $MSG_SYMLINK_EXISTS
+				echo -e "$MSG_SYMLINK_EXISTS"
 			fi
 		;;
 		esac
@@ -410,7 +406,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # TODO: add commands to export fonts in WSL
-# TODO: add commands to ensure tools are installed in a new shell, including LSP (biome, rust-analyser, bash)
+# TODO: add commands to install deps in a new shell
+# bash-language-server, shellcheck
+# biome
+# rustup, rust-analyser
+# nvm
 
 # =======
 # aliases
@@ -421,29 +421,41 @@ PWD_SAVE="PWD=$(pwd)"
 PWD_LOAD="cd $PWD"
 
 # quick system move comamnds
-alias cdhome="echo \"🕰 cd repos folder: $PATH_HOME\" && cd $PATH_HOME"
 alias cdconfig="echo \"🕰 cd repos folder: $PATH_HOME_CONFIG\" && cd $PATH_HOME_CONFIG"
+alias cdhome="echo \"🕰 cd repos folder: $PATH_HOME\" && cd $PATH_HOME"
 alias cdshare="echo \"🕰 cd repos folder: $PATH_HOME_LOCAL_SHARE\" && cd $PATH_HOME_LOCAL_SHARE"
 
-# quick user move commands
-alias cdrepos="echo \"🕰 cd repos folder: $PATH_REPOS\" && cd $PATH_REPOS"
-alias cddot="echo \"🕰 cd dotfiles repo: $PATH_REPOS_DOTFILES\" && cd $PATH_REPOS_DOTFILES"
-alias cdhxis="echo \"🕰 cd $DISTRO_HELIX_IS repo: $PATH_REPOS_HELIX_IS\" && cd $PATH_REPOS_HELIX_IS"
-alias cdweb="echo \"🕰 cd web repo: $PATH_REPOS_WEB\" && cd $PATH_REPOS_WEB"
-alias cdapi="echo \"🕰 cd api repo: $PATH_REPOS_API\" && cd $PATH_REPOS_API"
-
 # quick system folder edit commands
+alias econfig=$(cdconfig && echo "$DEFAULT_COMMAND .")
+alias ehome=$(cdhome && echo "$DEFAULT_COMMAND .")
 alias eshare=$(cdshare && echo "$DEFAULT_COMMAND .")
 
-# quick user folder edit commands
-alias erepos=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS" && echo "$PWD_LOAD")
-alias ehelix=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC -w $PATH_REPOS_HELIX_IS" && echo "$PWD_LOAD")
-alias edot=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_DOTFILES" && echo "$PWD_LOAD")
-alias eweb=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_WEB" && echo "$PWD_LOAD")
-alias eapi=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_API" && echo "$PWD_LOAD")
+# quick user move commands
+alias cdapi="echo \"🕰 cd api repo: $PATH_REPOS_API\" && cd $PATH_REPOS_API"
+alias cdbash=cdhome
+alias cddot="echo \"🕰 cd dotfiles repo: $PATH_REPOS_DOTFILES\" && cd $PATH_REPOS_DOTFILES"
+alias cdhelix="echo \"🕰 cd $DISTRO_HELIX_IS repo: $PATH_REPOS_HELIX_IS\" && cd $PATH_REPOS_HELIX_IS"
+alias cdrepos="echo \"🕰 cd repos folder: $PATH_REPOS\" && cd $PATH_REPOS"
+alias cdweb="echo \"🕰 cd web repo: $PATH_REPOS_WEB\" && cd $PATH_REPOS_WEB"
 
-# bashrc quick commands
+# quick user edit commands
+alias eapi=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_API" && echo "$PWD_LOAD")
 alias ebash=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND $PATH_HOME_BASHRC -w $PATH_HOME_CONFIG" && echo "$PWD_LOAD")
+alias edot=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_DOTFILES" && echo "$PWD_LOAD")
+alias ehelix=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC -w $PATH_REPOS_HELIX_IS" && echo "$PWD_LOAD")
+alias erepos=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS" && echo "$PWD_LOAD")
+alias eweb=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_WEB" && echo "$PWD_LOAD")
+
+# quick lazygit commands
+
+alias lgapi='echo "$PWD_SAVE" && cdapi && lg && echo "$PWD_LOAD"'
+alias lgbash='echo "$PWD_SAVE" && cdbash && lg && echo "$PWD_LOAD"'
+alias lgdot='echo "$PWD_SAVE" && cddot && lg && echo "$PWD_LOAD"'
+alias lghelix='echo "$PWD_SAVE" && cdhelix && lg && echo "$PWD_LOAD"'
+alias lgrepos='echo "$PWD_SAVE" && cdrepos && lg && echo "$PWD_LOAD"'
+alias lgweb='echo "$PWD_SAVE" && cdweb && lg && echo "$PWD_LOAD"'
+
+# quick source commands
 alias sbash="source $PATH_HOME_BASHRC" # source .bashrc
 
 # quick editor setup commands
@@ -480,17 +492,20 @@ alias lg="lazygit"
 alias gui="gitui"
 
 # force default editor at cli
-alias v=$DEFAULT_COMMAND
-alias vi=$DEFAULT_COMMAND
-alias vim=$DEFAULT_COMMAND
-alias nano=$DEFAULT_COMMAND
-alias gedit=$DEFAULT_COMMAND
+alias v="$DEFAULT_COMMAND"
+alias vi="$DEFAULT_COMMAND"
+alias vim="$DEFAULT_COMMAND"
+alias nano="$DEFAULT_COMMAND"
+alias gedit="$DEFAULT_COMMAND"
 
 # other
 alias tree="xplr"
 alias warmup="typeracer"
 
-# Advanced command-not-found hook
+# ======================
+# command-not-found hook
+# ======================
+
 if [ -f /etc/arch-release ]; then
 	source /usr/share/doc/find-the-command/ftc.bash
 fi
