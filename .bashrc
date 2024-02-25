@@ -449,7 +449,7 @@ alias eweb=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_WEB" &&
 # quick lazygit commands
 
 alias lgapi='echo "$PWD_SAVE" && cdapi && lg && echo "$PWD_LOAD"'
-alias lgbash='echo "$PWD_SAVE" && cdbash && lg && echo "$PWD_LOAD"'
+alias lgbash='echo "$PWD_SAVE" && cddot && lg && echo "$PWD_LOAD"'
 alias lgdot='echo "$PWD_SAVE" && cddot && lg && echo "$PWD_LOAD"'
 alias lghelix='echo "$PWD_SAVE" && cdhelix && lg && echo "$PWD_LOAD"'
 alias lgrepos='echo "$PWD_SAVE" && cdrepos && lg && echo "$PWD_LOAD"'
