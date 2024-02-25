@@ -448,12 +448,12 @@ alias eweb=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_WEB" &&
 
 # quick lazygit commands
 
-alias lgapi='echo "$PWD_SAVE" && cdapi && lg && echo "$PWD_LOAD"'
-alias lgbash='echo "$PWD_SAVE" && cddot && lg && echo "$PWD_LOAD"'
-alias lgdot='echo "$PWD_SAVE" && cddot && lg && echo "$PWD_LOAD"'
-alias lghelix='echo "$PWD_SAVE" && cdhelix && lg && echo "$PWD_LOAD"'
-alias lgrepos='echo "$PWD_SAVE" && cdrepos && lg && echo "$PWD_LOAD"'
-alias lgweb='echo "$PWD_SAVE" && cdweb && lg && echo "$PWD_LOAD"'
+alias lgapi=$(echo "$PWD_SAVE" && echo 'cdapi' && echo 'lg' && echo "$PWD_LOAD")
+alias lgbash=$(echo "$PWD_SAVE" && echo 'cddot' && echo 'lg' && echo "$PWD_LOAD")
+alias lgdot=$(echo "$PWD_SAVE" && echo 'cddot' && echo 'lg' && echo "$PWD_LOAD")
+alias lghelix=$(echo "$PWD_SAVE" && echo 'cdhel'ix && echo 'lg' && echo "$PWD_LOAD")
+alias lgrepos=$(echo "$PWD_SAVE" && echo 'cdrep'os && echo 'lg' && echo "$PWD_LOAD")
+alias lgweb=$(echo "$PWD_SAVE" && echo 'cdweb' && echo 'lg' && echo "$PWD_LOAD")
 
 # quick source commands
 alias sbash="source $PATH_HOME_BASHRC" # source .bashrc
