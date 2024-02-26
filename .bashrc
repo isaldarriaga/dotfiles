@@ -14,6 +14,7 @@ PATH_HOME_CONFIG="$PATH_HOME/.config"
 PATH_HOME_LOCAL="$PATH_HOME/.local"
 PATH_HOME_LOCAL_STATE="$PATH_HOME_LOCAL/state"
 PATH_HOME_LOCAL_SHARE="$PATH_HOME_LOCAL/share"
+PATH_HOME_LOCAL_BIN="$PATH_HOME_LOCAL/bin"
 
 # repos
 PATH_REPOS="$PATH_HOME/repos"
@@ -62,8 +63,10 @@ DEFAULT_EDITOR=$EDITOR_HELIX
 DEFAULT_DISTRO=$DISTRO_HELIX_IS
 DEFAULT_ACTION=$ACTION_LINK
 DEFAULT_CHANNEL=$CHANNEL_NONE
-DEFAULT_EDITOR_COMMAND="echo ' unknown command'"
+
+DEFAULT_EDITOR_COMMAND="" # defined later
 DEFAULT_GIT_COMMAND="lazygit"
+DEFAULT_TREE_COMMAND="xplr"
 
 case "$DEFAULT_EDITOR" in
   "$EDITOR_HELIX")
@@ -151,7 +154,7 @@ EDITOR=${2:-"$DEFAULT_EDITOR"}
 DISTRO=${3:-"$DEFAULT_DISTRO"}
 CHANNEL=${4:-"$DEFAULT_CHANNEL"}
 
-COMMAND=$DEFAULT_EDITOR_COMMAND
+EDITOR_COMMAND="$DEFAULT_EDITOR_COMMAND"
 
 CUR_DATETIME=$(date '+%Y-%m-%dT%H:%M:%S')
 
@@ -267,8 +270,8 @@ case "$ACTION" in
 				
 				echo -e "$MSG_CALLING"
 				sleep 2
-				$COMMAND -v
-        $COMMAND --health
+				$EDITOR_COMMAND -v
+        $EDITOR_COMMAND --health
 				echo -e "$MSG_CALLING_COMPLETE"
 			fi
 			
@@ -291,7 +294,7 @@ case "$ACTION" in
 				
 				echo -e "$MSG_CALLING"
 				sleep 2
-				$COMMAND
+				$EDITOR_COMMAND
 				echo -e "$MSG_CALLING_COMPLETE"
 			else
 				echo -e "$MSG_SYMLINK_EXISTS"
@@ -308,7 +311,7 @@ case "$ACTION" in
 				
 				echo -e "$MSG_CALLING"
 				sleep 2
-        $COMMAND
+        $EDITOR_COMMAND
 				echo -e "$MSG_CALLING_COMPLETE"
 			fi
 			
@@ -337,8 +340,8 @@ case "$ACTION" in
 	      esac
 
 	      echo -e "$MSG_SETTING_UP_COMPLETE"
-	      $COMMAND -v
-	      $COMMAND -c checkhealth
+	      $EDITOR_COMMAND -v
+	      $EDITOR_COMMAND -c checkhealth
 			else
 				echo -e "$MSG_SYMLINK_EXISTS"
 			fi
@@ -353,12 +356,12 @@ case "$ACTION" in
 				echo -e "$MSG_CLONING_COMPLETE"
 				
 				echo -e "$MSG_CALLING"
-	      $COMMAND --headless +q
+	      $EDITOR_COMMAND --headless +q
 				echo -e "$MSG_CALLING_COMPLETE"
 				
-	      $COMMAND -v
+	      $EDITOR_COMMAND -v
 				
-	      $COMMAND -c checkhealth
+	      $EDITOR_COMMAND -c checkhealth
 			fi
 			
 	    if ! [ -L "$EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH" ]
@@ -412,6 +415,9 @@ export NVM_DIR="$HOME/.nvm"
 # biome
 # rustup, rust-analyser
 # nvm
+# tmux
+# alacritty
+# starship
 
 # =======
 # aliases
@@ -426,34 +432,29 @@ changedir() {
 	cd "$1" || return
 }
 
-# quick system move comamnds
-alias cdconfig=$(echo "changedir $PATH_HOME_CONFIG")
-alias cdhome=$(echo "changedir $PATH_HOME")
-alias cdshare=$(echo "changedir $PATH_HOME_LOCAL_SHARE")
-
-# quick system folder edit commands
-alias econfig=$(cdconfig && echo "$DEFAULT_EDITOR_COMMAND .")
-alias ehome=$(cdhome && echo "$DEFAULT_EDITOR_COMMAND .")
-alias eshare=$(cdshare && echo "$DEFAULT_EDITOR_COMMAND .")
-
-# quick user move commands
-alias cdbash=cdhome
+# quick move commands
 alias cdapi=$(echo "changedir $PATH_REPOS_API")
+alias cdbash=cdhome
+alias cdconfig=$(echo "changedir $PATH_HOME_CONFIG")
 alias cddot=$(echo "changedir $PATH_REPOS_DOTFILES")
 alias cdhelix=$(echo "changedir $PATH_REPOS_HELIX_IS")
+alias cdhome=$(echo "changedir $PATH_HOME")
 alias cdrepos=$(echo "changedir $PATH_REPOS")
+alias cdshare=$(echo "changedir $PATH_HOME_LOCAL_SHARE")
 alias cdweb=$(echo "changedir $PATH_REPOS_WEB")
 
-# quick user edit commands
+# quick edit commands
 alias eapi=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS_API" && echo "$PWD_LOAD")
 alias ebash=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND $PATH_HOME_BASHRC -w $PATH_HOME_CONFIG" && echo "$PWD_LOAD")
+alias econfig=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_HOME_CONFIG" && echo "$PWD_LOAD")
 alias edot=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS_DOTFILES" && echo "$PWD_LOAD")
 alias ehelix=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC -w $PATH_REPOS_HELIX_IS" && echo "$PWD_LOAD")
+alias ehome=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_HOME" && echo "$PWD_LOAD")
 alias erepos=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS" && echo "$PWD_LOAD")
+alias eshare=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_HOME_LOCAL_SHARE" && echo "$PWD_LOAD")
 alias eweb=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS_WEB" && echo "$PWD_LOAD")
 
-# quick lazygit commands
-
+# quick lazy git commands
 alias gapi=$(echo "$PWD_SAVE" && echo 'cdapi' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
 alias gbash=$(echo "$PWD_SAVE" && echo 'cddot' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
 alias gdot=$(echo "$PWD_SAVE" && echo 'cddot' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
@@ -467,7 +468,7 @@ alias sbash="source $PATH_HOME_BASHRC" # source .bashrc
 # quick editor setup commands
 alias ebak="sbash $ACTION_BACKUP $DEFAULT_EDITOR $DEFAULT_DISTRO"
 alias einstall="sbash $ACTION_INSTALL $DEFAULT_EDITOR $DEFAULT_DISTRO $DEFAULT_CHANNEL"
-alias elink="sbash $ACTION_LINK $DEFAULT_EDITOR $DEFAULT_DISTRO"
+alias elink="sbash $ACTION_CONFIG $DEFAULT_EDITOR $DEFAULT_DISTRO"
 
 # quick utility commands
 alias ip="ip -color"
@@ -505,7 +506,7 @@ alias nano="$DEFAULT_EDITOR_COMMAND"
 alias gedit="$DEFAULT_EDITOR_COMMAND"
 
 # other
-alias tree="xplr"
+alias tree="$DEFAULT_TREE_COMMAND"
 alias warmup="typeracer"
 
 # ======================
