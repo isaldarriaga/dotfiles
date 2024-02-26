@@ -62,7 +62,8 @@ DEFAULT_EDITOR=$EDITOR_HELIX
 DEFAULT_DISTRO=$DISTRO_HELIX_IS
 DEFAULT_ACTION=$ACTION_LINK
 DEFAULT_CHANNEL=$CHANNEL_NONE
-DEFAULT_COMMAND="echo ' unknown command'"
+DEFAULT_EDITOR_COMMAND="echo ' unknown command'"
+DEFAULT_GIT_COMMAND="lazygit"
 
 case "$DEFAULT_EDITOR" in
   "$EDITOR_HELIX")
@@ -74,11 +75,11 @@ case "$DEFAULT_EDITOR" in
 		
     case "$DEFAULT_DISTRO" in
       "$DISTRO_HELIX_UPSTREAM")
-		    DEFAULT_COMMAND=hx
+		    DEFAULT_EDITOR_COMMAND=hx
       ;;
 	    
 			"$DISTRO_HELIX_IS")
-				DEFAULT_COMMAND="cd $PATH_REPOS_HELIX_IS && cargo run"
+				DEFAULT_EDITOR_COMMAND="cd $PATH_REPOS_HELIX_IS && cargo run"
 			;;	
 		esac
   ;;
@@ -86,29 +87,29 @@ case "$DEFAULT_EDITOR" in
   "$EDITOR_NEOVIM")
   	case "$DEFAULT_DISTRO" in
 		  "$DISTRO_LAZY_VIM")
-		    DEFAULT_COMMAND=nvim
+		    DEFAULT_EDITOR_COMMAND=nvim
 	    ;;
 	    
 		  "$DISTRO_NV_CHAD")
-		    DEFAULT_COMMAND=nvim
+		    DEFAULT_EDITOR_COMMAND=nvim
 				LUA_CUSTOM_PATH=lua/custom
 			;;
 			
 		  "$DISTRO_LUNAR_VIM")
-		    DEFAULT_COMMAND=lvim
+		    DEFAULT_EDITOR_COMMAND=lvim
 	    ;;
 	    
 		  "$DISTRO_ASTRO_NVIM")
-		    DEFAULT_COMMAND=nvim
+		    DEFAULT_EDITOR_COMMAND=nvim
 				LUA_CUSTOM_PATH=lua/user
 	    ;;
 	    
 		esac
 		
-		EDITOR_CACHE_PATH="$PATH_HOME_CACHE/$DEFAULT_COMMAND"
-    EDITOR_CONFIG_PATH="$PATH_HOME_CONFIG/$DEFAULT_COMMAND"
-		EDITOR_SHARE_PATH="$PATH_HOME_LOCAL_SHARE/$DEFAULT_COMMAND"
-		EDITOR_STATE_PATH="$PATH_HOME_LOCAL_STATE/$DEFAULT_COMMAND"
+		EDITOR_CACHE_PATH="$PATH_HOME_CACHE/$DEFAULT_EDITOR_COMMAND"
+    EDITOR_CONFIG_PATH="$PATH_HOME_CONFIG/$DEFAULT_EDITOR_COMMAND"
+		EDITOR_SHARE_PATH="$PATH_HOME_LOCAL_SHARE/$DEFAULT_EDITOR_COMMAND"
+		EDITOR_STATE_PATH="$PATH_HOME_LOCAL_STATE/$DEFAULT_EDITOR_COMMAND"
 		MY_EDITOR_CONFIG_PATH="$PATH_REPOS_DOTFILES_CONFIG/$DEFAULT_DISTRO" # config is managed per neovim distro
 		
 	;;
@@ -150,7 +151,7 @@ EDITOR=${2:-"$DEFAULT_EDITOR"}
 DISTRO=${3:-"$DEFAULT_DISTRO"}
 CHANNEL=${4:-"$DEFAULT_CHANNEL"}
 
-COMMAND=$DEFAULT_COMMAND
+COMMAND=$DEFAULT_EDITOR_COMMAND
 
 CUR_DATETIME=$(date '+%Y-%m-%dT%H:%M:%S')
 
@@ -391,8 +392,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 # force default editor at gui
-export EDITOR=$DEFAULT_COMMAND
-export VISUAL=$DEFAULT_COMMAND
+export EDITOR=$DEFAULT_EDITOR_COMMAND
+export VISUAL=$DEFAULT_EDITOR_COMMAND
 
 # locales (fix fonts)
 export LC_ALL=C.UTF-8
@@ -420,40 +421,45 @@ export NVM_DIR="$HOME/.nvm"
 PWD_SAVE="PWD=$(pwd)"
 PWD_LOAD="cd $PWD"
 
+changedir() {
+	echo -e "\n\t📂 changing dir to: $1"
+	cd "$1" || return
+}
+
 # quick system move comamnds
-alias cdconfig="echo \"🕰 cd repos folder: $PATH_HOME_CONFIG\" && cd $PATH_HOME_CONFIG"
-alias cdhome="echo \"🕰 cd repos folder: $PATH_HOME\" && cd $PATH_HOME"
-alias cdshare="echo \"🕰 cd repos folder: $PATH_HOME_LOCAL_SHARE\" && cd $PATH_HOME_LOCAL_SHARE"
+alias cdconfig=$(echo "changedir $PATH_HOME_CONFIG")
+alias cdhome=$(echo "changedir $PATH_HOME")
+alias cdshare=$(echo "changedir $PATH_HOME_LOCAL_SHARE")
 
 # quick system folder edit commands
-alias econfig=$(cdconfig && echo "$DEFAULT_COMMAND .")
-alias ehome=$(cdhome && echo "$DEFAULT_COMMAND .")
-alias eshare=$(cdshare && echo "$DEFAULT_COMMAND .")
+alias econfig=$(cdconfig && echo "$DEFAULT_EDITOR_COMMAND .")
+alias ehome=$(cdhome && echo "$DEFAULT_EDITOR_COMMAND .")
+alias eshare=$(cdshare && echo "$DEFAULT_EDITOR_COMMAND .")
 
 # quick user move commands
-alias cdapi="echo \"🕰 cd api repo: $PATH_REPOS_API\" && cd $PATH_REPOS_API"
 alias cdbash=cdhome
-alias cddot="echo \"🕰 cd dotfiles repo: $PATH_REPOS_DOTFILES\" && cd $PATH_REPOS_DOTFILES"
-alias cdhelix="echo \"🕰 cd $DISTRO_HELIX_IS repo: $PATH_REPOS_HELIX_IS\" && cd $PATH_REPOS_HELIX_IS"
-alias cdrepos="echo \"🕰 cd repos folder: $PATH_REPOS\" && cd $PATH_REPOS"
-alias cdweb="echo \"🕰 cd web repo: $PATH_REPOS_WEB\" && cd $PATH_REPOS_WEB"
+alias cdapi=$(echo "changedir $PATH_REPOS_API")
+alias cddot=$(echo "changedir $PATH_REPOS_DOTFILES")
+alias cdhelix=$(echo "changedir $PATH_REPOS_HELIX_IS")
+alias cdrepos=$(echo "changedir $PATH_REPOS")
+alias cdweb=$(echo "changedir $PATH_REPOS_WEB")
 
 # quick user edit commands
-alias eapi=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_API" && echo "$PWD_LOAD")
-alias ebash=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND $PATH_HOME_BASHRC -w $PATH_HOME_CONFIG" && echo "$PWD_LOAD")
-alias edot=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_DOTFILES" && echo "$PWD_LOAD")
-alias ehelix=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC -w $PATH_REPOS_HELIX_IS" && echo "$PWD_LOAD")
-alias erepos=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS" && echo "$PWD_LOAD")
-alias eweb=$(echo "$PWD_SAVE" && echo "$DEFAULT_COMMAND . -w $PATH_REPOS_WEB" && echo "$PWD_LOAD")
+alias eapi=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS_API" && echo "$PWD_LOAD")
+alias ebash=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND $PATH_HOME_BASHRC -w $PATH_HOME_CONFIG" && echo "$PWD_LOAD")
+alias edot=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS_DOTFILES" && echo "$PWD_LOAD")
+alias ehelix=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC -w $PATH_REPOS_HELIX_IS" && echo "$PWD_LOAD")
+alias erepos=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS" && echo "$PWD_LOAD")
+alias eweb=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS_WEB" && echo "$PWD_LOAD")
 
 # quick lazygit commands
 
-alias lgapi=$(echo "$PWD_SAVE" && echo 'cdapi' && echo 'lg' && echo "$PWD_LOAD")
-alias lgbash=$(echo "$PWD_SAVE" && echo 'cddot' && echo 'lg' && echo "$PWD_LOAD")
-alias lgdot=$(echo "$PWD_SAVE" && echo 'cddot' && echo 'lg' && echo "$PWD_LOAD")
-alias lghelix=$(echo "$PWD_SAVE" && echo 'cdhel'ix && echo 'lg' && echo "$PWD_LOAD")
-alias lgrepos=$(echo "$PWD_SAVE" && echo 'cdrep'os && echo 'lg' && echo "$PWD_LOAD")
-alias lgweb=$(echo "$PWD_SAVE" && echo 'cdweb' && echo 'lg' && echo "$PWD_LOAD")
+alias gapi=$(echo "$PWD_SAVE" && echo 'cdapi' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
+alias gbash=$(echo "$PWD_SAVE" && echo 'cddot' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
+alias gdot=$(echo "$PWD_SAVE" && echo 'cddot' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
+alias ghelix=$(echo "$PWD_SAVE" && echo 'cdhelix' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
+alias grepos=$(echo "$PWD_SAVE" && echo 'cdrepos' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
+alias gweb=$(echo "$PWD_SAVE" && echo 'cdweb' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
 
 # quick source commands
 alias sbash="source $PATH_HOME_BASHRC" # source .bashrc
@@ -492,11 +498,11 @@ alias lg="lazygit"
 alias gui="gitui"
 
 # force default editor at cli
-alias v="$DEFAULT_COMMAND"
-alias vi="$DEFAULT_COMMAND"
-alias vim="$DEFAULT_COMMAND"
-alias nano="$DEFAULT_COMMAND"
-alias gedit="$DEFAULT_COMMAND"
+alias v="$DEFAULT_EDITOR_COMMAND"
+alias vi="$DEFAULT_EDITOR_COMMAND"
+alias vim="$DEFAULT_EDITOR_COMMAND"
+alias nano="$DEFAULT_EDITOR_COMMAND"
+alias gedit="$DEFAULT_EDITOR_COMMAND"
 
 # other
 alias tree="xplr"
@@ -547,7 +553,7 @@ esac
 case $(tty) in
   /dev/pts/[0-9]*)
     
-    EMULATOR=$(basename $SHELL)
+    EMULATOR=$(basename "$SHELL")
 		echo -e "$EMULATOR detected!"
 		
 		if [ "$EMULATOR" = "bash" ]; then
