@@ -14,7 +14,6 @@ PATH_HOME_CONFIG="$PATH_HOME/.config"
 PATH_HOME_LOCAL="$PATH_HOME/.local"
 PATH_HOME_LOCAL_STATE="$PATH_HOME_LOCAL/state"
 PATH_HOME_LOCAL_SHARE="$PATH_HOME_LOCAL/share"
-PATH_HOME_LOCAL_BIN="$PATH_HOME_LOCAL/bin"
 
 # repos
 PATH_REPOS="$PATH_HOME/repos"
@@ -56,8 +55,8 @@ CHANNEL_NIGHTLY="nightly" # LUNAR-VIM, ASTRO-NVIM
 CHANNEL_NONE="" # HELIX-IS (main branch)
 
 # defaults for:
-# - quick editor setup - ebak, einstall, elink
-# - user files edit commands - ebash, edot, etc.
+# - quick editor setup
+# - user files edit commands
 
 DEFAULT_EDITOR=$EDITOR_HELIX
 DEFAULT_DISTRO=$DISTRO_HELIX_IS
