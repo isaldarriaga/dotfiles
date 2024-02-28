@@ -422,14 +422,14 @@ export NVM_DIR="$HOME/.nvm"
 # functions
 # =========
 
-savepwd() {
-	PWD=$(pwd)
-	echo -e "\n\t💾 pwd saved to: $PWD"
+savecwd() {
+	CWD=$(pwd)
+	echo -e "\n\t💾 cwd saved to: $CWD"
 }
 
-loadpwd() {
-	cd "$PWD" || return
-	echo -e "\n\t✅ pwd restored to: $PWD"
+loadcwd() {
+	cd "$CWD" || return
+	echo -e "\n\t✅ cwd restored to: $CWD"
 }
 
 changedir() {
@@ -453,23 +453,23 @@ alias cdshare='changedir "$PATH_HOME_LOCAL_SHARE"'
 alias cdweb='changedir "$PATH_REPOS_WEB"'
 
 # quick edit commands
-alias eapi="savepwd && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_API -w $PATH_REPOS_API && loadpwd"
-alias ebash="savepwd && cdbash && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_BASHRC -w $PATH_HOME && loadpwd"
-alias econfig="savepwd && cdconfig && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_CONFIG  -w $PATH_HOME_CONFIG && loadpwd"
-alias edot="savepwd && cddot && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_DOTFILES  -w $PATH_REPOS_DOTFILES && loadpwd"
-alias ehelix="savepwd && cdhelix && $DEFAULT_EDITOR_COMMAND -- helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC -w $PATH_REPOS_HELIX_IS && loadpwd"
-alias ehome="savepwd && cdhome && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME -w $PATH_HOME && loadpwd"
-alias erepos="savepwd && cdrepos && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS -w $PATH_REPOS && loadpwd"
-alias eshare="savepwd && cdshare && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_LOCAL_SHARE -w $PATH_HOME_LOCAL_SHARE && loadpwd"
-alias eweb="savepwd && cdweb && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_WEB -w $PATH_REPOS_WEB && loadpwd"
+alias eapi="savecwd && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_API -w $PATH_REPOS_API && loadcwd"
+alias ebash="savecwd && cdbash && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_BASHRC -w $PATH_HOME && loadcwd"
+alias econfig="savecwd && cdconfig && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_CONFIG  -w $PATH_HOME_CONFIG && loadcwd"
+alias edot="savecwd && cddot && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_DOTFILES  -w $PATH_REPOS_DOTFILES && loadcwd"
+alias ehelix="savecwd && cdhelix && $DEFAULT_EDITOR_COMMAND -- helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC -w $PATH_REPOS_HELIX_IS && loadcwd"
+alias ehome="savecwd && cdhome && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME -w $PATH_HOME && loadcwd"
+alias erepos="savecwd && cdrepos && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS -w $PATH_REPOS && loadcwd"
+alias eshare="savecwd && cdshare && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_LOCAL_SHARE -w $PATH_HOME_LOCAL_SHARE && loadcwd"
+alias eweb="savecwd && cdweb && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_WEB -w $PATH_REPOS_WEB && loadcwd"
 
 # quick lazy git commands
-alias gapi="savepwd && cdapi && $DEFAULT_GIT_COMMAND && loadpwd"
-alias gbash="savepwd && cddot && $DEFAULT_GIT_COMMAND && loadpwd"
-alias gdot="savepwd && cddot && $DEFAULT_GIT_COMMAND && loadpwd"
-alias ghelix="savepwd && cdhelix && $DEFAULT_GIT_COMMAND && loadpwd"
-alias grepos="savepwd && cdrepos && $DEFAULT_GIT_COMMAND && loadpwd"
-alias gweb="savepwd && cdweb && $DEFAULT_GIT_COMMAND && loadpwd"
+alias gapi="savecwd && cdapi && $DEFAULT_GIT_COMMAND && loadcwd"
+alias gbash="savecwd && cddot && $DEFAULT_GIT_COMMAND && loadcwd"
+alias gdot="savecwd && cddot && $DEFAULT_GIT_COMMAND && loadcwd"
+alias ghelix="savecwd && cdhelix && $DEFAULT_GIT_COMMAND && loadcwd"
+alias grepos="savecwd && cdrepos && $DEFAULT_GIT_COMMAND && loadcwd"
+alias gweb="savecwd && cdweb && $DEFAULT_GIT_COMMAND && loadcwd"
 
 # quick source commands
 alias sbash="source $PATH_HOME_BASHRC" # source .bashrc
