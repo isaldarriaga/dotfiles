@@ -81,7 +81,7 @@ case "$DEFAULT_EDITOR" in
       ;;
 	    
 			"$DISTRO_HELIX_IS")
-				DEFAULT_EDITOR_COMMAND="cd $PATH_REPOS_HELIX_IS && cargo run"
+				DEFAULT_EDITOR_COMMAND="changedir $PATH_REPOS_HELIX_IS && cargo run"
 			;;	
 		esac
   ;;
@@ -424,12 +424,12 @@ export NVM_DIR="$HOME/.nvm"
 
 savepwd() {
 	PWD=$(pwd)
-	echo -e "\n\t pwd saved to: $PWD"
+	echo -e "\n\t💾 pwd saved to: $PWD"
 }
 
 loadpwd() {
 	cd "$PWD" || return
-	echo -e "\n\t pwd changed to: $PWD"
+	echo -e "\n\t✅ pwd restored to: $PWD"
 }
 
 changedir() {
