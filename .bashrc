@@ -453,23 +453,23 @@ alias cdshare='changedir "$PATH_HOME_LOCAL_SHARE"'
 alias cdweb='changedir "$PATH_REPOS_WEB"'
 
 # quick edit commands
-alias eapi="savePwd && cdapi && $DEFAULT_EDITOR_COMMAND . && loadPwd"
-alias ebash="savePwd && cdbash && $DEFAULT_EDITOR_COMMAND $PATH_HOME_BASHRC && loadPwd"
-alias econfig="savePwd && cdconfig && $DEFAULT_EDITOR_COMMAND . && loadPwd"
-alias edot="savePwd && cddot && $DEFAULT_EDITOR_COMMAND . && loadPwd"
-alias ehelix="savePwd && cdhelix && $DEFAULT_EDITOR_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC && loadPwd"
-alias ehome="savePwd && cdhome && $DEFAULT_EDITOR_COMMAND . && loadPwd"
-alias erepos="savePwd && cdrepos && $DEFAULT_EDITOR_COMMAND . && loadPwd"
-alias eshare="savePwd && cdshare && $DEFAULT_EDITOR_COMMAND . && loadPwd"
-alias eweb="savePwd && cdweb && $DEFAULT_EDITOR_COMMAND . && loadPwd"
+alias eapi="savepwd && cdapi && $DEFAULT_EDITOR_COMMAND . && loadpwd"
+alias ebash="savepwd && cdbash && $DEFAULT_EDITOR_COMMAND $PATH_HOME_BASHRC && loadpwd"
+alias econfig="savepwd && cdconfig && $DEFAULT_EDITOR_COMMAND . && loadpwd"
+alias edot="savepwd && cddot && $DEFAULT_EDITOR_COMMAND . && loadpwd"
+alias ehelix="savepwd && cdhelix && $DEFAULT_EDITOR_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC && loadpwd"
+alias ehome="savepwd && cdhome && $DEFAULT_EDITOR_COMMAND . && loadpwd"
+alias erepos="savepwd && cdrepos && $DEFAULT_EDITOR_COMMAND . && loadpwd"
+alias eshare="savepwd && cdshare && $DEFAULT_EDITOR_COMMAND . && loadpwd"
+alias eweb="savepwd && cdweb && $DEFAULT_EDITOR_COMMAND . && loadpwd"
 
 # quick lazy git commands
-alias gapi="savePwd && cdapi && $DEFAULT_GIT_COMMAND && loadPwd"
-alias gbash="savePwd && cddot && $DEFAULT_GIT_COMMAND && loadPwd"
-alias gdot="savePwd && cddot && $DEFAULT_GIT_COMMAND && loadPwd"
-alias ghelix="savePwd && cdhelix && $DEFAULT_GIT_COMMAND && loadPwd"
-alias grepos="savePwd && cdrepos && $DEFAULT_GIT_COMMAND && loadPwd"
-alias gweb="savePwd && cdweb && $DEFAULT_GIT_COMMAND && loadPwd"
+alias gapi="savepwd && cdapi && $DEFAULT_GIT_COMMAND && loadpwd"
+alias gbash="savepwd && cddot && $DEFAULT_GIT_COMMAND && loadpwd"
+alias gdot="savepwd && cddot && $DEFAULT_GIT_COMMAND && loadpwd"
+alias ghelix="savepwd && cdhelix && $DEFAULT_GIT_COMMAND && loadpwd"
+alias grepos="savepwd && cdrepos && $DEFAULT_GIT_COMMAND && loadpwd"
+alias gweb="savepwd && cdweb && $DEFAULT_GIT_COMMAND && loadpwd"
 
 # quick source commands
 alias sbash="source $PATH_HOME_BASHRC" # source .bashrc
