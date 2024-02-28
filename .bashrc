@@ -153,8 +153,6 @@ EDITOR=${2:-"$DEFAULT_EDITOR"}
 DISTRO=${3:-"$DEFAULT_DISTRO"}
 CHANNEL=${4:-"$DEFAULT_CHANNEL"}
 
-EDITOR_COMMAND="$DEFAULT_EDITOR_COMMAND"
-
 CUR_DATETIME=$(date '+%Y-%m-%dT%H:%M:%S')
 
 case "$ACTION" in
@@ -269,8 +267,8 @@ case "$ACTION" in
 				
 				echo -e "$MSG_CALLING"
 				sleep 2
-				$EDITOR_COMMAND -v
-        $EDITOR_COMMAND --health
+				$DEFAULT_EDITOR_COMMAND -v
+        $DEFAULT_EDITOR_COMMAND --health
 				echo -e "$MSG_CALLING_COMPLETE"
 			fi
 			
@@ -293,7 +291,7 @@ case "$ACTION" in
 				
 				echo -e "$MSG_CALLING"
 				sleep 2
-				$EDITOR_COMMAND
+				$DEFAULT_EDITOR_COMMAND
 				echo -e "$MSG_CALLING_COMPLETE"
 			else
 				echo -e "$MSG_SYMLINK_EXISTS"
@@ -310,7 +308,7 @@ case "$ACTION" in
 				
 				echo -e "$MSG_CALLING"
 				sleep 2
-        $EDITOR_COMMAND
+        $DEFAULT_EDITOR_COMMAND
 				echo -e "$MSG_CALLING_COMPLETE"
 			fi
 			
@@ -339,8 +337,8 @@ case "$ACTION" in
 	      esac
 
 	      echo -e "$MSG_SETTING_UP_COMPLETE"
-	      $EDITOR_COMMAND -v
-	      $EDITOR_COMMAND -c checkhealth
+	      $DEFAULT_EDITOR_COMMAND -v
+	      $DEFAULT_EDITOR_COMMAND -c checkhealth
 			else
 				echo -e "$MSG_SYMLINK_EXISTS"
 			fi
@@ -355,12 +353,12 @@ case "$ACTION" in
 				echo -e "$MSG_CLONING_COMPLETE"
 				
 				echo -e "$MSG_CALLING"
-	      $EDITOR_COMMAND --headless +q
+	      $DEFAULT_EDITOR_COMMAND --headless +q
 				echo -e "$MSG_CALLING_COMPLETE"
 				
-	      $EDITOR_COMMAND -v
+	      $DEFAULT_EDITOR_COMMAND -v
 				
-	      $EDITOR_COMMAND -c checkhealth
+	      $DEFAULT_EDITOR_COMMAND -c checkhealth
 			fi
 			
 	    if ! [ -L "$EDITOR_CONFIG_PATH/$LUA_CUSTOM_PATH" ]
