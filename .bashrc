@@ -419,48 +419,58 @@ export NVM_DIR="$HOME/.nvm"
 # alacritty
 # starship
 
-# =======
-# aliases
-# =======
+# =========
+# functions
+# =========
 
-# quick pwd
-PWD_SAVE="PWD=$(pwd)"
-PWD_LOAD="cd $PWD"
+savepwd() {
+	PWD=$(pwd)
+	echo -e "\n\t pwd saved to: $PWD"
+}
+
+loadpwd() {
+	cd "$PWD" || return
+	echo -e "\n\t pwd changed to: $PWD"
+}
 
 changedir() {
 	echo -e "\n\t📂 changing dir to: $1"
 	cd "$1" || return
 }
 
+# =======
+# aliases
+# =======
+
 # quick move commands
-alias cdapi=$(echo "changedir $PATH_REPOS_API")
-alias cdbash=cdhome
-alias cdconfig=$(echo "changedir $PATH_HOME_CONFIG")
-alias cddot=$(echo "changedir $PATH_REPOS_DOTFILES")
-alias cdhelix=$(echo "changedir $PATH_REPOS_HELIX_IS")
-alias cdhome=$(echo "changedir $PATH_HOME")
-alias cdrepos=$(echo "changedir $PATH_REPOS")
-alias cdshare=$(echo "changedir $PATH_HOME_LOCAL_SHARE")
-alias cdweb=$(echo "changedir $PATH_REPOS_WEB")
+alias cdapi='changedir "$PATH_REPOS_API"'
+alias cdbash='cdhome'
+alias cdconfig='changedir "$PATH_HOME_CONFIG"'
+alias cddot='changedir "$PATH_REPOS_DOTFILES"'
+alias cdhelix='changedir "$PATH_REPOS_HELIX_IS"'
+alias cdhome='changedir "$PATH_HOME"'
+alias cdrepos='changedir "$PATH_REPOS"'
+alias cdshare='changedir "$PATH_HOME_LOCAL_SHARE"'
+alias cdweb='changedir "$PATH_REPOS_WEB"'
 
 # quick edit commands
-alias eapi=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS_API" && echo "$PWD_LOAD")
-alias ebash=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND $PATH_HOME_BASHRC -w $PATH_HOME_CONFIG" && echo "$PWD_LOAD")
-alias econfig=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_HOME_CONFIG" && echo "$PWD_LOAD")
-alias edot=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS_DOTFILES" && echo "$PWD_LOAD")
-alias ehelix=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC -w $PATH_REPOS_HELIX_IS" && echo "$PWD_LOAD")
-alias ehome=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_HOME" && echo "$PWD_LOAD")
-alias erepos=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS" && echo "$PWD_LOAD")
-alias eshare=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_HOME_LOCAL_SHARE" && echo "$PWD_LOAD")
-alias eweb=$(echo "$PWD_SAVE" && echo "$DEFAULT_EDITOR_COMMAND . -w $PATH_REPOS_WEB" && echo "$PWD_LOAD")
+alias eapi="savePwd && cdapi && $DEFAULT_EDITOR_COMMAND . && loadPwd"
+alias ebash="savePwd && cdbash && $DEFAULT_EDITOR_COMMAND $PATH_HOME_BASHRC && loadPwd"
+alias econfig="savePwd && cdconfig && $DEFAULT_EDITOR_COMMAND . && loadPwd"
+alias edot="savePwd && cddot && $DEFAULT_EDITOR_COMMAND . && loadPwd"
+alias ehelix="savePwd && cdhelix && $DEFAULT_EDITOR_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC && loadPwd"
+alias ehome="savePwd && cdhome && $DEFAULT_EDITOR_COMMAND . && loadPwd"
+alias erepos="savePwd && cdrepos && $DEFAULT_EDITOR_COMMAND . && loadPwd"
+alias eshare="savePwd && cdshare && $DEFAULT_EDITOR_COMMAND . && loadPwd"
+alias eweb="savePwd && cdweb && $DEFAULT_EDITOR_COMMAND . && loadPwd"
 
 # quick lazy git commands
-alias gapi=$(echo "$PWD_SAVE" && echo 'cdapi' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
-alias gbash=$(echo "$PWD_SAVE" && echo 'cddot' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
-alias gdot=$(echo "$PWD_SAVE" && echo 'cddot' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
-alias ghelix=$(echo "$PWD_SAVE" && echo 'cdhelix' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
-alias grepos=$(echo "$PWD_SAVE" && echo 'cdrepos' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
-alias gweb=$(echo "$PWD_SAVE" && echo 'cdweb' && echo "$DEFAULT_GIT_COMMAND" && echo "$PWD_LOAD")
+alias gapi="savePwd && cdapi && $DEFAULT_GIT_COMMAND && loadPwd"
+alias gbash="savePwd && cddot && $DEFAULT_GIT_COMMAND && loadPwd"
+alias gdot="savePwd && cddot && $DEFAULT_GIT_COMMAND && loadPwd"
+alias ghelix="savePwd && cdhelix && $DEFAULT_GIT_COMMAND && loadPwd"
+alias grepos="savePwd && cdrepos && $DEFAULT_GIT_COMMAND && loadPwd"
+alias gweb="savePwd && cdweb && $DEFAULT_GIT_COMMAND && loadPwd"
 
 # quick source commands
 alias sbash="source $PATH_HOME_BASHRC" # source .bashrc
@@ -504,6 +514,7 @@ alias vi="$DEFAULT_EDITOR_COMMAND"
 alias vim="$DEFAULT_EDITOR_COMMAND"
 alias nano="$DEFAULT_EDITOR_COMMAND"
 alias gedit="$DEFAULT_EDITOR_COMMAND"
+alias kedit="$DEFAULT_EDITOR_COMMAND"
 
 # other
 alias tree="$DEFAULT_TREE_COMMAND"
