@@ -453,15 +453,15 @@ alias cdshare='changedir "$PATH_HOME_LOCAL_SHARE"'
 alias cdweb='changedir "$PATH_REPOS_WEB"'
 
 # quick edit commands
-alias eapi="savepwd && cdapi && $DEFAULT_EDITOR_COMMAND . && loadpwd"
-alias ebash="savepwd && cdbash && $DEFAULT_EDITOR_COMMAND $PATH_HOME_BASHRC && loadpwd"
-alias econfig="savepwd && cdconfig && $DEFAULT_EDITOR_COMMAND . && loadpwd"
-alias edot="savepwd && cddot && $DEFAULT_EDITOR_COMMAND . && loadpwd"
-alias ehelix="savepwd && cdhelix && $DEFAULT_EDITOR_COMMAND helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC && loadpwd"
-alias ehome="savepwd && cdhome && $DEFAULT_EDITOR_COMMAND . && loadpwd"
-alias erepos="savepwd && cdrepos && $DEFAULT_EDITOR_COMMAND . && loadpwd"
-alias eshare="savepwd && cdshare && $DEFAULT_EDITOR_COMMAND . && loadpwd"
-alias eweb="savepwd && cdweb && $DEFAULT_EDITOR_COMMAND . && loadpwd"
+alias eapi="savepwd && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_API -w $PATH_REPOS_API && loadpwd"
+alias ebash="savepwd && cdbash && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_BASHRC -w $PATH_HOME && loadpwd"
+alias econfig="savepwd && cdconfig && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_CONFIG  -w $PATH_HOME_CONFIG && loadpwd"
+alias edot="savepwd && cddot && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_DOTFILES  -w $PATH_REPOS_DOTFILES && loadpwd"
+alias ehelix="savepwd && cdhelix && $DEFAULT_EDITOR_COMMAND -- helix-term/src/keymap/default.rs helix-term/src/commands.rs $PATH_HOME_BASHRC -w $PATH_REPOS_HELIX_IS && loadpwd"
+alias ehome="savepwd && cdhome && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME -w $PATH_HOME && loadpwd"
+alias erepos="savepwd && cdrepos && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS -w $PATH_REPOS && loadpwd"
+alias eshare="savepwd && cdshare && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_LOCAL_SHARE -w $PATH_HOME_LOCAL_SHARE && loadpwd"
+alias eweb="savepwd && cdweb && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_WEB -w $PATH_REPOS_WEB && loadpwd"
 
 # quick lazy git commands
 alias gapi="savepwd && cdapi && $DEFAULT_GIT_COMMAND && loadpwd"
