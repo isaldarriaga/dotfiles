@@ -45,9 +45,9 @@ left = ["spinner", "mode", "file-type", "file-encoding", "diagnostics"]
 center = ["version-control", "file-name", "read-only-indicator", "position-percentage"]
 right = ["selections", "register", "position"]
 separator = "│"
-mode.normal = "NORMAL"
-mode.insert = "INSERT"
-mode.select = "SELECT"
+mode.normal = "🧬 HELIX-IS"
+mode.insert = "📝 INSERT"
+mode.select = "🖍️  SELECT"
 
 # chained keybinds
 [keys.normal]
