@@ -3,7 +3,7 @@
 # fc-cache -f && fc-list
 # WSL - manually install after: cp ~/.local/share/fonts/* /mnt/d/fonts/
 
-theme = "tokyonight"
+theme = "doom_acario_dark"
 
 [editor]
 true-color = true
