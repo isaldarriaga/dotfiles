@@ -587,3 +587,9 @@ esac
 # ==================
 
 echo -e -n "\x1b[\x33 q" 
+
+# ============
+# cargo envars
+# ============
+
+. "$HOME/.cargo/env"
