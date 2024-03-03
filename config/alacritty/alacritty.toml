@@ -39,28 +39,13 @@ key = "C"
 mods = "Control|Shift"
 
 [[keyboard.bindings]]
-action = "PasteSelection"
-key = "Insert"
-mods = "Shift"
-
-[[keyboard.bindings]]
 action = "ResetFontSize"
 key = "Key0"
 mods = "Control"
 
 [[keyboard.bindings]]
 action = "IncreaseFontSize"
-key = "Equals"
-mods = "Control"
-
-[[keyboard.bindings]]
-action = "IncreaseFontSize"
 key = "Plus"
-mods = "Control"
-
-[[keyboard.bindings]]
-action = "DecreaseFontSize"
-key = "Minus"
 mods = "Control"
 
 [[keyboard.bindings]]
