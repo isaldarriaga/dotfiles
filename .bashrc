@@ -593,3 +593,6 @@ echo -e -n "\x1b[\x33 q"
 # ============
 
 . "$HOME/.cargo/env"
+
+# IgnorePkg = appstream-qt kdsoap kdsoap-ws-discovery-client kde-network kio-fuse kuserfeedback libkexiv2 libqaccessibilityclient baloo-widgets sddm btrfs-assistant garuda-settings-manager-kcm garuda-system-maintenance
+# IgnoreGroup = kde-applications kde-utilities kf5 qt5 qt6 plasma
