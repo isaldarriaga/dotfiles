@@ -14,6 +14,7 @@ PATH_HOME_CONFIG="$PATH_HOME/.config"
 PATH_HOME_LOCAL="$PATH_HOME/.local"
 PATH_HOME_LOCAL_STATE="$PATH_HOME_LOCAL/state"
 PATH_HOME_LOCAL_SHARE="$PATH_HOME_LOCAL/share"
+PATH_HOME_CARGO="$HOME/.cargo"
 
 # repos
 PATH_REPOS="$PATH_HOME/repos"
@@ -592,7 +593,9 @@ echo -e -n "\x1b[\x33 q"
 # cargo envars
 # ============
 
-. "$HOME/.cargo/env"
+if [ -f "$PATH_HOME_CARGO/env" ]; then
+	source "$PATH_HOME_CARGO/env"
+fi
 
 # =======
 # history

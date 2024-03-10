@@ -3,7 +3,7 @@
 # fc-cache -f && fc-list
 # WSL - manually install after: cp ~/.local/share/fonts/* /mnt/d/fonts/
 
-theme = "tokyonight_storm"
+theme = "ayu_evolve"
 
 [editor]
 true-color = true
@@ -17,8 +17,8 @@ auto-info = true
 
 [editor.cursor-shape]
 insert = "bar"
-normal = "block"
-select = "underline"
+normal = "underline"
+select = "block"
 
 [editor.file-picker]
 hidden = true
@@ -41,8 +41,8 @@ snippets = true
 goto-reference-include-declaration = true
 
 [editor.statusline]
-left = ["spinner", "mode", "file-type", "file-encoding", "diagnostics"]
-center = ["version-control", "file-name", "read-only-indicator", "position-percentage"]
+left = ["mode", "position-percentage", "file-type", "spinner", "file-encoding", "diagnostics"]
+center = ["version-control", "file-name", "read-only-indicator"]
 right = ["selections", "register", "position"]
 separator = "│"
 mode.normal = "🧬 NORMAL"
