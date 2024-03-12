@@ -28,7 +28,7 @@ layout = ["diff", "diagnostics", "line-numbers", "spacer"]
 
 [editor.indent-guides]
 render = true
-character = "┊" # Some characters that work well: "▏", "┆", "┊", "⸽"
+character = "༐"
 skip-levels = 1
 
 [editor.lsp]
@@ -41,13 +41,13 @@ snippets = true
 goto-reference-include-declaration = true
 
 [editor.statusline]
-left = ["mode", "position-percentage", "file-type", "spinner", "file-encoding", "diagnostics"]
-center = ["version-control", "file-name", "read-only-indicator"]
-right = ["selections", "register", "position"]
-separator = "│"
-mode.normal = "🧬 NORMAL"
-mode.insert = "📝 INSERT"
-mode.select = "🖍️  SELECT"
+left = ["mode", "version-control", "separator", "position", "selections", "file-name", "file-modification-indicator", "diagnostics"]
+center = ["workspace-diagnostics", "read-only-indicator"]
+right = ["spinner"] 
+separator = " "
+mode.normal = "🧬"
+mode.insert = "📝"
+mode.select = "🖍️"
 
 # chained keybinds
 # [keys.normal]
