@@ -41,13 +41,13 @@ snippets = true
 goto-reference-include-declaration = true
 
 [editor.statusline]
-left = ["mode", "position-percentage", "file-type", "spinner", "file-encoding", "diagnostics"]
-center = ["version-control", "file-name", "read-only-indicator"]
-right = ["selections", "register", "position"]
-separator = "│"
-mode.normal = "🧬 NORMAL"
-mode.insert = "📝 INSERT"
-mode.select = "🖍️  SELECT"
+left = ["mode", "version-control", "separator", "position", "selections", "file-name", "file-modification-indicator", "spinner"]
+center = ["read-only-indicator"]
+right = ["diagnostics", "workspace-diagnostics"] 
+separator = "  "
+mode.normal = "🧬"
+mode.insert = "📝"
+mode.select = "🖍️"
 
 # chained keybinds
 # [keys.normal]
