@@ -41,10 +41,10 @@ snippets = true
 goto-reference-include-declaration = true
 
 [editor.statusline]
-left = ["mode", "version-control", "separator", "position", "selections", "file-name", "file-modification-indicator", "diagnostics"]
+left = ["mode", "separator", "version-control", "position", "selections", "file-name", "file-modification-indicator", "diagnostics", "spinner"]
 center = ["workspace-diagnostics", "read-only-indicator"]
-right = ["spinner"] 
-separator = " "
+right = [] 
+separator = " "
 mode.normal = "🧬"
 mode.insert = "📝"
 mode.select = "🖍️"
