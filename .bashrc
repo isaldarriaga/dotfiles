@@ -516,7 +516,7 @@ alias lg="lazygit"
 alias gui="gitui"
 
 # force default editor at cli
-alias hx="savecwd && $DEFAULT_EDITOR_COMMAND -- $CUR_DIR -w $CUR_DIR && loadcwd"
+alias hx="savecwd && $DEFAULT_EDITOR_COMMAND -- $CWD -w $CWD && loadcwd"
 alias v="hx"
 alias vi="hx"
 alias vim="hx"
@@ -616,5 +616,5 @@ fi
 shopt -s histappend
 
 # reload history file
-PROMPT_COMMAND="$PROMPT_COMMAND;history -a; history -n"
+# PROMPT_COMMAND="$PROMPT_COMMAND;history -a; history -n"
 
