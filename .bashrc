@@ -14,6 +14,7 @@ PATH_HOME_CONFIG="$PATH_HOME/.config"
 PATH_HOME_LOCAL="$PATH_HOME/.local"
 PATH_HOME_LOCAL_STATE="$PATH_HOME_LOCAL/state"
 PATH_HOME_LOCAL_SHARE="$PATH_HOME_LOCAL/share"
+PATH_HOME_CARGO="$HOME/.cargo"
 
 # repos
 PATH_REPOS="$PATH_HOME/repos"
@@ -435,6 +436,15 @@ changedir() {
 	cd "$1" || return
 }
 
+# hx() {
+#   savecwd
+#   EDIT_FILE=${1:-"$CWD"}
+#   EDIT_PATH=$(if [ -f "$1" ]; then dirname "$1"; else echo "$CWD"; fi)
+#   echo "EDIT_FILE: $EDIT_FILE, EDIT_PATH: $EDIT_PATH"
+#   "$DEFAULT_EDITOR_COMMAND" -- eval "$EDIT_FILE" -w eval "$EDIT_PATH"
+#   loadcwd
+# }
+
 # =======
 # aliases
 # =======
@@ -506,12 +516,14 @@ alias lg="lazygit"
 alias gui="gitui"
 
 # force default editor at cli
-alias v="$DEFAULT_EDITOR_COMMAND"
-alias vi="$DEFAULT_EDITOR_COMMAND"
-alias vim="$DEFAULT_EDITOR_COMMAND"
-alias nano="$DEFAULT_EDITOR_COMMAND"
-alias gedit="$DEFAULT_EDITOR_COMMAND"
-alias kedit="$DEFAULT_EDITOR_COMMAND"
+alias hx="savecwd && $DEFAULT_EDITOR_COMMAND -- $CWD -w $CWD && loadcwd"
+alias v="hx"
+alias vi="hx"
+alias vim="hx"
+# alias micro="hx"
+# alias nano="hx"
+# alias gedit="hx"
+# alias kedit="hx"
 
 # other
 alias tree="$DEFAULT_TREE_COMMAND"
@@ -563,7 +575,7 @@ case $(tty) in
   /dev/pts/[0-9]*)
     
     EMULATOR=$(basename "$SHELL")
-		echo -e "$EMULATOR detected!"
+		echo -e "emulator: $EMULATOR"
 		
 		if [ "$EMULATOR" = "bash" ]; then
 			eval "$(starship init bash)"
@@ -592,4 +604,17 @@ echo -e -n "\x1b[\x33 q"
 # cargo envars
 # ============
 
-. "$HOME/.cargo/env"
+if [ -f "$PATH_HOME_CARGO/env" ]; then
+	source "$PATH_HOME_CARGO/env"
+fi
+
+# =======
+# history
+# =======
+
+# append instead of overwrite in multi-session
+shopt -s histappend
+
+# reload history file
+# PROMPT_COMMAND="$PROMPT_COMMAND;history -a; history -n"
+
