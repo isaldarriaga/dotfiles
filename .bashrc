@@ -64,7 +64,7 @@ DEFAULT_DISTRO=$DISTRO_HELIX_IS
 DEFAULT_ACTION=$ACTION_LINK
 DEFAULT_CHANNEL=$CHANNEL_NONE
 
-DEFAULT_EDITOR_COMMAND="" # defined later
+DEFAULT_EDITOR_COMMAND=""
 DEFAULT_GIT_COMMAND="lazygit"
 DEFAULT_TREE_COMMAND="xplr"
 
@@ -82,7 +82,7 @@ case "$DEFAULT_EDITOR" in
       ;;
 	    
 			"$DISTRO_HELIX_IS")
-				DEFAULT_EDITOR_COMMAND="changedir $PATH_REPOS_HELIX_IS && cargo run"
+				DEFAULT_EDITOR_COMMAND="helixis"
 			;;	
 		esac
   ;;
@@ -421,29 +421,36 @@ export NVM_DIR="$HOME/.nvm"
 # functions
 # =========
 
-savecwd() {
-	CWD=$(pwd)
-	echo -e "\n\t💾 cwd saved to: $CWD"
+function savecwd() {
+	CWD_TMP=$(pwd)
+	echo -e "\n\t💾 cwd saved to: $CWD_TMP"
 }
 
-loadcwd() {
-	cd "$CWD" || return
-	echo -e "\n\t✅ cwd restored to: $CWD"
+function loadcwd() {
+	cd "$CWD_TMP" || return
+	echo -e "\n\t✅ cwd restored to: $CWD_TMP"
 }
 
-changedir() {
+function changedir() {
 	echo -e "\n\t📂 changing dir to: $1"
 	cd "$1" || return
 }
 
-# hx() {
-#   savecwd
-#   EDIT_FILE=${1:-"$CWD"}
-#   EDIT_PATH=$(if [ -f "$1" ]; then dirname "$1"; else echo "$CWD"; fi)
-#   echo "EDIT_FILE: $EDIT_FILE, EDIT_PATH: $EDIT_PATH"
-#   "$DEFAULT_EDITOR_COMMAND" -- eval "$EDIT_FILE" -w eval "$EDIT_PATH"
-#   loadcwd
-# }
+function helixis() {
+  if [ -f "$1" ]
+  then
+    EDIT_FILE="$1"
+  else
+    EDIT_FILE="."
+  fi
+  EDIT_PATH=$(dirname "$EDIT_FILE")
+  echo "EDIT_FILE: $EDIT_FILE, EDIT_PATH: $EDIT_PATH"
+
+  savecwd
+  changedir $PATH_REPOS_HELIX_IS
+  cargo run -- $EDIT_FILE -w $EDIT_PATH
+  loadcwd
+}
 
 # =======
 # aliases
@@ -461,15 +468,15 @@ alias cdshare='changedir "$PATH_HOME_LOCAL_SHARE"'
 alias cdweb='changedir "$PATH_REPOS_WEB"'
 
 # quick edit commands
-alias eapi="savecwd && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_API -w $PATH_REPOS_API && loadcwd"
-alias ebash="savecwd && cdbash && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_BASHRC -w $PATH_HOME && loadcwd"
-alias econfig="savecwd && cdconfig && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_CONFIG  -w $PATH_HOME_CONFIG && loadcwd"
-alias edot="savecwd && cddot && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_DOTFILES  -w $PATH_REPOS_DOTFILES && loadcwd"
-alias ehelix="savecwd && cdhelix && $DEFAULT_EDITOR_COMMAND -- helix-term/src/keymap/default.rs helix-term/src/commands.rs -w $PATH_REPOS_HELIX_IS && loadcwd"
-alias ehome="savecwd && cdhome && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME -w $PATH_HOME && loadcwd"
-alias erepos="savecwd && cdrepos && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS -w $PATH_REPOS && loadcwd"
-alias eshare="savecwd && cdshare && $DEFAULT_EDITOR_COMMAND -- $PATH_HOME_LOCAL_SHARE -w $PATH_HOME_LOCAL_SHARE && loadcwd"
-alias eweb="savecwd && cdweb && $DEFAULT_EDITOR_COMMAND -- $PATH_REPOS_WEB -w $PATH_REPOS_WEB && loadcwd"
+alias eapi="helixis $PATH_REPOS_API"
+alias ebash="helixis $PATH_HOME_BASHRC"
+alias econfig="helixis $PATH_HOME_CONFIG "
+alias edot="helixis $PATH_REPOS_DOTFILES "
+alias ehelix="helixis helix-term/src/keymap/default.rs helix-term/src/commands.rs"
+alias ehome="helixis $PATH_HOME"
+alias erepos="helixis $PATH_REPOS"
+alias eshare="helixis $PATH_HOME_LOCAL_SHARE"
+alias eweb="helixis $PATH_REPOS_WEB"
 
 # quick lazy git commands
 alias gapi="savecwd && cdapi && $DEFAULT_GIT_COMMAND && loadcwd"
@@ -515,15 +522,10 @@ alias db="distrobox"
 alias lg="lazygit"
 alias gui="gitui"
 
-# force default editor at cli
-alias hx="savecwd && $DEFAULT_EDITOR_COMMAND -- $CWD -w $CWD && loadcwd"
-alias v="hx"
-alias vi="hx"
-alias vim="hx"
-# alias micro="hx"
-# alias nano="hx"
-# alias gedit="hx"
-# alias kedit="hx"
+alias hx="$DEFAULT_EDITOR_COMMAND"
+alias v="$DEFAULT_EDITOR_COMMAND"
+alias vi="$DEFAULT_EDITOR_COMMAND"
+alias vim="$DEFAULT_EDITOR_COMMAND"
 
 # other
 alias tree="$DEFAULT_TREE_COMMAND"
