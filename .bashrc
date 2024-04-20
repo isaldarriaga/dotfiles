@@ -522,10 +522,15 @@ alias db="distrobox"
 alias lg="lazygit"
 alias gui="gitui"
 
+# editor
 alias hx="$DEFAULT_EDITOR_COMMAND"
 alias v="$DEFAULT_EDITOR_COMMAND"
 alias vi="$DEFAULT_EDITOR_COMMAND"
 alias vim="$DEFAULT_EDITOR_COMMAND"
+
+# Replace some more things with better alternatives
+alias cat='bat --style header --style snip --style changes --style header'
+[ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 
 # other
 alias tree="$DEFAULT_TREE_COMMAND"
